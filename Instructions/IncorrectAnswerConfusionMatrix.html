@@ -1,0 +1,47 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Incorrect Answer!{{ endblock }}
+
+{{ block content }}
+
+<p>
+Your answer was incorrect. Please try again.    
+</p>
+<p>
+    The following "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
+</p>
+
+{{ formfields }}
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td id="tp" style="color:green">TP</td>
+           <td id ="fn" style="color:red">FN</td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fp" style="color:black">?</td>
+           <td id ="tn" style="color:green">TN</td>
+       </tr>
+    </tbody>
+</table>
+
+{{ next_button }}
+
+{{ endblock }}

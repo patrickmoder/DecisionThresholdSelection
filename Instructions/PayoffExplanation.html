@@ -1,0 +1,93 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Introduction to Bonus Payoff{{ endblock }}
+
+{{ block content }}
+
+<p>
+    In the following experiment, your bonus payoff will depend on how close you are to the optimal threshold θ<sub>opt</sub>, that is the threshold that <b>minimizes overall costs</b>. <br>
+    In our previous example, the AI algorithm predicted negative and positive characteristics out of a set of 20 samples. Let us assume that the optimal threshold θ<sub>opt</sub> is different from our previously chosen threshold θ. Now, with θ<sub>opt</sub> we expect the following outcomes, also displayed in the confusion matrix below:
+    <ul>
+        <li>12 correct predictions: 4 True Positives, 8 True Negatives</li>
+        <li>8 incorrect predictions: 2 False Positives and 6 False Negatives</li>
+</ul>
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td id="tp" style="color:green">4</td>
+           <td id ="fn" style="color:red">6</td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fp" style="color:red">2</td>
+           <td id ="tn" style="color:green">8</td>
+       </tr>
+    </tbody>
+</table>
+
+<p>
+    Based thereon, for the optimal threshold θ<sub>opt</sub> we would expect 2 x 5$ (=10$) for False Positive Predictions and 6 x 1$ (=6$) cost units for False Negative predictions, resulting in an optimum of 16$ overall. We display the overall costs in the cost matrix below. Hence, we expect less overall costs than with the previously chosen threshold (19$). <br> 
+    Note that the overall number of correct predictions (12) with the optimal threshold θ<sub>opt</sub> is below the number of correct predictions (13) with our previous threshold choice. This is acceptable since our objective is to minimize overall costs.
+</p>
+
+<table id="costmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Cost Matrix [$]</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td> - </td>
+           <td id ="fnc">6</td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fpc">10</td>
+           <td> - </td>
+       </tr>
+    </tbody>
+</table>
+
+<h2>
+    How your bonus payoff gets calculated:
+</h2>
+
+<p>
+    For every cost unit that your selected threshold is worse to the optimal cost (based on the optimal threshold θ<sub>opt</sub>), your bonus per round (100 units) will be reduced by 1 unit, but not below 0 units. In the example above, our threshold leads to costs of 19$ while the optimum is at 16$ (a difference of 3$). Therefore, our bonus after this round would be 97 units (100 - 3) before we move on to the next round. <br>
+    After the last round, your cumulated bonus payoffs will be translated to real money, with 100 units equal to 1€. In the example above, we would get 97ct for this round. Together with the bonus payoffs from all other rounds, this amount is added to the participation fee of 5€.
+</p>
+
+{{ formfields }}
+
+{{ next_button }}
+
+{{ endblock }}

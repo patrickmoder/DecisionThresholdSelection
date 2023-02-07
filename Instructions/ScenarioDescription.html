@@ -1,0 +1,65 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Scenario Description{{ endblock }}
+
+{{ block content }}
+
+<p>
+    In an effort to predict a characteristic of an object, an Artificial Intelligence (AI) algorithm gets trained to make such predictions. For a given prediction problem, the AI algorithm has a binary output that indicates whether an object is going to have that characteristic of interest (positive) or not (negative). Either the positive <b>or</b> the negative characteristic can be present, and there are no other characterstics.
+</p>
+
+<p>
+    When the AI algorithm makes a correct prediction, we therefore differentiate between two outcomes:
+<ul>
+  <li>True Positive (TP): the AI algorithm correctly predicts a positive characteristic, i.e., the absence of the negative characteristic.</li>
+  <li>True Negative (TN): the AI algorithm correctly predicts a negative characteristic, i.e., the absence of the positive characteristic.</li>
+</ul>   
+</p>
+
+<p>
+    Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false predictions occasionally. Such false predictions, or misclassifications, can appear in two different flavors:
+<ul>
+  <li>False Positive (FP): the AI algorithm predicts a positive characteristic but a negative characteristic is present.</li>
+  <li>False Negative (FN): the AI algorithm predicts a negative characteristic but a positive characteristic is present.</li>
+</ul>   
+</p>
+
+<p>
+    The following "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
+</p>
+
+{{ formfields }}
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td id="tp" style="color:green">TP</td>
+           <td id ="fn" style="color:red">FN</td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fp" style="color:black">?</td>
+           <td id ="tn" style="color:green">TN</td>
+       </tr>
+    </tbody>
+</table>
+
+
+{{ next_button }}
+
+{{ endblock }}

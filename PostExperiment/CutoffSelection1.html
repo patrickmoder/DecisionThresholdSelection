@@ -1,0 +1,217 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Cutoff Selection{{ endblock }}
+
+{{ block content }}
+
+<p>
+    You try to predict positive and negative classes out of a sample with {{ abs }} observations, where {{ player.n_N }} observations belong to the negative class, and {{ player.n_P }} belong to the positive class. Expected costs of misclassification are {{ player.c_FN }} unit for False Negative (FN) and {{ player.c_FP }} unit for False Positive (FP) predictions, respectively. 
+    
+    <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
+    
+<ul>
+  <li>Expected number of False Negatives (FN): n(FN) = (θ * 20) * (5 ^ θ), rounded to the next integer.</li>
+  <li>Expected number of False Positives (FP): n(FP) = ((-θ + 1) * 20) * (5 ^ (-θ + 1)), rounded to the next integer.</li>
+</ul>-->
+
+    Your aim is to choose a decision threshold that minimizes the expected costs.
+</p>
+
+<p>
+    Move the slider to decide which threshold (between 0 and 1) to use.
+</p>
+
+<p>
+    Depending on the chosen threshold, you see different evaluation metrics, a confusion matrix (expected prediction outcomes) and a cost matrix (expected costs). If you need more help, please click the button "Need Help?" below to display a graphical visualization.
+</p>
+
+<input type="range" name ="theta" min="0" max="100" step="1" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);">
+
+<p id="threshold"></p>
+
+<!-- by leaving the threshold (and the results) blank initially, we prompt the user to move the slider, reducing the anchoring/default effect. -->
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td id="tp" style="color:green"></td>
+           <td id ="fn" style="color:red"></td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fp" style="color:red"></td>
+           <td id ="tn" style="color:green"></td>
+       </tr>
+    </tbody>
+</table>
+
+<table id="costmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Cost Matrix (Cost Units)</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td> - </td>
+           <td id ="fnc"></td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fpc"></td>
+           <td> - </td>
+       </tr>
+    </tbody>
+</table>
+
+<button type="button" onclick="showHelp(this)">
+    Need Help?
+</button>
+
+<div id="help"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<div id="myPlot" style="width:100%;max-width:700px"></div>
+
+<script>
+var fns = "Math.round((x * 20) * Math.pow({{ baseP }}, x))";
+var fps = "Math.round(((-x + 1)* 20) * Math.pow({{ baseN }}, (-x + 1)))";
+var cost = "{{ player.c_FN }} * Math.round((x * 20) * Math.pow({{ baseP }}, x)) + {{ player.c_FP }} * Math.round(((-x + 1)* 20) * Math.pow({{ baseN }}, (-x + 1)))";
+var fncost = "{{ player.c_FN }} * Math.round((x * 20) * Math.pow({{ baseP }}, x))";
+var fpcost = "{{ player.c_FP }} * Math.round(((-x + 1)* 20) * Math.pow({{ baseN }}, (-x + 1)))";
+// Generate values
+
+var x1Values = [];
+var x2Values = [];
+var x3Values = [];
+var x4Values = [];
+var x5Values = [];
+var y1Values = [];
+var y2Values = [];
+var y3Values = [];
+var y4Values = [];
+var y5Values = [];
+
+for (var x = 0; x <= 1; x += 0.01) {
+  x1Values.push(x);
+  x2Values.push(x);
+  x3Values.push(x);
+  x4Values.push(x);
+  x5Values.push(x); 
+  y1Values.push(eval(fns));
+  y2Values.push(eval(fps));
+  y3Values.push(eval(cost));
+  y4Values.push(eval(fncost));
+  y5Values.push(eval(fpcost));
+}
+
+// Define Plot Data
+var data = [
+  {x: x1Values, y: y1Values, mode:"lines", name:"False Negative Observations"},
+  {x: x2Values, y: y2Values, mode:"lines", name:"False Positive Observations"},
+  {x: x4Values, y: y4Values, mode:"lines", name:"False Negative Costs"},
+  {x: x5Values, y: y5Values, mode:"lines", name:"False Positive Costs"},
+  {x: x3Values, y: y3Values, mode:"lines", name:"Overall Cost"}
+];
+
+//Define Plot Layout
+var layout = {
+    title: "Expected Outcome and Costs",
+    xaxis: {title: "Threshold"}
+};
+
+// Display Plot using Plotly
+let help = document.getElementById('help');
+function showHelp() {
+    help.innerHTML = Plotly.newPlot("myPlot", data, layout);
+}
+</script>   
+
+
+<script>
+    let threshold = document.getElementById('threshold');
+    function updateThreshold(input) {
+        let theta = parseInt(input.value);
+        let th = theta/100;
+        let cost = {{ player.c_FN }} * Math.round((th * 20) * Math.pow({{ baseP }}, th)) + {{ player.c_FP }} * Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1)));
+        let acc = (({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + ({{ player.n_N }} - Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, -th + 1)))) / {{ abs }};
+        let accr = +acc.toFixed(2);
+        let fone = (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th)))) / (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1))) + Math.round((th * 20) * Math.pow({{ baseP }}, th)));
+        let foner = +fone.toFixed(2);
+        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /> Your F<sub>1</sub> Score is ${foner}.`
+    };
+    let tp = document.getElementById('tp');
+    function updateTP(input) {
+        let tptheta = parseInt(input.value);
+        let tpth = tptheta / 100;
+        let tpcalc = {{ player.n_P }} - Math.round((tpth * 20) * Math.pow({{ baseP }}, tpth));
+        tp.innerHTML = `${tpcalc}`   
+    };
+    let fn = document.getElementById('fn');
+    function updateFN(input) {
+        let fntheta = parseInt(input.value);
+        let fnth = fntheta / 100;
+        let fncalc = Math.round((fnth * 20) * Math.pow({{ baseP }}, fnth));
+        fn.innerHTML = `${fncalc}`
+    };
+    let fp = document.getElementById('fp');
+    function updateFP(input) {
+        let fptheta = parseInt(input.value);
+        let fpth = fptheta / 100;
+        let fpcalc = Math.round(((-fpth + 1)* 20) * Math.pow({{ baseN }}, (-fpth + 1)));
+        fp.innerHTML = `${fpcalc}`   
+    };
+    let tn = document.getElementById('tn');
+    function updateTN(input) {
+        let tntheta = parseInt(input.value);
+        let tnth = tntheta / 100;
+        let tncalc = {{ player.n_N }} - Math.round(((-tnth + 1)* 20) * Math.pow({{ baseN }}, -tnth + 1));
+        tn.innerHTML = `${tncalc}`   
+    };
+    let fnc = document.getElementById('fnc');
+    function updateFNC(input) {
+        let fnctheta = parseInt(input.value);
+        let fncth = fnctheta / 100;
+        let fncost = {{ player.c_FN }} * Math.round((fncth * 20) * Math.pow({{ baseP }}, fncth));
+        fnc.innerHTML = `${fncost}`
+    }
+    let fpc = document.getElementById('fpc');
+    function updateFPC(input) {
+        let fpctheta = parseInt(input.value);
+        let fpcth = fpctheta / 100;
+        let fpcost = {{ player.c_FP }} * Math.round(((-fpcth + 1)* 20) * Math.pow({{ baseN }}, (-fpcth + 1)));
+        fpc.innerHTML = `${fpcost}`
+    }
+</script>
+
+
+{{ next_button }}
+
+{{ endblock }}
