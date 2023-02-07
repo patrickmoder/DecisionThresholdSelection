@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    You try to predict positive and negative classes out of a sample with {{ abs }} observations, where {{ player.n_N }} observations belong to the negative class, and {{ player.n_P }} belong to the positive class. Expected costs of misclassification are {{ player.c_FN }} unit for False Negative (FN) and {{ player.c_FP }} unit for False Positive (FP) predictions, respectively. 
+    You try to predict positive and negative classes out of a sample with <b>{{ abs }}</b> observations, where <b>{{ player.n_N }}</b> observations belong to the negative class, and <b>{{ player.n_P }}</b> belong to the positive class. Expected costs of misclassification are <b>{{ player.c_FN }}</b> unit(s) for False Negative (FN) and <b>{{ player.c_FP }}</b> unit(s) for False Positive (FP) predictions, respectively. 
     
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
     
@@ -186,7 +186,7 @@ function showHelp() {
         let thOpt = {{ player.th_opt }} / 100;
         let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
         let pay = 1000 - (cost - costOpt);
-        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /> Your F<sub>1</sub> Score is ${foner}. <br /><br /> +++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your payoff will be ${pay}!`
+        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> +++ Shall we keep the Accuracy and F1 information? If yes, we need to introduce it first! +++ <br /> Your accuracy is ${accr}. <br /> Your F<sub>1</sub> Score is ${foner}. <br /><br /> +++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your payoff will be ${pay}!`
     };
     let tp = document.getElementById('tp');
     function updateTP(input) {
@@ -232,11 +232,11 @@ function showHelp() {
     }
 </script>
 
-<!--<p>  Remember: For every cost unit that your selected threshold is worse to the optimal cost, your payout of 1000 will be reduced by 1.
+<p> Remember: For every cost unit that your selected threshold is worse to the optimal cost, your payoff of 100 (for this round) will be reduced by 1, but not below 0. </p>
         
-    +++ Your payoff is {{ player.payoff }}. -> TO BE REMOVED!!! +++ </p>-->
+    <!--+++ Your payoff is {{ player.payoff }}. -> TO BE REMOVED!!! +++ -->
 
-Please click next to make your choice and move to the next round.
+Please click next to confirm your choice and move to the next round.
 
 {{ next_button }}
 
