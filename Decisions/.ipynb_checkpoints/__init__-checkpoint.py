@@ -18,7 +18,7 @@ def creating_session(subsession: Subsession):
     import itertools
     
     
-    f = open(r"C:\Users\moder\Desktop\treatments.csv", "r", encoding='utf-8-sig')
+    f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(random.sample(rows, len(rows)))
     
