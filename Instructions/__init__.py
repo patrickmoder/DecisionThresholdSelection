@@ -23,6 +23,7 @@ class ScenarioDescription(Page):
     form_fields = ['Confusion_Matrix_missing_value']
 class IncorrectAnswerConfusionMatrix(Page):
     form_model = 'player'
+    form_fields = ['Confusion_Matrix_missing_value']
     @staticmethod
     def is_displayed(player: Player):
         group = player.group
@@ -32,19 +33,21 @@ class ThresholdIntroduction(Page):
     form_fields = ['Threshold_Introduction_Understanding_Check']
 class IncorrectAnswerThresholdIntroduction(Page):
     form_model = 'player'
+    form_fields = ['Threshold_Introduction_Understanding_Check']
     @staticmethod
     def is_displayed(player: Player):
         group = player.group
-        return group.Threshold_Introduction_Understanding_Check != "No"
+        return group.Threshold_Introduction_Understanding_Check != False
 class MisclassificationCosts(Page):
     form_model = 'group'
     form_fields = ['Misclassification_Costs_Understanding_Check']
 class IncorrectAnswerMisclassificationCosts(Page):
     form_model = 'player'
+    form_fields = ['Misclassification_Costs_Understanding_Check']
     @staticmethod
     def is_displayed(player: Player):
         group = player.group
-        return group.Misclassification_Costs_Understanding_Check != "20"
+        return group.Misclassification_Costs_Understanding_Check != 20
 class PayoffExplanation(Page):
     form_model = 'player'
     form_fields = ['understand_instr']
