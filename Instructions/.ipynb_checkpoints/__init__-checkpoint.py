@@ -49,6 +49,6 @@ class IncorrectAnswerMisclassificationCosts(Page):
         group = player.group
         return group.Misclassification_Costs_Understanding_Check != 20
 class PayoffExplanation(Page):
-    form_model = 'player'
+    form_model = 'group'
     form_fields = ['understand_instr']
 page_sequence = [Welcome, ScenarioDescription, IncorrectAnswerConfusionMatrix, ThresholdIntroduction, IncorrectAnswerThresholdIntroduction, MisclassificationCosts, IncorrectAnswerMisclassificationCosts, PayoffExplanation]
