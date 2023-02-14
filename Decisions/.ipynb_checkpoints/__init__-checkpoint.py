@@ -21,6 +21,7 @@ def creating_session(subsession: Subsession):
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(random.sample(rows, len(rows)))
+    print(rows)
     
     for p in subsession.get_players():
         row = next(rowsr)
