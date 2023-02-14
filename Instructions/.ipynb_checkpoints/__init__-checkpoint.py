@@ -80,4 +80,4 @@ class PayoffExplanation(Page):
     #def is_displayed(player: Player):
     #    group = player.group
     #    return group.Misclassification_Costs_Understanding_Check = 20
-page_sequence = [Welcome, ScenarioDescription,, IncorrectAnswerConfusionMatrix, ThresholdIntroduction, IncorrectAnswerThresholdIntroduction, MisclassificationCosts, IncorrectAnswerMisclassificationCosts, PayoffExplanation]
+page_sequence = [Welcome, ScenarioDescription, IncorrectAnswerConfusionMatrix, ThresholdIntroduction, IncorrectAnswerThresholdIntroduction, MisclassificationCosts, IncorrectAnswerMisclassificationCosts, PayoffExplanation]
