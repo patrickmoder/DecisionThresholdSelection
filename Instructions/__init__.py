@@ -19,15 +19,15 @@ class Group(BaseGroup):
         if value!='False Positive (FP)':
             return 'Your answer was incorrect. Please try again.'
         
-    def Threshold_Introduction_Understanding_Check(group, value):
+    def Threshold_Introduction_Understanding_Check_error_message(group, value):
         if value!=False:
             return 'Your answer was incorrect. Please try again.'
             
-    def Misclassification_Costs_Understanding_Check(group, value):
+    def Misclassification_Costs_Understanding_Check_error_message(group, value):
         if value!=20:
             return 'Your answer was incorrect. Please try again.'
         
-    def understand_instr(group, value):
+    def understand_instr_error_message(group, value):
         if value!=True:
             return 'Are you sure that you did not understand the instructions and payoff calculation? In this case you can not participate in the experiment. Please submit your answer again.'
     
