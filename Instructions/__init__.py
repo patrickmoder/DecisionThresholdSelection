@@ -10,9 +10,9 @@ class C(BaseConstants):
 class Subsession(BaseSubsession):
     pass
 class Group(BaseGroup):
-    Confusion_Matrix_missing_value = models.StringField(choices=[['True Positive (TP)', 'True Positive (TP)'], ['True Negative (TN)', 'True Negative (TN)'], ['False Positive (FP)', 'False Positive (FP)'], ['False Negative (FN)', 'False Negative (FN)']], label='What outcome is missing (?) in the matrix below? Please click "Next" to confirm your answer.')
-    Threshold_Introduction_Understanding_Check = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Do you agree with the following statement? In order to reduce False Negative (FN) classifications, the threshold θ should be increased. Please click "Next" to confirm your answer.')
-    Misclassification_Costs_Understanding_Check = models.IntegerField(label='Based on the exemplary costs for misclassifications introduced above, how much would four (4) False Positive Predictions cost? Please click "Next" to confirm your answer.')
+    Confusion_Matrix_missing_value = models.StringField(choices=[['True Positive (TP)', 'True Positive (TP)'], ['True Negative (TN)', 'True Negative (TN)'], ['False Positive (FP)', 'False Positive (FP)'], ['False Negative (FN)', 'False Negative (FN)']], label='Please answer the following question before you can move to the next page. What outcome is missing (?) in the matrix above? <br /> Please click "Next" to confirm your answer.')
+    Threshold_Introduction_Understanding_Check = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Please answer the following question before you can move to the next page. Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold θ should be increased." <br /> Please click "Next" to confirm your answer.')
+    Misclassification_Costs_Understanding_Check = models.IntegerField(label='Please answer the following question before you can move to the next page. Based on the exemplary costs for misclassifications introduced above, how much would four (4) False Positive Predictions cost? <br /> Please click "Next" to confirm your answer.')
     understand_instr = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Did you understand the instructions and how your payoff gets calculated?')
 class Player(BasePlayer):
     pass

@@ -4,11 +4,12 @@
 {{ block content }}
 
 <p>
-    In general, one tries to make as many correct predictions as possible. When making an incorrect prediction (FP or FN), we expect misclassification costs. Such misclassification costs can be different, for example 5$ for each False Positive (FP) prediction and 1$ for each False Negative (FN), respectively.
+    In general, one tries to make as many correct predictions as possible: we can calculate the accuracy of an algorithm by dividing the total number of correct predictions (TP+TN) by the total number of samples. The accuracy is a number between 0 and 1, with higher values indicating more accurate predictions. <br />
+    When making an incorrect prediction (FP or FN), we also expect misclassification costs. Such misclassification costs can be different for False Positive (FP) and False Negative (FN) predictions. Both the prediction accuracy and the misclassifications costs are affected by the selected decision threshold θ.
 </p>
 
 <p>
-    Given these costs, let us imagine the AI algorithm predicts two characteristics (positive or negative) from a set of 20 samples. Our chosen decision threshold θ results in the confusion matrix dispayed below. We expect the following outcomes:
+    Let us illustrate these considerations in an example: imagine a well-trained AI algorithm that predicts two characteristics (positive or negative) from a set of 20 samples, where 10 samples have the positive and 10 samples have the negative characteristic. In our example, we assume misclassification costs of 5$ for each False Positive (FP) prediction and 1$ for each False Negative (FN) prediction, respectively. Now, let us assume that we choose a decision threshold θ, with which the prediction outcomes of the AI algorithm are the following (also displayed in the confusion matrix below):
     <ul>
         <li>13 correct predictions: 6 True Positives, 7 True Negatives</li>
         <li>7 incorrect predictions: 3 False Positives and 4 False Negatives</li>
@@ -16,7 +17,7 @@
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <caption align="right">Confusion Matrix (Absolute Prediction Outcomes)</caption>
     <thead>
         <tr>
             <th></th>
@@ -46,11 +47,11 @@
 </table>
 
 <p>
-    Based thereon, we would expect 3 x 5$ (=15$) for False Positive predictions and 4 x 1$ (=4$) for False Negative predictions, resulting in 19$ overall. We display the overall costs in the "cost matrix" below.
+    Our chosen threshold θ results in a prediction accuracy of 0.65 (13 correct predictions / 20 total samples). Moreover, we would expect misclassification costs of 3 x 5$ (=15$) for False Positive predictions and 4 x 1$ (=4$) for False Negative predictions, resulting in 19$ overall. We display the overall misclassification costs in the "cost matrix" below.
 </p>
 
 <table id="costmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Cost Matrix [$]</caption>
+    <caption align="right">Cost Matrix (Absolute Misclassification Costs [$])</caption>
     <thead>
         <tr>
             <th></th>

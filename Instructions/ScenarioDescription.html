@@ -4,7 +4,7 @@
 {{ block content }}
 
 <p>
-    In an effort to predict a characteristic of an object, an Artificial Intelligence (AI) algorithm gets trained to make such predictions. For a given prediction problem, the AI algorithm has a binary output that indicates whether an object is going to have that characteristic of interest (positive) or not (negative). Either the positive <b>or</b> the negative characteristic can be present, and there are no other characterstics.
+    In an effort to predict a characteristic of an object, an Artificial Intelligence (AI) algorithm gets trained to make such predictions. The AI algorithm has a binary output that indicates whether an object is going to have that characteristic of interest (positive) or not (negative). Either the positive or the negative characteristic can be present, and there are no other characterstics.
 </p>
 
 <p>
@@ -27,10 +27,8 @@
     The following "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
 </p>
 
-{{ formfields }}
-
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <caption align="right">Confusion Matrix</caption>
     <thead>
         <tr>
             <th></th>
@@ -59,6 +57,7 @@
     </tbody>
 </table>
 
+{{ formfields }}
 
 {{ next_button }}
 

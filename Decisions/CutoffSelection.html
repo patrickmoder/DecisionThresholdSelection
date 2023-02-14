@@ -21,11 +21,11 @@
 </p>
 
 <p>
-    Move the slider to decide which threshold (between 0 and 1) to use.
+    Depending on the chosen threshold, you see different evaluation metrics, a confusion matrix (expected prediction outcomes) and a cost matrix (expected costs). If you need more help, please click the button "Need Help?" below to display a graphical visualization.
 </p>
 
 <p>
-    Depending on the chosen threshold, you see different evaluation metrics, a confusion matrix (expected prediction outcomes) and a cost matrix (expected costs). If you need more help, please click the button "Need Help?" below to display a graphical visualization.
+    Move the slider to select which threshold (between 0 and 1) to use.
 </p>
 
 <input type="range" name ="theta" min="0" form="player.selected_threshold" max="100" step="1" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)">
@@ -185,8 +185,8 @@ function showHelp() {
         let foner = +fone.toFixed(2);
         let thOpt = {{ player.th_opt }} / 100;
         let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
-        let pay = 1000 - (cost - costOpt);
-        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> +++ Shall we keep the Accuracy and F1 information? If yes, we need to introduce it first! +++ <br /> Your accuracy is ${accr}. <br /> Your F<sub>1</sub> Score is ${foner}. <br /><br /> +++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your payoff will be ${pay}!`
+        let pay = 100 - (cost - costOpt);
+        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /><br /> +++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!`
     };
     let tp = document.getElementById('tp');
     function updateTP(input) {
@@ -232,11 +232,11 @@ function showHelp() {
     }
 </script>
 
-<p> Remember: For every cost unit that your selected threshold is worse to the optimal cost, your payoff of 100 (for this round) will be reduced by 1, but not below 0. </p>
+<p> Remember: For every cost unit that your selected threshold is worse to the optimal cost, your payoff of 100 cents (for this round) will be reduced by 1 cent, but not reduced below 0 cents (no risk of negative payoff). </p>
         
     <!--+++ Your payoff is {{ player.payoff }}. -> TO BE REMOVED!!! +++ -->
 
-Please click next to confirm your choice and move to the next round.
+<p> Please click next to confirm your choice and move to the next round. <p/>
 
 {{ next_button }}
 
