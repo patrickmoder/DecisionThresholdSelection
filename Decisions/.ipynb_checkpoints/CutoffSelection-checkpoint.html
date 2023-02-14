@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    You try to predict positive and negative classes out of a sample with <b>{{ abs }}</b> observations, where <b>{{ player.n_N }}</b> observations belong to the negative class, and <b>{{ player.n_P }}</b> belong to the positive class. Expected costs of misclassification are <b>{{ player.c_FN }}</b> unit(s) for False Negative (FN) and <b>{{ player.c_FP }}</b> unit(s) for False Positive (FP) predictions, respectively. 
+    You try to predict positive and negative characteristics of <b>{{ abs }}</b> samples, where <b>{{ player.n_N }}</b> samples have the negative characteristic, and <b>{{ player.n_P }}</b> have the positive characteristic. Expected costs of misclassification are <b>{{ player.c_FN }}</b> unit(s) for False Negative (FN) and <b>{{ player.c_FP }}</b> unit(s) for False Positive (FP) prediction outcomes, respectively. 
     
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
     
@@ -17,7 +17,7 @@
   <li>Expected number of False Positives (FP): n(FP) = ((-θ + 1) * 20) * (5 ^ (-θ + 1)), rounded to the next integer.</li>
 </ul>-->
 
-    Your aim is to choose a decision threshold that minimizes the expected costs.
+    <b>Remember: Your aim is to choose a decision threshold that minimizes the expected costs.</b>
 </p>
 
 <p>
@@ -25,10 +25,10 @@
 </p>
 
 <p>
-    Move the slider to select which threshold (between 0 and 1) to use.
+    Move the slider to select a threshold (between 0 and 1).
 </p>
 
-<input type="range" name ="theta" min="0" form="player.selected_threshold" max="100" step="1" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)">
+<input type="range" name ="slider_threshold" min="0" form="player.selected_threshold" max="100" step="1" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)">
 
 
 
@@ -161,17 +161,17 @@ function showHelp() {
 </script>   
 
 
-<script>
+<!--<script>
     function updatePay(input) {
         var theta = parseInt(input.value);
         let th = theta/100;
         let cost = {{ player.c_FN }} * Math.round((th * 20) * Math.pow({{ baseP }}, th)) + {{ player.c_FP }} * Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1)));
         let thOpt = {{ player.th_opt }} / 100;
         let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
-        let pay = 1000 - (cost - costOpt);
+        let pay = 100 - (cost - costOpt);
         let player.reward = pay;
     }
-</script>
+</script>-->
 
 <script>
     let threshold = document.getElementById('threshold');
@@ -186,7 +186,7 @@ function showHelp() {
         let thOpt = {{ player.th_opt }} / 100;
         let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
         let pay = 100 - (cost - costOpt);
-        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /><br /> +++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!`
+        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /><br /> <i>+++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!</i>`
     };
     let tp = document.getElementById('tp');
     function updateTP(input) {
@@ -232,11 +232,11 @@ function showHelp() {
     }
 </script>
 
-<p> Remember: For every cost unit that your selected threshold is worse to the optimal cost, your payoff of 100 cents (for this round) will be reduced by 1 cent, but not reduced below 0 cents (no risk of negative payoff). </p>
+<p> Remember: For every cost unit that your threshold selection is above the cost minimum (achieved with the optimal threshold θ<sub>opt</sub>), your bonus payoff of 100 cents (for this round) will be reduced by 1 cent, but won't get reduced below 0 cents (no risk of negative payoff).</p>
         
     <!--+++ Your payoff is {{ player.payoff }}. -> TO BE REMOVED!!! +++ -->
 
-<p> Please click next to confirm your choice and move to the next round. <p/>
+<p> Please click next to confirm your selection and move to the next round. <p/>
 
 {{ next_button }}
 

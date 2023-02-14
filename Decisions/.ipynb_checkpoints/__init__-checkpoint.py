@@ -52,7 +52,7 @@ def set_payoffs(player: Player):
         player.payoff = player.n_N
 class CutoffSelection(Page):
     form_model = 'player'
-    form_fields = ['selected_threshold', 'theta']
+    form_fields = ['selected_threshold']
     @staticmethod
     def vars_for_template(player: Player):
         abs = player.n_N + player.n_P
