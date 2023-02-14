@@ -185,11 +185,11 @@ function showHelp() {
         let foner = +fone.toFixed(2);
         let thOpt = {{ player.th_opt }} / 100;
         let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
-        if (100 - (cost - costOpt) < 0) {
-            let pay = 0;
-        } else {
+        if ((100 - (cost - costOpt)) > 0) {
             let pay = 100 - (cost - costOpt);
-        }
+        } else {
+            let pay = 0;
+        };
         threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /><br /> <i>+++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!</i>`
     };
     let tp = document.getElementById('tp');
