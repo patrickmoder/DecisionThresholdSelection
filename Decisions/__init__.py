@@ -20,13 +20,14 @@ def creating_session(subsession: Subsession):
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(rows)
-    players = subsession.get_players()
+    #players = subsession.get_players()
     #print(rows)
-    #for player in subsession.get_players():
-    for i in range(len(players)):
+    for p in subsession.get_players():
+    #for i in range(len(players)):
         #i = subsession.round_number
-        player = players[i]
-        row = rowsr[i]
+        #player = players[i]
+        #p.participant.num_rounds = player.num_rounds
+        row = rows[3]
         #print('treatment is', row)
         player.n_N = int(row['n_N'])
         player.n_P = int(row['n_P'])
