@@ -20,18 +20,19 @@ def creating_session(subsession: Subsession):
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(rows)
-    #players = subsession.get_players()
+    players = subsession.get_players()
     #print(rows)
-    for player in subsession.get_players():
-    #for i in range(len(players)):
-        row = next(rowsr)
+    #for player in subsession.get_players():
+    for i in range(C.NUM_ROUNDS):
+        player = players[i]
+        row = rows[i]
         #print('treatment is', row)
-        player.n_N += int(row['n_N'])
-        player.n_P += int(row['n_P'])
-        player.c_FN += int(row['c_FN'])
-        player.c_FP += int(row['c_FP'])
-        player.th_opt += int(row['th_opt'])
-        player.scen += int(row['scen'])
+        player.n_N = int(row['n_N'])
+        player.n_P = int(row['n_P'])
+        player.c_FN = int(row['c_FN'])
+        player.c_FP = int(row['c_FP'])
+        player.th_opt = int(row['th_opt'])
+        player.scen = int(row['scen'])
 class Group(BaseGroup):
     pass
 class Player(BasePlayer):
