@@ -6,7 +6,7 @@ doc = 'When Artificial Intelligence based models are used to make predictions ab
 class C(BaseConstants):
     NAME_IN_URL = 'Decisions'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 9
+    NUM_ROUNDS = 12
     THRESHOLD_RANGE = 1
     BUDGET_START = cu(8)
 class Subsession(BaseSubsession):
@@ -25,7 +25,7 @@ def creating_session(subsession: Subsession):
     for player in subsession.get_players():
     #for i in range(len(players)):
             #p = players[i]
-            row = rowsr[subsession.round_number]
+            row = next(rowsr)
             #print('treatment is', row)
             player.n_N = int(row['n_N'])
             player.n_P = int(row['n_P'])
