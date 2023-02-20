@@ -22,9 +22,9 @@ def creating_session(subsession: Subsession):
     rows = list(csv.DictReader(f))
     #rowsr = itertools.cycle(rows)
     #print(rows)
-    for p in subsession.get_players():
+    for player in subsession.get_players():
     #for i in range(len(players)):
-            player = players[i]
+            #p = players[i]
             row = next(rows)
             #print('treatment is', row)
             player.n_N = int(row['n_N'])
