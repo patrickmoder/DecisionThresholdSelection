@@ -14,7 +14,7 @@ class Subsession(BaseSubsession):
 def creating_session(subsession: Subsession):
     #session = subsession.session
     import csv
-    #import random
+    import random
     import itertools
 
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
