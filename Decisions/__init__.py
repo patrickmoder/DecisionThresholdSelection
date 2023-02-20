@@ -23,10 +23,13 @@ def creating_session(subsession: Subsession):
     #rowsr = itertools.cycle(rows)
     #print(rows)
     players = subsession.get_players()
-    for i in range(len(players)):
+    for i in range(len(players)+1):
         if subsession.round_number == 1:
             player = players[i]
             row = rows[i]
+        else:
+            player = players[i]
+            row = rows[i+1]
             #print('treatment is', row)
             player.n_N = int(row['n_N'])
             player.n_P = int(row['n_P'])
