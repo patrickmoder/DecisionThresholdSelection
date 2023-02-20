@@ -21,7 +21,7 @@ def creating_session(subsession: Subsession):
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(rows)
     players = subsession.get_players()
-    r = player.round_number
+    r = subsession.round_number
     #print(rows)
     #for player in subsession.get_players():
     for i in range(len(players)):
