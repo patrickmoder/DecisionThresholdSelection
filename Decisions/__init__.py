@@ -19,8 +19,8 @@ def creating_session(subsession: Subsession):
 
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rowsa = list(csv.DictReader(f))
-    rowsb = rows[::-1]
-    rowsc = random.sample(rows, len(rows))
+    rowsb = rowsa[::-1]
+    rowsc = random.sample(rowsa, len(rowsa))
     sequences = itertools.cycle([rowsa, rowsb, rowsc])
     #rowsr = itertools.cycle(rows)
     for player in subsession.get_players():
