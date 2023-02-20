@@ -19,12 +19,12 @@ def creating_session(subsession: Subsession):
 
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rows = list(csv.DictReader(f))
-    rowsr = itertools.cycle(rows)
-    #players = subsession.get_players()
-    #print(rows)
+    #rowsb = rows[::-1]
+    #rowsr = random.sample(rows, len(rows))
+    #rowsr = itertools.cycle(rows)
     for player in subsession.get_players():
         r = subsession.round_number - 1
-        row = rowsr[r]
+        row = rows[r]
         #print('treatment is', row)
         player.n_N = int(row['n_N'])
         player.n_P = int(row['n_P'])
@@ -40,6 +40,7 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
+    seq = models.IntegerField()
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField(blank=True)
     cost_opt = models.IntegerField()
