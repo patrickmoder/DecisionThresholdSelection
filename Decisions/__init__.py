@@ -22,7 +22,7 @@ def creating_session(subsession: Subsession):
     rowsr = itertools.cycle(rows)
     #players = subsession.get_players()
     #print(rows)
-    for p in subsession.get_players():
+    for player in subsession.get_players():
     #for i in range(len(players)):
         #i = subsession.round_number
         #player = players[i]
