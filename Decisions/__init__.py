@@ -16,16 +16,15 @@ def creating_session(subsession: Subsession):
     import csv
     #import random
     import itertools
-    
-    
+
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(rows)
+    row = next(rowsr)
     #print(rows)
     for player in subsession.get_players():
     #for i in range(len(players)):
             #p = players[i]
-            row = next(rowsr)
             #print('treatment is', row)
             player.n_N = int(row['n_N'])
             player.n_P = int(row['n_P'])
