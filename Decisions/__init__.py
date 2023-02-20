@@ -18,12 +18,14 @@ def creating_session(subsession: Subsession):
     import itertools
 
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
-    rows = list(csv.DictReader(f))
-    #rowsb = rows[::-1]
-    #rowsr = random.sample(rows, len(rows))
+    rowsa = list(csv.DictReader(f))
+    rowsb = rows[::-1]
+    rowsc = random.sample(rows, len(rows))
+    sequences = itertools.cycle([rowsa, rowsb, rowsc])
     #rowsr = itertools.cycle(rows)
     for player in subsession.get_players():
         r = subsession.round_number - 1
+        rows = next(sequences)
         row = rows[r]
         #print('treatment is', row)
         player.n_N = int(row['n_N'])
