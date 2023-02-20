@@ -27,7 +27,7 @@ def creating_session(subsession: Subsession):
         #i = subsession.round_number
         #player = players[i]
         #p.participant.num_rounds = player.num_rounds
-        r = subsession.num_rounds - 1
+        r = subsession.round_number - 1
         row = rows[r]
         #print('treatment is', row)
         player.n_N = int(row['n_N'])
