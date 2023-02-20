@@ -40,7 +40,7 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
-    seq = models.IntegerField()
+    #seq = models.IntegerField()
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField(blank=True)
     cost_opt = models.IntegerField()
