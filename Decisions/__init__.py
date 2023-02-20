@@ -23,7 +23,7 @@ def creating_session(subsession: Subsession):
 
     #print(rows)
     for player in subsession.get_players():
-        row =+ next(rowsr)
+        row += next(rowsr)
         #for i in range(len(players)):
         #p = players[i]
         #print('treatment is', row)
