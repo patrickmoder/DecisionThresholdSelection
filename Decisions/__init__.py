@@ -44,7 +44,7 @@ class Player(BasePlayer):
     scen = models.IntegerField()
     #seq = models.IntegerField()
     th_opt = models.FloatField()
-    selected_threshold = models.IntegerField(blank=True)
+    selected_threshold = models.IntegerField()
     cost_opt = models.IntegerField()
     reward = models.IntegerField()
     theta = models.IntegerField()
