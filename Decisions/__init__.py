@@ -21,13 +21,12 @@ def creating_session(subsession: Subsession):
     rows = list(csv.DictReader(f))
     rowsr = itertools.cycle(rows)
     players = subsession.get_players()
-    r = subsession.round_number
     #print(rows)
     #for player in subsession.get_players():
     for i in range(len(players)):
         #i = subsession.round_number
         player = players[i]
-        row = rows[r]
+        row = rowsr[i]
         #print('treatment is', row)
         player.n_N = int(row['n_N'])
         player.n_P = int(row['n_P'])
