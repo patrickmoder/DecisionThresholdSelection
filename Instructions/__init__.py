@@ -10,10 +10,7 @@ class C(BaseConstants):
 class Subsession(BaseSubsession):
     pass
 class Group(BaseGroup):
-    Confusion_Matrix_missing_value = models.StringField(choices=[['True Positive (TP)', 'True Positive (TP)'], ['True Negative (TN)', 'True Negative (TN)'], ['False Positive (FP)', 'False Positive (FP)'], ['False Negative (FN)', 'False Negative (FN)']], label='Please answer the following question before you can move to the next page. <b> What outcome is missing (?) in the matrix above? </b> <br /> <br /> Please click "Next" to confirm your answer.')
-    Threshold_Introduction_Understanding_Check = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Please answer the following question before you can move to the next page. <b> Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold θ should be increased." </b> <br /> <br /> Please click "Next" to confirm your answer.')
-    Misclassification_Costs_Understanding_Check = models.IntegerField(label='Please answer the following question before you can move to the next page. <b> Based on the exemplary costs for misclassifications introduced above, how much would four (4) False Positive Predictions cost? </b> <br /> <br /> Please click "Next" to confirm your answer.')
-    understand_instr = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Did you understand the instructions and how your payoff gets calculated?')
+    pass
     
 #    def Confusion_Matrix_missing_value_error_message(group, value):
 #        if value!='False Positive (FP)':
@@ -32,52 +29,50 @@ class Group(BaseGroup):
 #            return 'Are you sure that you did not understand the instructions and payoff calculation? In this case you can not participate in the experiment. Please submit your answer again.'
     
 class Player(BasePlayer):
-    pass
+    Confusion_Matrix_missing_value = models.StringField(
+        choices=[['True Positive (TP)', 'True Positive (TP)'], ['True Negative (TN)', 'True Negative (TN)'],
+                 ['False Positive (FP)', 'False Positive (FP)'], ['False Negative (FN)', 'False Negative (FN)']],
+        label='Please answer the following question before you can move to the next page. <b> What outcome is missing (?) in the matrix above? </b> <br /> <br /> Please click "Next" to confirm your answer.')
+    Threshold_Introduction_Understanding_Check = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']],
+                                                                     label='Please answer the following question before you can move to the next page. <b> Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold θ should be increased." </b> <br /> <br /> Please click "Next" to confirm your answer.')
+    Misclassification_Costs_Understanding_Check = models.IntegerField(
+        label='Please answer the following question before you can move to the next page. <b> Based on the exemplary costs for misclassifications introduced above, how much would four (4) False Positive Predictions cost? </b> <br /> <br /> Please click "Next" to confirm your answer.')
+    understand_instr = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']],
+                                           label='Did you understand the instructions and how your payoff gets calculated?')
 class Welcome(Page):
-    form_model = 'player'
+    pass
 class ScenarioDescription(Page):
-    form_model = 'group'
-    form_fields = ['Confusion_Matrix_missing_value']
-class IncorrectAnswerConfusionMatrix(Page):
-    form_model = 'group'
-    form_fields = ['Confusion_Matrix_missing_value']
-    @staticmethod
-    def is_displayed(player: Player):
-        group = player.group
-        return group.Confusion_Matrix_missing_value != "False Positive (FP)"
+    pass
 class ThresholdIntroduction(Page):
-    form_model = 'group'
-    form_fields = ['Threshold_Introduction_Understanding_Check']
+    pass
    # @staticmethod
    # def is_displayed(player: Player):
    #     group = player.group
    #     return group.Confusion_Matrix_missing_value = "False Positive (FP)"
-class IncorrectAnswerThresholdIntroduction(Page):
-    form_model = 'group'
-    form_fields = ['Threshold_Introduction_Understanding_Check']
-    @staticmethod
-    def is_displayed(player: Player):
-        group = player.group
-        return group.Threshold_Introduction_Understanding_Check != False
 class MisclassificationCosts(Page):
-    form_model = 'group'
-    form_fields = ['Misclassification_Costs_Understanding_Check']
+    pass
     #@staticmethod
     #def is_displayed(player: Player):
     #    group = player.group
     #    return group.Threshold_Introduction_Understanding_Check = False
-class IncorrectAnswerMisclassificationCosts(Page):
-    form_model = 'group'
-    form_fields = ['Misclassification_Costs_Understanding_Check']
+class PayoffExplanation(Page):
+    pass
+class PayoffCalculation(Page):
+    form_model = 'player'
+    form_fields = ['understand_instr']
+class UnderstandingChecks(Page):
+    form_model = 'player'
+    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Understanding_Check', 'Misclassification_Costs_Understanding_Check']
+
     @staticmethod
     def is_displayed(player: Player):
-        group = player.group
-        return group.Misclassification_Costs_Understanding_Check != 20
-class PayoffExplanation(Page):
-    form_model = 'group'
-    form_fields = ['understand_instr']
+        return player.understand_instr != True
+
     #@staticmethod
     #def is_displayed(player: Player):
     #    group = player.group
-    #    return group.Misclassification_Costs_Understanding_Check = 20
-page_sequence = [Welcome, ScenarioDescription, IncorrectAnswerConfusionMatrix, ThresholdIntroduction, IncorrectAnswerThresholdIntroduction, MisclassificationCosts, IncorrectAnswerMisclassificationCosts, PayoffExplanation]
+    #    return group.Confusion_Matrix_missing_value != "False Positive (FP)"
+    #    return group.Threshold_Introduction_Understanding_Check != False
+    #    return group.Misclassification_Costs_Understanding_Check != 20
+
+page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks]

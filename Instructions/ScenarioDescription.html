@@ -1,30 +1,35 @@
 {{ extends 'global/Page.html' }}
-{{ block title }}Scenario Description{{ endblock }}
+{{ block title }}Scenario description{{ endblock }}
 
 {{ block content }}
 
-<p>
+
+<!--this is the initial wording<p>
     In an effort to predict a characteristic of an object, an Artificial Intelligence (AI) algorithm gets trained to make such predictions. The AI algorithm has a binary output that indicates whether an object is going to have that characteristic of interest (positive) or not (negative). Either the positive or the negative characteristic can be present, and there are no other characterstics.
+</p>-->
+
+<p>
+    In an effort to classify an object, an Artificial Intelligence (AI) algorithm gets trained to make such classifications. The AI algorithm has a binary output that indicates whether an object belongs to the class of interest (positive) or not (negative). Some examples are classifying an object as A or B, black or white, big or small, and so on.
 </p>
 
 <p>
-    When the AI algorithm makes a correct prediction, we therefore differentiate between two outcomes:
+    When the AI algorithm makes a correct classification, we therefore differentiate between two outcomes:
 <ul>
-  <li>True Positive (TP): the AI algorithm correctly predicts a positive characteristic, i.e., the absence of the negative characteristic.</li>
-  <li>True Negative (TN): the AI algorithm correctly predicts a negative characteristic, i.e., the absence of the positive characteristic.</li>
+  <li>True Positive (TP): the AI algorithm correctly predicts a positive class.</li>
+  <li>True Negative (TN): the AI algorithm correctly predicts a negative class.</li>
 </ul>   
 </p>
 
 <p>
-    Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false predictions occasionally. Such false predictions, or misclassifications, can appear in two different flavors:
+    Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false classifications occasionally. Such false predictions, or misclassifications, can appear in two different flavors:
 <ul>
-  <li>False Positive (FP): the AI algorithm predicts a positive characteristic but a negative characteristic is present.</li>
-  <li>False Negative (FN): the AI algorithm predicts a negative characteristic but a positive characteristic is present.</li>
+  <li>False Positive (FP): the AI algorithm predicts a positive class but the object belongs to the negative class.</li>
+  <li>False Negative (FN): the AI algorithm predicts a negative class but the object belongs to the positive class.</li>
 </ul>   
 </p>
 
 <p>
-    The following (incomplete) "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
+    The following "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
@@ -51,13 +56,15 @@
        </tr>
        <tr>
            <td>Negative</td>
-           <td id ="fp" style="color:black">?</td>
+           <td id ="fp" style="color:black">FP</td>
            <td id ="tn" style="color:green">TN</td>
        </tr>
     </tbody>
 </table>
 
-{{ formfields }}
+<p>
+Please confirm that you understood the scenario description. By clicking "Next" you will move to the next page.
+</p>
 
 {{ next_button }}
 

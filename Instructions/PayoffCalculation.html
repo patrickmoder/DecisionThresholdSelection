@@ -1,0 +1,24 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Calculation of your bonus payoff{{ endblock }}
+
+{{ block content }}
+
+
+<p>
+    In each round, you can earn a bonus payoff in addition to your participation fee.
+    For every cost unit that your threshold selection is above the cost minimum (achieved with the optimal threshold D<sub>opt</sub>), your bonus payoff per round (1€ = 100 cents) will be reduced by 1 cent, but won't get reduced below 0 cents (no risk of negative payoff). <br>
+    In the earlier example, our threshold selection leads to costs of 19$ while the cost minimum achieved with D<sub>opt</sub> is at 16$ (a difference of 3 cost units).
+    Therefore, our bonus payoff after this round would be 0.97€ (100 - 3 = 97 cents) before we move on to the next round.
+    Together with the bonus payoffs from all other rounds, this amount is added to the participation fee of 5€.
+    <!--After the last round, your cumulated bonus payoffs will be translated to real money, with 100 units equal to 1€. In the example above, we would get 97ct (0.97€) for this round. -->
+</p>
+
+<p>
+Please confirm that you understood the instructions and how your final payoff gets calculated. By clicking "Next" you will move to the understanding checks.
+</p>
+
+{{ formfields }}
+
+{{ next_button }}
+
+{{ endblock }}

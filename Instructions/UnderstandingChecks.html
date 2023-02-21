@@ -1,0 +1,75 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Understanding checks{{ endblock }}
+
+{{ block content }}
+
+<p>
+    Please answer the following understanding questions before you can proceed with the experiment.
+</p>
+
+<h2>
+    Question 1:
+</h2>
+
+<p>
+    The following (incomplete) "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Confusion Matrix</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td id="tp" style="color:green">TP</td>
+           <td id ="fn" style="color:red">FN</td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fp" style="color:black">?</td>
+           <td id ="tn" style="color:green">TN</td>
+       </tr>
+    </tbody>
+</table>
+
+<input name="Confusion_Matrix_missing_value">
+
+{{ formfield_errors 'Confusion_Matrix_missing_value'}}
+
+
+<h2>
+    Question 2:
+</h2>
+
+<input name="Threshold_Introduction_Understanding_Check">
+
+{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
+
+<h2>
+    Question 3:
+</h2>
+
+<input name="Misclassification_Costs_Understanding_Check">
+
+{{ formfield_errors 'Misclassification_Costs_Understanding_Check' }}
+
+<p>
+    Please confirm your answers by clicking "Next". If your answers are correct, you will move to the first round of the experiment.
+</p>
+
+{{ next_button }}
+
+{{ endblock }}

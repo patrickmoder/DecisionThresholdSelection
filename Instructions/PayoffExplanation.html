@@ -1,24 +1,31 @@
 {{ extends 'global/Page.html' }}
-{{ block title }}Introduction to Bonus Payoff{{ endblock }}
+{{ block title }}Introduction to bonus payoff{{ endblock }}
 
 {{ block content }}
 
 <p>
-    In the following experiment, your task will be to choose a decision threshold in multiple rounds for different prediction scenarios. Your bonus payoff will depend on how close your chosen threshold is to the optimal threshold θ<sub>opt</sub>, that is the threshold that <b>minimizes overall costs</b>.
+    In the following experiment, your task will be to choose a decision threshold in multiple rounds for different classification scenarios.
+    Your bonus payoff will depend on how close your chosen threshold is to the optimal threshold D<sub>opt</sub>, that is the threshold that <b>minimizes overall costs</b>.
 </p>
 
 <p>
-    Let us illustrate the bonus payoff calculation again with our previous example. The AI algorithm predicted negative and positive characteristics out of a set of 20 samples, where 10 samples have the positive and 10 samples have the negative characteristic. Costs for misclassifications were 5$ for each False Positive (FP) prediction and 1$ for each False Negative (FN) prediction, respectively. With our selected threshold, the algorithm made 13 correct predictions (accuracy 0.65). Moreover, misclassification costs were 3 x 5$ (=15$) for False Positive predictions and 4 x 1$ (=4$) for False Negative predictions, resulting in 19$ overall.
+    Let us illustrate the bonus payoff calculation again with our previous example.
+    The AI algorithm predicted which class (positive or negative) an object belongs to.
+    Out of a set of 20 objects, 10 objects belonged to the positive class and 10 objects belonged to the negative class.
+    Costs for misclassifications were 5$ for each False Positive (FP) classification and 1$ for each False Negative (FN) classification, respectively.
+    With our selected threshold D, the algorithm made 13 correct classifications (accuracy 0.65).
+    Moreover, misclassification costs were 3 x 5$ (=15$) for False Positive classifications and 4 x 1$ (=4$) for False Negative clsasifications, resulting in 19$ overall.
 </p>
-<p> Now, let us assume that the optimal threshold θ<sub>opt</sub> is different from our previously chosen threshold θ. In fact, with θ<sub>opt</sub> we expect the following outcomes, also displayed in the confusion matrix below:
+<p> Now, let us assume that the optimal threshold D<sub>opt</sub> is different from our previously chosen threshold D.
+    In fact, with D<sub>opt</sub> we expect the following outcomes, also displayed in the confusion matrix below:
     <ul>
-        <li>12 correct predictions: 4 True Positives, 8 True Negatives</li>
-        <li>8 incorrect predictions: 2 False Positives and 6 False Negatives</li>
+        <li>12 correct classifications: 4 True Positives, 8 True Negatives</li>
+        <li>8 incorrect classifications: 2 False Positives and 6 False Negatives</li>
 </ul>
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Prediction Outcomes)</caption>
+    <caption align="right">Confusion Matrix (Absolute Classification Outcomes)</caption>
     <thead>
         <tr>
             <th></th>
@@ -48,8 +55,14 @@
 </table>
 
 <p>
-    For the optimal threshold θ<sub>opt</sub> we would expect misclassification costs of 2 x 5$ (=10$) for False Positive predictions and 6 x 1$ (=6$) for False Negative predictions, resulting in 16$ overall. As we can see, we expect less overall costs than with the previously chosen threshold (19$). Comparing all possible thresholds θ and their resulting misclassification costs, we find that 16$ is the lowest number possible (the optimum) and therefore the corresponding threshold is named θ<sub>opt</sub>. We display the overall misclassification costs for θ<sub>opt</sub> in the cost matrix below. </p> 
-<p>    Note that the overall number of correct predictions with the optimal threshold θ<sub>opt</sub> is 12 (accuracy 0.60) and therefore below the number of correct predictions (13, accuracy 0.65) with our previous threshold choice. Despite θ<sub>opt</sub> being suboptimal regarding accuracy, remember that the optimal threshold θ<sub>opt</sub> is always minimizing costs in our setting.
+    For the optimal threshold D<sub>opt</sub> we would expect misclassification costs of 2 x 5$ (=10$) for False Positive classifications and 6 x 1$ (=6$) for False Negative classifications, resulting in 16$ overall.
+    As we can see, we expect less overall costs than with the previously chosen threshold (19$).
+    Comparing all possible thresholds and their resulting misclassification costs, we find that 16$ is the lowest number possible (the optimum) and therefore the corresponding threshold is named D<sub>opt</sub>.
+    We display the overall misclassification costs for D<sub>opt</sub> in the cost matrix below.
+</p>
+<p>
+    Note that the overall number of correct classifications with the optimal threshold D<sub>opt</sub> is 12 (accuracy 0.60) and therefore below the number of correct classifications (13, accuracy 0.65) with our previously selected threshold D.
+    Despite D<sub>opt</sub> being suboptimal regarding accuracy, remember that the optimal threshold D<sub>opt</sub> is always the threshold that minimizes costs in our setting.
 </p>
 
 <table id="costmatrix" cellpadding="4px" border="1px">
@@ -82,21 +95,10 @@
     </tbody>
 </table>
 
-<h2>
-    How your bonus payoff gets calculated:
-</h2>
 
 <p>
-    In each round, you can earn a bonus payoff in addition to your participation fee. For every cost unit that your threshold selection is above the cost minimum (achieved with the optimal threshold θ<sub>opt</sub>), your bonus payoff per round (100 cents) will be reduced by 1 cent, but won't get reduced below 0 cents (no risk of negative payoff). <br>
-    In the example above, our threshold selection leads to costs of 19$ while the minimum achieved with θ<sub>opt</sub> is at 16$ (a difference of 3$). Therefore, our bonus payoff after this round would be 97 cents (100 - 3) before we move on to the next round. Together with the bonus payoffs from all other rounds, this amount is added to the participation fee of 5€.
-    <!--After the last round, your cumulated bonus payoffs will be translated to real money, with 100 units equal to 1€. In the example above, we would get 97ct (0.97€) for this round. -->
+Please confirm that you understood the instructions to the bonus payoff. By clicking "Next" you will move to the next round.
 </p>
-
-<p>
-Please confirm that you understood the instructions and how your final payoff gets calculated. By clicking "Next" you will move to the first round of the experiment.
-</p>
-
-{{ formfields }}
 
 <!-- Include number of rounds here & Include attendance check? -->
 

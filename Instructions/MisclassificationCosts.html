@@ -4,20 +4,26 @@
 {{ block content }}
 
 <p>
-    In general, one tries to make as many correct predictions as possible: we can calculate the accuracy of an algorithm by dividing the total number of correct predictions (TP+TN) by the total number of samples. The accuracy is a number between 0 and 1, with higher values indicating more accurate predictions. <br />
-    When making an incorrect prediction (FP or FN), we also expect misclassification costs. Such misclassification costs can be different for False Positive (FP) and False Negative (FN) predictions. Both the prediction accuracy and the misclassifications costs are affected by the selected decision threshold θ.
+    In general, one tries to make as many correct classifications as possible: we can calculate the <b>accuracy</b> of an algorithm by dividing the total number of correct classifications (TP+TN) by the total number of samples.
+    The accuracy is a number between 0 and 1, with higher values indicating more accurate classifications. <br />
+    When making an incorrect classifications (FP or FN), we also expect <b>misclassification costs</b>.
+    Such misclassification costs can be different for False Positive (FP) and False Negative (FN) classifications.
+    Both the accuracy and the misclassification costs are affected by the selected decision threshold D.
 </p>
 
 <p>
-    Let us illustrate these considerations in an example: imagine a well-trained AI algorithm that predicts two characteristics (positive or negative) from a set of 20 samples, where 10 samples have the positive and 10 samples have the negative characteristic. In our example, we assume misclassification costs of 5$ for each False Positive (FP) prediction and 1$ for each False Negative (FN) prediction, respectively. Now, let us assume that we choose a decision threshold θ, with which the prediction outcomes of the AI algorithm are the following (also displayed in the confusion matrix below):
+    Let us illustrate these considerations in an example: imagine a well-trained AI algorithm that predicts which class (positive or negative) an object belongs to.
+    Out of a set of 20 objects, 10 objects belong to the positive and 10 objects belong to the negative class.
+    In our example, we assume misclassification costs of 5$ for each False Positive (FP) classification and 1$ for each False Negative (FN) classification, respectively.
+    Now, let us assume that we choose a decision threshold D, with which the classifications by the AI algorithm are the following (also displayed in the confusion matrix below):
     <ul>
-        <li>13 correct predictions: 6 True Positives, 7 True Negatives</li>
-        <li>7 incorrect predictions: 3 False Positives and 4 False Negatives</li>
+        <li>13 correct classifications: 6 True Positives, 7 True Negatives</li>
+        <li>7 incorrect classifications: 3 False Positives and 4 False Negatives</li>
 </ul>
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Prediction Outcomes)</caption>
+    <caption align="right">Confusion Matrix (Absolute Classification Outcomes)</caption>
     <thead>
         <tr>
             <th></th>
@@ -47,7 +53,9 @@
 </table>
 
 <p>
-    Our chosen threshold θ results in a prediction accuracy of 0.65 (13 correct predictions / 20 total samples). Moreover, we would expect misclassification costs of 3 x 5$ (=15$) for False Positive predictions and 4 x 1$ (=4$) for False Negative predictions, resulting in 19$ overall. We display the overall misclassification costs in the "cost matrix" below.
+    Our chosen threshold D results in a prediction accuracy of 0.65 (13 correct classifications out of 20 objects in total).
+    Moreover, we would expect misclassification costs of 3 x 5$ (=15$) for False Positive classifications and 4 x 1$ (=4$) for False Negative classifications, resulting in 19$ overall.
+    We display the overall misclassification costs in the "cost matrix" below.
 </p>
 
 <table id="costmatrix" cellpadding="4px" border="1px">
@@ -80,8 +88,6 @@
     </tbody>
 </table>
 
-
-{{ formfields }}
 
 {{ next_button }}
 
