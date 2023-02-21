@@ -53,7 +53,7 @@ def set_payoffs(player: Player):
     subsession = player.subsession
     players = subsession.get_players()
     for player in players:
-        player.payoff = 1
+        player.payoff = player.selected_threshold
 class CutoffSelection(Page):
     form_model = 'player'
     form_fields = ['selected_threshold']
