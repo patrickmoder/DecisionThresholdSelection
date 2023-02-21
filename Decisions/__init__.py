@@ -72,7 +72,7 @@ class CutoffSelection(Page):
             thropt = thropt,
             costoptr = costoptr,
         )
-    def before_next_page(player: Player):
+    def before_next_page(player, timeout_happened):
         thr = player.selected_threshold / 100
         costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             ((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
