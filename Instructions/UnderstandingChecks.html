@@ -4,12 +4,12 @@
 {{ block content }}
 
 <p>
-    Please answer the following understanding questions before you can proceed with the experiment.
+    Please answer the following four questions before you can proceed with the experiment.
 </p>
 
-<h2>
+<h3>
     Question 1:
-</h2>
+</h3>
 
 <p>
     The following (incomplete) "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
@@ -51,16 +51,6 @@
 
 <br /> <br />
 
-<h2>
-    Question 2:
-</h2>
-
-{{ formfield 'Threshold_Introduction_Understanding_Check' }}
-
-{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
-
-<br /> <br />
-
 <p>
     The following "confusion matrix" shows the actual classification outcomes of an AI algorithm.
     We assume misclassification costs of 1$ for each False Positive (FP) classification and 5$ for each False Negative (FN) classification, respectively
@@ -95,9 +85,9 @@
     </tbody>
 </table>
 
-<h2>
-    Question 3:
-</h2>
+<h3>
+    Question 2:
+</h3>
 
 {{ formfield 'Accuracy_Understanding_Check' }}
 
@@ -105,13 +95,23 @@
 
 <br /> <br />
 
-<h2>
-    Question 4:
-</h2>
+<h3>
+    Question 3:
+</h3>
 
 {{ formfield 'Misclassification_Costs_Understanding_Check' }}
 
 {{ formfield_errors 'Misclassification_Costs_Understanding_Check' }}
+
+<br /> <br />
+
+<h3>
+    Question 4:
+</h3>
+
+{{ formfield 'Threshold_Introduction_Understanding_Check' }}
+
+{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
 
 <br /> <br />
 

@@ -40,7 +40,7 @@ class Player(BasePlayer):
         choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
         label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
     Misclassification_Costs_Understanding_Check = models.IntegerField(
-        label='<b> Based on the confusion matrix shown above, what are the overall misclassification costs? </b>')
+        label='<b> Based on the confusion matrix shown above, what are the overall misclassification costs [$]? </b>')
     understand_instr = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='Did you understand the instructions and how your payoff gets calculated?')
