@@ -65,12 +65,28 @@ class PayoffExplanation(Page):
 class PayoffCalculation(Page):
     form_model = 'player'
     form_fields = ['understand_instr']
+    @staticmethod
+    def error_message(player:Player, values):
+        solutions = dict(understand_instr=True)
+        if values != solutions:
+            return "Are you sure that you have not understood the instructions?"
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Understanding_Check', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check']
+    form_fields = ['Confusion_Matrix_missing_value', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check', 'Threshold_Introduction_Understanding_Check']
     @staticmethod
     def is_displayed(player: Player):
         return player.understand_instr != False
+
+    @staticmethod
+    def error_message(player: Player, values):
+        solutions = dict(
+            Confusion_Matrix_missing_value='False Positive (FP)',
+            Accuracy_Understanding_Check='0.8',
+            Misclassification_Costs_Understanding_Check=False,
+            Threshold_Introduction_Understanding_Check=20)
+
+        if values != solutions:
+            return "One or more answers were incorrect."
 
     #@staticmethod
     #def is_displayed(player: Player):
