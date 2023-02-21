@@ -11,36 +11,20 @@ class Subsession(BaseSubsession):
     pass
 class Group(BaseGroup):
     pass
-    
-#    def Confusion_Matrix_missing_value_error_message(group, value):
-#        if value!='False Positive (FP)':
-#            return 'Your answer was incorrect. Please try again.'
-#        
-#    def Threshold_Introduction_Understanding_Check_error_message(group, value):
-#        if value!=False:
-#            return 'Your answer was incorrect. Please try again.'
-#            
-#    def Misclassification_Costs_Understanding_Check_error_message(group, value):
-#        if value!=20:
-#            return 'Your answer was incorrect. Please try again.'
-#        
-#    def understand_instr_error_message(group, value):
-#        if value!=True:
-#            return 'Are you sure that you did not understand the instructions and payoff calculation? In this case you can not participate in the experiment. Please submit your answer again.'
-    
+
 class Player(BasePlayer):
     Confusion_Matrix_missing_value = models.StringField(
         choices=[['True Positive (TP)', 'True Positive (TP)'], ['True Negative (TN)', 'True Negative (TN)'],
                  ['False Positive (FP)', 'False Positive (FP)'], ['False Negative (FN)', 'False Negative (FN)']],
         label='<b> What outcome is missing (?) in the matrix above? </b>')
-    Threshold_Introduction_Understanding_Check = models.BooleanField(
-        choices=[[True, 'Yes'], [False, 'No']],
-        label='<b> Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold D should be increased." </b>')
     Accuracy_Understanding_Check = models.StringField(
         choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
         label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
     Misclassification_Costs_Understanding_Check = models.IntegerField(
         label='<b> Based on the confusion matrix shown above, what are the overall misclassification costs [$]? </b>')
+    Threshold_Introduction_Understanding_Check = models.BooleanField(
+        choices=[[True, 'Yes'], [False, 'No']],
+        label='<b> Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold D should be increased." </b>')
     understand_instr = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='Did you understand the instructions and how your payoff gets calculated?')
@@ -50,16 +34,8 @@ class ScenarioDescription(Page):
     pass
 class ThresholdIntroduction(Page):
     pass
-   # @staticmethod
-   # def is_displayed(player: Player):
-   #     group = player.group
-   #     return group.Confusion_Matrix_missing_value = "False Positive (FP)"
 class MisclassificationCosts(Page):
     pass
-    #@staticmethod
-    #def is_displayed(player: Player):
-    #    group = player.group
-    #    return group.Threshold_Introduction_Understanding_Check = False
 class PayoffExplanation(Page):
     pass
 class PayoffCalculation(Page):
@@ -69,7 +45,7 @@ class PayoffCalculation(Page):
     def error_message(player:Player, values):
         solutions = dict(understand_instr=True)
         if values != solutions:
-            return "Are you sure that you have not understood the instructions?"
+            return "Are you sure? You cannot participate in the experiment if you answer again that you did not understand the instructions. Please review your answer."
 class UnderstandingChecks(Page):
     form_model = 'player'
     form_fields = ['Confusion_Matrix_missing_value', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check', 'Threshold_Introduction_Understanding_Check']
@@ -82,17 +58,10 @@ class UnderstandingChecks(Page):
         solutions = dict(
             Confusion_Matrix_missing_value='False Positive (FP)',
             Accuracy_Understanding_Check='0.8',
-            Misclassification_Costs_Understanding_Check=False,
-            Threshold_Introduction_Understanding_Check=20)
+            Misclassification_Costs_Understanding_Check=20,
+            Threshold_Introduction_Understanding_Check=False)
 
         if values != solutions:
-            return "One or more answers were incorrect."
-
-    #@staticmethod
-    #def is_displayed(player: Player):
-    #    group = player.group
-    #    return group.Confusion_Matrix_missing_value != "False Positive (FP)"
-    #    return group.Threshold_Introduction_Understanding_Check != False
-    #    return group.Misclassification_Costs_Understanding_Check != 20
+            return "One or more answers were incorrect. Please try again."
 
 page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks]
