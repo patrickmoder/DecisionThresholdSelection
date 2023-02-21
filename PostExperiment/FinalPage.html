@@ -1,0 +1,16 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Thanks for your participation!{{ endblock }}
+
+{{ block content }}
+<p>
+    Thank you for participating in the experiment.
+</p>
+<p>
+    Your overall payoff is {{ participant.payoff_plus_participation_fee }}.
+</p>
+
+{{ formfields }}
+
+{{ next_button }}
+
+{{ endblock }}
