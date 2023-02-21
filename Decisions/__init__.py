@@ -83,7 +83,7 @@ class CutoffSelection(Page):
             ((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
 
         if 100 - (costr - costoptr) > 0:
-            player.payoff = 100 - (costr - costoptr)
+            player.payoff = (100 - (costr - costoptr)) / 100
         else:
             player.payoff = 0
 
