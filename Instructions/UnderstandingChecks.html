@@ -49,6 +49,7 @@
 
 {{ formfield_errors 'Confusion_Matrix_missing_value'}}
 
+<br /> <br />
 
 <h2>
     Question 2:
@@ -58,13 +59,61 @@
 
 {{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
 
+<br /> <br />
+
+<p>
+    The following "confusion matrix" shows the actual classification outcomes of an AI algorithm.
+    We assume misclassification costs of 1$ for each False Positive (FP) classification and 5$ for each False Negative (FN) classification, respectively
+</p>
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Confusion Matrix (Absolute Classification Outcomes)</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Positive</td>
+           <td>Negative</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual Class</b></td>
+           <td>Positive</td>
+           <td id="tp" style="color:green">10</td>
+           <td id ="fn" style="color:red">3</td>
+       </tr>
+       <tr>
+           <td>Negative</td>
+           <td id ="fp" style="color:red">5</td>
+           <td id ="tn" style="color:green">22</td>
+       </tr>
+    </tbody>
+</table>
+
 <h2>
     Question 3:
+</h2>
+
+{{ formfield 'Accuracy_Understanding_Check' }}
+
+{{ formfield_errors 'Accuracy_Understanding_Check' }}
+
+<br /> <br />
+
+<h2>
+    Question 4:
 </h2>
 
 {{ formfield 'Misclassification_Costs_Understanding_Check' }}
 
 {{ formfield_errors 'Misclassification_Costs_Understanding_Check' }}
+
+<br /> <br />
 
 <p>
     Please confirm your answers by clicking "Next". If your answers are correct, you will move to the first round of the experiment.

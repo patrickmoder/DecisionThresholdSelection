@@ -32,13 +32,18 @@ class Player(BasePlayer):
     Confusion_Matrix_missing_value = models.StringField(
         choices=[['True Positive (TP)', 'True Positive (TP)'], ['True Negative (TN)', 'True Negative (TN)'],
                  ['False Positive (FP)', 'False Positive (FP)'], ['False Negative (FN)', 'False Negative (FN)']],
-        label='Please answer the following question before you can move to the next page. <b> What outcome is missing (?) in the matrix above? </b> <br /> <br /> Please click "Next" to confirm your answer.')
-    Threshold_Introduction_Understanding_Check = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']],
-                                                                     label='Please answer the following question before you can move to the next page. <b> Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold θ should be increased." </b> <br /> <br /> Please click "Next" to confirm your answer.')
+        label='<b> What outcome is missing (?) in the matrix above? </b>')
+    Threshold_Introduction_Understanding_Check = models.BooleanField(
+        choices=[[True, 'Yes'], [False, 'No']],
+        label='<b> Do you agree with the following statement? "In order to reduce False Negative (FN) classifications, the threshold D should be increased." </b>')
+    Accuracy_Understanding_Check = models.StringField(
+        choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
+        label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
     Misclassification_Costs_Understanding_Check = models.IntegerField(
-        label='Please answer the following question before you can move to the next page. <b> Based on the exemplary costs for misclassifications introduced above, how much would four (4) False Positive Predictions cost? </b> <br /> <br /> Please click "Next" to confirm your answer.')
-    understand_instr = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']],
-                                           label='Did you understand the instructions and how your payoff gets calculated?')
+        label='<b> Based on the confusion matrix shown above, what are the overall misclassification costs? </b>')
+    understand_instr = models.BooleanField(
+        choices=[[True, 'Yes'], [False, 'No']],
+        label='Did you understand the instructions and how your payoff gets calculated?')
 class Welcome(Page):
     pass
 class ScenarioDescription(Page):
@@ -62,7 +67,7 @@ class PayoffCalculation(Page):
     form_fields = ['understand_instr']
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Understanding_Check', 'Misclassification_Costs_Understanding_Check']
+    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Understanding_Check', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check']
     @staticmethod
     def is_displayed(player: Player):
         return player.understand_instr != False

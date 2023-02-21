@@ -28,7 +28,7 @@
     Move the slider to select a threshold (between 0 and 1).
 </p>
 
-<input type="range" min="0" name="selected_threshold" max="100" step="1" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)" >
+<input type="range" min="0" name="selected_threshold" max="100" step="1" style="width: 500px;" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)" >
 
 {{ formfield_errors 'selected_threshold'}}
 
