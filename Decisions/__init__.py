@@ -46,14 +46,9 @@ class Player(BasePlayer):
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
     cost_opt = models.IntegerField()
-    reward = models.IntegerField()
-    theta = models.IntegerField()
-def set_payoffs(player: Player):
-    session = player.session
-    subsession = player.subsession
-    players = subsession.get_players()
-    for player in players:
-        player.payoff = 1
+    #reward = models.IntegerField()
+    #theta = models.IntegerField()
+
 class CutoffSelection(Page):
     form_model = 'player'
     form_fields = ['selected_threshold']
@@ -62,10 +57,24 @@ class CutoffSelection(Page):
         abs = player.n_N + player.n_P
         baseN = player.n_N / 20
         baseP = player.n_P / 20
+        thr = player.selected_threshold / 100
+        costr = player.c_FN * Math.round((thr * 20) * Math.pow(baseP, thr)) + player.c_FP * Math.round(((-thr + 1)* 20) * Math.pow(baseN, (-thr + 1)))
+        thropt = player.th_opt / 100
+        costoptr = player.c_FN * Math.round((thropt * 20) * Math.pow(baseP, thropt)) + player.c_FP * Math.round(((-thropt + 1)* 20) * Math.pow(baseN, (-thropt + 1)))
         
         return dict(
             abs = abs,
             baseN = int(baseN),
-            baseP = int(baseP)
+            baseP = int(baseP),
+            thr = thr,
+            costr = costr,
+            thropt = thropt,
+            costoptr = costoptr,
         )
+    def before_next_page(player: Player):
+        if 100 - (costr - costoptr) > 0:
+            player.payoff = 100 - (costr - costoptr)
+        else:
+            player.payoff = 0
+
 page_sequence = [CutoffSelection]
