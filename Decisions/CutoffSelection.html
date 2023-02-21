@@ -30,7 +30,7 @@
 
 <input type="range" min="0" name="selected_threshold" max="100" step="1" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)" >
 
-<!--{{ formfield_errors 'selected_threshold'}} <p> Your selected threshold is .</p>-->
+{{ formfield_errors 'selected_threshold'}} <p> Your selected threshold is {{ selected_threshold }}.</p>
 
 <p id="threshold"></p>
 
