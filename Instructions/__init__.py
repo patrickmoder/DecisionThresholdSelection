@@ -63,10 +63,9 @@ class PayoffCalculation(Page):
 class UnderstandingChecks(Page):
     form_model = 'player'
     form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Understanding_Check', 'Misclassification_Costs_Understanding_Check']
-
     @staticmethod
     def is_displayed(player: Player):
-        return player.understand_instr != True
+        return player.understand_instr != False
 
     #@staticmethod
     #def is_displayed(player: Player):
