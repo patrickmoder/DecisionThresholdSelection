@@ -66,8 +66,8 @@ class CutoffSelection(Page):
             abs = abs,
             baseN = int(baseN),
             baseP = int(baseP),
-            thr = thr,
-            costr = costr,
+            thr = field_maybe_none(thr),
+            costr = field_maybe_none(costr),
             thropt = thropt,
             costoptr = costoptr,
         )
