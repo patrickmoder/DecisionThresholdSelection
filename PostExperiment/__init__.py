@@ -25,9 +25,9 @@ class Player(BasePlayer):
     highest_degree = models.StringField(choices=[['High School', 'High School'], ['Bachelors', 'Bachelors'], ['Masters', 'Masters'], ['Doctorate', 'Doctorate']], label='What is your highest degree in education?')
     strategy_change = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Did you change your strategy to select the threshold during the experiment?')
     strategy_how_why = models.LongStringField(label='If yes, why and how did you adjust your strategy?', blank=True)
-    strategy_when = models.IntegerField(label='If yes, after how many rounds did you adjust the strategy?', max=C.NUM_ROUNDS, min=1, blank=True)
+    strategy_when = models.IntegerField(label='If yes, after how many rounds did you adjust the strategy?', max=9, min=1, blank=True)
     optimal_how_often = models.StringField(choices=[['never', 'never'], ['rarely', 'rarely'], ['sometimes', 'sometimes'], ['often', 'often'], ['always', 'always']], label='How often do you think that you selected the optimal threshold?')
-    optimal_confident = models.IntegerField(label='How confident are you that you selected the optimal threshold in the majority of rounds in this experiment?', max=5, min=1)
+    optimal_confident = models.StringField(choices=[['not at all', 'not at all'], ['slightly', 'slightly'], ['quite a bit', 'quite a bit'], ['very', 'very'], ['extremely', 'extremely']], label='How confident are you that you selected the optimal threshold in the majority of rounds in this experiment?')
     feedback_general = models.LongStringField(blank=True, label='Do you like to share any other feedback with the experimenters?')
     study_field = models.StringField(choices=[['Formal sciences (incl. mathematics, computer science, etc.)', 'Formal sciences (incl. mathematics, computer science, etc.)'], ['Natural sciences (incl. physics, engineering, medicine, etc.)', 'Natural sciences (incl. physics, engineering, medicine, etc.)'], ['Social sciences (incl. economics, psychology, jurisprudence, etc.)', 'Social sciences (incl. economics, psychology, jurisprudence, etc.)']], label='Your field of study?')
 class PostExperimentSurvey(Page):
@@ -41,4 +41,4 @@ class PostExperimentSurvey(Page):
 class FinalPage(Page):
     pass
 
-page_sequence = [PostExperimentSurvey]
+page_sequence = [PostExperimentSurvey, FinalPage]
