@@ -60,8 +60,8 @@ class CutoffSelection(Page):
         thr = 0
         costr = 0
         thropt = player.th_opt / 100
-        costoptr = player.c_FN * Math.round((thropt * 20) * Math.pow(baseP, thropt)) + player.c_FP * Math.round(
-            ((-thropt + 1) * 20) * Math.pow(baseN, (-thropt + 1)))
+        costoptr = player.c_FN * round((thropt * 20) * pow(baseP, thropt)) + player.c_FP * round(
+            ((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
 
         return dict(
             abs = abs,
@@ -74,8 +74,8 @@ class CutoffSelection(Page):
         )
     def before_next_page(player: Player):
         thr = player.selected_threshold / 100
-        costr = player.c_FN * Math.round((thr * 20) * Math.pow(baseP, thr)) + player.c_FP * Math.round(
-            ((-thr + 1) * 20) * Math.pow(baseN, (-thr + 1)))
+        costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
+            ((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
 
         if 100 - (costr - costoptr) > 0:
             player.payoff = 100 - (costr - costoptr)
