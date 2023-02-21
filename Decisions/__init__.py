@@ -57,8 +57,12 @@ class CutoffSelection(Page):
         abs = player.n_N + player.n_P
         baseN = player.n_N / 20
         baseP = player.n_P / 20
+        thr = 0
+        costr = 0
+        thropt = player.th_opt / 100
+        costoptr = player.c_FN * Math.round((thropt * 20) * Math.pow(baseP, thropt)) + player.c_FP * Math.round(
+            ((-thropt + 1) * 20) * Math.pow(baseN, (-thropt + 1)))
 
-        
         return dict(
             abs = abs,
             baseN = int(baseN),
@@ -72,9 +76,6 @@ class CutoffSelection(Page):
         thr = player.selected_threshold / 100
         costr = player.c_FN * Math.round((thr * 20) * Math.pow(baseP, thr)) + player.c_FP * Math.round(
             ((-thr + 1) * 20) * Math.pow(baseN, (-thr + 1)))
-        thropt = player.th_opt / 100
-        costoptr = player.c_FN * Math.round((thropt * 20) * Math.pow(baseP, thropt)) + player.c_FP * Math.round(
-            ((-thropt + 1) * 20) * Math.pow(baseN, (-thropt + 1)))
 
         if 100 - (costr - costoptr) > 0:
             player.payoff = 100 - (costr - costoptr)
