@@ -27,13 +27,13 @@ def creating_session(subsession: Subsession):
         r = subsession.round_number - 1
         rows = next(sequences)
         row = rows[r]
-        #print('treatment is', row)
         player.n_N = int(row['n_N'])
         player.n_P = int(row['n_P'])
         player.c_FN = int(row['c_FN'])
         player.c_FP = int(row['c_FP'])
         player.th_opt = int(row['th_opt'])
         player.scen = int(row['scen'])
+        #player.treat = rows
 class Group(BaseGroup):
     pass
 class Player(BasePlayer):
@@ -42,10 +42,10 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
-    #seq = models.IntegerField()
+    #treat = models.IntegerField()
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
-    cost_opt = models.IntegerField()
+    #cost_opt = models.IntegerField()
     #reward = models.IntegerField()
     #theta = models.IntegerField()
 
