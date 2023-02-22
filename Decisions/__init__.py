@@ -36,7 +36,7 @@ def creating_session(subsession: Subsession):
         player.c_FP = int(row['c_FP'])
         player.th_opt = int(row['th_opt'])
         player.scen = int(row['scen'])
-        #player.treat = str(rows)
+
 class Group(BaseGroup):
     pass
 class Player(BasePlayer):
@@ -45,7 +45,7 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
-    #treat = models.IntegerField()
+    treat = models.StringField(choices=[['asc', 'asc'], ['desc', 'desc'], ['rand1', 'rand1'], ['rand2', 'rand2']])
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
     #cost_opt = models.IntegerField()
@@ -66,6 +66,20 @@ class CutoffSelection(Page):
         costoptr = player.c_FN * round((thropt * 20) * pow(baseP, thropt)) + player.c_FP * round(
             ((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
 
+        list_asc = list(range(1,97,4))
+        list_desc = list(range(2,98,4))
+        list_rand1 = list(range(3,99,4))
+        list_rand2 = list(range(4,100,4))
+
+        if player.id_in_group in list_asc:
+            player.treat = 'asc'
+        elif player.id_in_group in list_desc:
+            player.treat = 'desc'
+        elif player.id_in_group in list_rand1:
+            player.treat = 'rand1'
+        elif player.id_in_group in list_rand2:
+            player.treat = 'rand2'
+
         return dict(
             abs = abs,
             baseN = int(baseN),
@@ -74,6 +88,10 @@ class CutoffSelection(Page):
             costr = costr,
             thropt = thropt,
             costoptr = costoptr,
+            list_asc = list_asc,
+            list_desc = list_desc,
+            list_rand1 = list_rand1,
+            list_rand2 = list_rand2
         )
     def before_next_page(player, timeout_happened):
         thr = player.selected_threshold / 100
