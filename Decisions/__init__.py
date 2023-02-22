@@ -36,7 +36,7 @@ def creating_session(subsession: Subsession):
         player.c_FP = int(row['c_FP'])
         player.th_opt = int(row['th_opt'])
         player.scen = int(row['scen'])
-        player.treat = rows
+        player.treat = str(rows)
 class Group(BaseGroup):
     pass
 class Player(BasePlayer):
