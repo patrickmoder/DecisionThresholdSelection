@@ -21,7 +21,7 @@ def creating_session(subsession: Subsession):
     f1 = open(r"_static/treatments_rand1.csv", "r", encoding='utf-8-sig')
     f2 = open(r"_static/treatments_rand2.csv", "r", encoding='utf-8-sig')
     asc = list(csv.DictReader(f))
-    desc = rowsa[::-1]
+    desc = asc[::-1]
     rand1 = list(csv.DictReader(f1))
     rand2 = list(csv.DictReader(f2))
     sequences = itertools.cycle([asc, desc, rand1, rand2])
