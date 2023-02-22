@@ -36,7 +36,7 @@ def creating_session(subsession: Subsession):
         player.c_FP = int(row['c_FP'])
         player.th_opt = int(row['th_opt'])
         player.scen = int(row['scen'])
-        player.treat = str(rows)
+        #player.treat = str(rows)
 class Group(BaseGroup):
     pass
 class Player(BasePlayer):
@@ -45,7 +45,7 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
-    treat = models.IntegerField()
+    #treat = models.IntegerField()
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
     #cost_opt = models.IntegerField()
