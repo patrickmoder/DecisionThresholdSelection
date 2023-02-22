@@ -18,10 +18,13 @@ def creating_session(subsession: Subsession):
     import itertools
 
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
-    rowsa = list(csv.DictReader(f))
-    rowsb = rowsa[::-1]
-    rowsc = random.sample(rowsa, len(rowsa))
-    sequences = itertools.cycle([rowsa, rowsb, rowsc])
+    f1 = open(r"_static/treatments_rand1.csv", "r", encoding='utf-8-sig')
+    f2 = open(r"_static/treatments_rand2.csv", "r", encoding='utf-8-sig')
+    asc = list(csv.DictReader(f))
+    desc = rowsa[::-1]
+    rand1 = list(csv.DictReader(f1))
+    rand2 = list(csv.DictReader(f2))
+    sequences = itertools.cycle([asc, desc, rand1, rand2])
     #rowsr = itertools.cycle(rows)
     for player in subsession.get_players():
         r = subsession.round_number - 1
@@ -33,7 +36,7 @@ def creating_session(subsession: Subsession):
         player.c_FP = int(row['c_FP'])
         player.th_opt = int(row['th_opt'])
         player.scen = int(row['scen'])
-        #player.treat = rows
+        player.treat = rows
 class Group(BaseGroup):
     pass
 class Player(BasePlayer):
@@ -42,7 +45,7 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
-    #treat = models.IntegerField()
+    treat = models.IntegerField()
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
     #cost_opt = models.IntegerField()
