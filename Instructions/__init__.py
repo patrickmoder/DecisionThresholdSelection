@@ -63,8 +63,8 @@ class UnderstandingChecks(Page):
             Misclassification_Costs_Understanding_Check=20,
             Threshold_Introduction_Understanding_Check=False)
 
-        if values != solutions:
-            player.num_failed_attempts += 1
+        #if values != solutions:
+            #player.num_failed_attempts += 1
         if values != solutions:
             return "One or more answers were incorrect. Please try again."
 
