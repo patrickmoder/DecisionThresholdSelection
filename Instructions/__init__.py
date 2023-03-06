@@ -56,14 +56,9 @@ class UnderstandingChecks(Page):
         return player.understand_instr != False
 
     @staticmethod
-    def error_message(player: Player, values):
-        solutions_comprehens = dict(
-            Confusion_Matrix_missing_value='False Positive (FP)',
-            Accuracy_Understanding_Check='0.8',
-            Misclassification_Costs_Understanding_Check=20,
-            Threshold_Introduction_Understanding_Check=False
-        )
-        if values != solutions_comprehens:
+    def error_message(player:Player, values):
+        solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)', Accuracy_Understanding_Check='0.8', Misclassification_Costs_Understanding_Check=20, Threshold_Introduction_Understanding_Check=False)
+        if values != solutions:
             return "One or more answers were incorrect. Please try again."
         #if values != solutions:
             #player.num_failed_attempts += 1
