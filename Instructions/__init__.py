@@ -29,6 +29,7 @@ class Player(BasePlayer):
         choices=[[True, 'Yes'], [False, 'No']],
         label='Did you understand the instructions and how your payoff gets calculated?')
     num_failed_attempts = models.IntegerField(initial = 0, blank = True)
+
 class Welcome(Page):
     pass
 class ScenarioDescription(Page):
@@ -66,7 +67,7 @@ class UnderstandingChecks(Page):
             player.num_failed_attempts += 1
             return "One or more answers were incorrect. Please try again."
 
-class CorrectAnswer(Page):
+class CorrectAnswers(Page):
     pass
 
-page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks, CorrectAnswer]
+page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks, CorrectAnswers]
