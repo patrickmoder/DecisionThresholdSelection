@@ -50,7 +50,7 @@ class PayoffCalculation(Page):
             return "Are you sure? You cannot participate in the experiment if you answer again that you did not understand the instructions. Please review your answer."
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check', 'Threshold_Introduction_Understanding_Check', 'num_failed_attempts']
+    form_fields = ['Confusion_Matrix_missing_value', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check', 'Threshold_Introduction_Understanding_Check']
     @staticmethod
     def is_displayed(player: Player):
         return player.understand_instr != False
