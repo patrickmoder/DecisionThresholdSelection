@@ -66,5 +66,7 @@ class UnderstandingChecks(Page):
             return "One or more answers were incorrect. Please try again."
             player.num_failed_attempts += 1
 
+class CorrectAnswer(Page):
+    pass
 
 page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks, CorrectAnswer]
