@@ -68,7 +68,7 @@ class UnderstandingChecks(Page):
         if values != solutions:
             return "One or more answers were incorrect. Please try again."
 
-class CorrectAnswers(Page):
-    pass
+#class CorrectAnswers(Page):
+    #pass
 
-page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks, CorrectAnswers]
+page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks]
