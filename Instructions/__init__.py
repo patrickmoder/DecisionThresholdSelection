@@ -63,8 +63,9 @@ class UnderstandingChecks(Page):
             Threshold_Introduction_Understanding_Check=False)
 
         if values != solutions:
-            return "One or more answers were incorrect. Please try again."
             player.num_failed_attempts += 1
+            return "One or more answers were incorrect. Please try again."
+
 
 class CorrectAnswer(Page):
     pass
