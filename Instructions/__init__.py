@@ -66,7 +66,6 @@ class UnderstandingChecks(Page):
             player.num_failed_attempts += 1
             return "One or more answers were incorrect. Please try again."
 
-
 class CorrectAnswer(Page):
     pass
 
