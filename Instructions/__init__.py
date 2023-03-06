@@ -28,7 +28,7 @@ class Player(BasePlayer):
     understand_instr = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='Did you understand the instructions and how your payoff gets calculated?')
-    num_failed_attempts = models.IntegerField(initial = 0)
+    num_failed_attempts = models.IntegerField(initial = 0, blank = True)
 class Welcome(Page):
     pass
 class ScenarioDescription(Page):
