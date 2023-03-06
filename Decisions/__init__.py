@@ -20,11 +20,15 @@ def creating_session(subsession: Subsession):
     f = open(r"_static/treatments.csv", "r", encoding='utf-8-sig')
     f1 = open(r"_static/treatments_rand1.csv", "r", encoding='utf-8-sig')
     f2 = open(r"_static/treatments_rand2.csv", "r", encoding='utf-8-sig')
-    asc = list(csv.DictReader(f))
-    desc = asc[::-1]
+    f3 = open(r"_static/treatments_rand3.csv", "r", encoding='utf-8-sig')
+    f4 = open(r"_static/treatments_rand4.csv", "r", encoding='utf-8-sig')
+    #asc = list(csv.DictReader(f))
+    #desc = asc[::-1]
     rand1 = list(csv.DictReader(f1))
     rand2 = list(csv.DictReader(f2))
-    sequences = itertools.cycle([asc, desc, rand1, rand2])
+    rand3 = list(csv.DictReader(f3))
+    rand4 = list(csv.DictReader(f4))
+    sequences = itertools.cycle([rand1, rand2, rand3, rand4])
     #rowsr = itertools.cycle(rows)
     for player in subsession.get_players():
         r = subsession.round_number - 1
@@ -45,7 +49,7 @@ class Player(BasePlayer):
     c_FN = models.IntegerField()
     c_FP = models.IntegerField()
     scen = models.IntegerField()
-    #treat = models.StringField(choices=[['asc', 'asc'], ['desc', 'desc'], ['rand1', 'rand1'], ['rand2', 'rand2']])
+    treat = models.StringField(choices=[['rand1', 'rand1'], ['rand2', 'rand2'], ['rand3', 'rand3'], ['rand4', 'rand4']])
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
     #cost_opt = models.IntegerField()
@@ -66,19 +70,19 @@ class CutoffSelection(Page):
         costoptr = player.c_FN * round((thropt * 20) * pow(baseP, thropt)) + player.c_FP * round(
             ((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
 
-        ##list_asc = list(range(1,97,4))
-        ##list_desc = list(range(2,98,4))
-        ##list_rand1 = list(range(3,99,4))
-        ##list_rand2 = list(range(4,100,4))
+        ##list_rand1 = list(range(1,97,4))
+        ##list_rand2 = list(range(2,98,4))
+        ##list_rand3 = list(range(3,99,4))
+        ##list_rand4 = list(range(4,100,4))
 ##
-        ##if player.id_in_group in list_asc:
-        ##    player.treat = 'asc'
-        ##elif player.id_in_group in list_desc:
-        ##    player.treat = 'desc'
-        ##elif player.id_in_group in list_rand1:
+        ##if player.id_in_group in list_rand1:
         ##    player.treat = 'rand1'
         ##elif player.id_in_group in list_rand2:
         ##    player.treat = 'rand2'
+        ##elif player.id_in_group in list_rand3:
+        ##    player.treat = 'rand3'
+        ##elif player.id_in_group in list_rand4:
+        ##    player.treat = 'rand4'
 ##
         return dict(
             abs = abs,
@@ -88,10 +92,10 @@ class CutoffSelection(Page):
             costr = costr,
             thropt = thropt,
             costoptr = costoptr
-            #list_asc = list_asc,
-            #list_desc = list_desc,
             #list_rand1 = list_rand1,
-            #list_rand2 = list_rand2
+            #list_rand2 = list_rand2,
+            # list_rand3 = list_rand3,
+            # list_rand4 = list_rand4
         )
     def before_next_page(player, timeout_happened):
         thr = player.selected_threshold / 100

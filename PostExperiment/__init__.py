@@ -15,12 +15,13 @@ class Group(BaseGroup):
     pass
 class Player(BasePlayer):
     age = models.IntegerField(label='Your age?', min=18)
-    similar_task = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Have you ever done some similar task before?')
+    similar_task = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Have you ever done any similar task before?')
+    similar_exp = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Have you taken part in a similar experiment before?')
     choice_criterion = models.StringField(choices=[['cost', 'cost'], ['probability of positive characteristic', 'probability of positive characteristic'], ['probability of negative characteristic', 'probability of negative characteristic'], ['algorithm performance', 'algorithm performance'], ['other', 'other']], label='What criterion did you use to select the threshold?')
     choice_criterion_add = models.StringField(label='Which additional criteria did you use to select the threshold?', blank=True)
     gender = models.StringField(choices=[['female', 'female'], ['male', 'male'], ['diverse', 'diverse'], ['do not want to disclose', 'do not want to disclose']], label='Your gender?')
     nationality = models.StringField(label='Your nationality?')
-    study_progress = models.IntegerField(label='Your overall study progress in years?')
+    study_progress = models.IntegerField(label='How many semesters did you study so far in total?')
     professional_experience = models.IntegerField(label='Your professional experience in years?')
     highest_degree = models.StringField(choices=[['High School', 'High School'], ['Bachelors', 'Bachelors'], ['Masters', 'Masters'], ['Doctorate', 'Doctorate']], label='What is your highest degree in education?')
     strategy_change = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Did you change your strategy to select the threshold during the experiment?')
@@ -33,7 +34,7 @@ class Player(BasePlayer):
 class PostExperimentSurvey(Page):
     form_model = 'player'
     form_fields = ['age', 'gender', 'nationality', 'study_progress', 'highest_degree', 'study_field', 'professional_experience',
-                   'similar_task', 'optimal_confident', 'optimal_how_often',
+                   'similar_exp', 'similar_task', 'optimal_confident', 'optimal_how_often',
                    'choice_criterion', 'choice_criterion_add',
                    'strategy_change', 'strategy_how_why', 'strategy_when',
                    'feedback_general']

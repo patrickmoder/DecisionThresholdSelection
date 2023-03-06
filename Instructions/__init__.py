@@ -28,6 +28,7 @@ class Player(BasePlayer):
     understand_instr = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='Did you understand the instructions and how your payoff gets calculated?')
+    num_failed_attempts = models.IntegerField(initial = 0)
 class Welcome(Page):
     pass
 class ScenarioDescription(Page):
@@ -48,7 +49,7 @@ class PayoffCalculation(Page):
             return "Are you sure? You cannot participate in the experiment if you answer again that you did not understand the instructions. Please review your answer."
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check', 'Threshold_Introduction_Understanding_Check']
+    form_fields = ['Confusion_Matrix_missing_value', 'Accuracy_Understanding_Check', 'Misclassification_Costs_Understanding_Check', 'Threshold_Introduction_Understanding_Check', 'num_failed_attempts']
     @staticmethod
     def is_displayed(player: Player):
         return player.understand_instr != False
@@ -63,5 +64,7 @@ class UnderstandingChecks(Page):
 
         if values != solutions:
             return "One or more answers were incorrect. Please try again."
+            player.num_failed_attempts += 1
 
-page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks]
+
+page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, PayoffExplanation, PayoffCalculation, UnderstandingChecks, CorrectAnswer]
