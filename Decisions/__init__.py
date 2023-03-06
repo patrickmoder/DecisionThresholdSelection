@@ -70,20 +70,20 @@ class CutoffSelection(Page):
         costoptr = player.c_FN * round((thropt * 20) * pow(baseP, thropt)) + player.c_FP * round(
             ((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
 
-        ##list_rand1 = list(range(1,97,4))
-        ##list_rand2 = list(range(2,98,4))
-        ##list_rand3 = list(range(3,99,4))
-        ##list_rand4 = list(range(4,100,4))
-##
-        ##if player.id_in_group in list_rand1:
-        ##    player.treat = 'rand1'
-        ##elif player.id_in_group in list_rand2:
-        ##    player.treat = 'rand2'
-        ##elif player.id_in_group in list_rand3:
-        ##    player.treat = 'rand3'
-        ##elif player.id_in_group in list_rand4:
-        ##    player.treat = 'rand4'
-##
+        list_rand1 = list(range(1,97,4))
+        list_rand2 = list(range(2,98,4))
+        list_rand3 = list(range(3,99,4))
+        list_rand4 = list(range(4,100,4))
+
+        if player.id_in_group in list_rand1:
+            player.treat = 'rand1'
+        elif player.id_in_group in list_rand2:
+            player.treat = 'rand2'
+        elif player.id_in_group in list_rand3:
+            player.treat = 'rand3'
+        elif player.id_in_group in list_rand4:
+            player.treat = 'rand4'
+
         return dict(
             abs = abs,
             baseN = int(baseN),
@@ -91,11 +91,11 @@ class CutoffSelection(Page):
             thr = thr,
             costr = costr,
             thropt = thropt,
-            costoptr = costoptr
-            #list_rand1 = list_rand1,
-            #list_rand2 = list_rand2,
-            # list_rand3 = list_rand3,
-            # list_rand4 = list_rand4
+            costoptr = costoptr,
+            list_rand1 = list_rand1,
+            list_rand2 = list_rand2,
+            list_rand3 = list_rand3,
+            list_rand4 = list_rand4
         )
     def before_next_page(player, timeout_happened):
         thr = player.selected_threshold / 100

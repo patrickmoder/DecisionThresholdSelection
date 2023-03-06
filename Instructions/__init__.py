@@ -30,7 +30,7 @@ class Player(BasePlayer):
         label='Did you understand the instructions and how your payoff gets calculated?')
     num_ui_false = models.IntegerField(initial=0)
     num_failed_attempts = models.IntegerField(initial=0)
-    #exclude = models.BooleanField(initial=False)
+
 
 class Welcome(Page):
     pass
@@ -51,8 +51,7 @@ class PayoffCalculation(Page):
         if values != solutions:
             player.num_ui_false += 1
             return "Are you sure? You might not be able to participate in the experiment if you answer again that you did not understand the instructions. Please review your answer."
-            #if player.num_ui_false >= 2:
-                #player.exclude = True
+
 
 class UnderstandingChecks(Page):
     form_model = 'player'
