@@ -110,21 +110,25 @@ class CutoffSelection(Page):
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
         m_prob = random.randrange(0, 100, 1) / 100
-        prob_TP = 1 - (((-thr + 1) * 20) * pow(baseN, (-thr + 1))) / abs
-        prob_TN = 1 - round((thr * 20) * pow(baseP, thr)) / abs
+        prob_TP = 1 - (((-m_prob + 1) * 20) * pow(baseN, (-m_prob + 1))) / abs
+        prob_TN = 1 - round((m_prob * 20) * pow(baseP, m_prob)) / abs
 
         if m_prob >= thr:
-            player.outcome = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
-            if player.outcome == "TP":
+            out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            if TP in out:
                 player.payoff = 100
+                player.outcome = "TP"
             else:
                 player.payoff = 100 - player.c_FP
+                player.outcome = "FP"
         else:
-            player.outcome = random.choices(["FN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
-            if player.outcome == "TN":
+            out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
+            if TN in out:
                 player.payoff = 100
+                player.outcome = "TN"
             else:
                 player.payoff = 100 - player.c_FN
+                player.outcome = "FN"
 
 
         #if 100 - (costr - costoptr) > 0:
