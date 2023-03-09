@@ -103,7 +103,7 @@
     Need Help?
 </button>
 
-<div id="help"></div>
+<div id="help" onclick="track(this)" name="clicked_help"></div>
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -160,6 +160,10 @@ var layout = {
 let help = document.getElementById('help');
 function showHelp() {
     help.innerHTML = Plotly.newPlot("myPlot", data, layout);
+}
+//check whether it is clicked
+function track() {
+player.clicked_help = 1
 }
 </script>   
 
