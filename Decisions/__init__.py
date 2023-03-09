@@ -137,8 +137,8 @@ class CutoffSelection(Page):
 
         player.prob1_FP = (((-player.m_prob1 + 1) * 20) * pow(baseN, (-player.m_prob1 + 1))) / abs
         player.prob1_FN = round((player.m_prob1 * 20) * pow(baseP, player.m_prob1)) / abs
-        player.prob1_TP = (player.n_P - player.prob1_FN) / abs
-        player.prob1_TN = (player.n_N - player.prob1_FP) / abs
+        player.prob1_TP = (player.n_P - round((player.m_prob1 * 20) * pow(baseP, player.m_prob1))) / abs
+        player.prob1_TN = (player.n_N - (((-player.m_prob1 + 1) * 20) * pow(baseN, (-player.m_prob1 + 1)))) / abs
 
         prob2_FP = (((-m_prob2 + 1) * 20) * pow(baseN, (-m_prob2 + 1))) / abs
         prob2_FN = round((m_prob2 * 20) * pow(baseP, m_prob2)) / abs
