@@ -109,7 +109,7 @@ class CutoffSelection(Page):
             #((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
-        m_prob = random.randrange(0, 1, 0.01)
+        m_prob = random.randrange(0, 100, 1) / 100
         prob_TP = 1 - (((-thr + 1) * 20) * pow(baseN, (-thr + 1))) / abs
         prob_TN = 1 - round((thr * 20) * pow(baseP, thr)) / abs
 
