@@ -162,8 +162,9 @@ function showHelp() {
     help.innerHTML = Plotly.newPlot("myPlot", data, layout);
 }
 //check whether it is clicked
+var clicks = 0
 function track() {
-    clicks = 1
+    clicks += 1
     document.getElementById("help").innerHTML = clicks;
     document.getElementById("help").value = clicks
 }
