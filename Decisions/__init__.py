@@ -57,11 +57,11 @@ class Player(BasePlayer):
     out3 = models.StringField()
     out4 = models.StringField()
     out5 = models.StringField()
-    #out6 = models.StringField()
-    #out7 = models.StringField()
-    #out8 = models.StringField()
-    #out9 = models.StringField()
-    #out10 = models.StringField()
+    out6 = models.StringField()
+    out7 = models.StringField()
+    out8 = models.StringField()
+    out9 = models.StringField()
+    out10 = models.StringField()
     #cost_opt = models.IntegerField()
     #reward = models.IntegerField()
     #theta = models.IntegerField()
@@ -123,11 +123,11 @@ class CutoffSelection(Page):
         m_prob3 = random.randrange(0, 100, 1) / 100
         m_prob4 = random.randrange(0, 100, 1) / 100
         m_prob5 = random.randrange(0, 100, 1) / 100
-        #m_prob6 = random.randrange(0, 100, 1) / 100
-        #m_prob7 = random.randrange(0, 100, 1) / 100
-        #m_prob8 = random.randrange(0, 100, 1) / 100
-        #m_prob9 = random.randrange(0, 100, 1) / 100
-        #m_prob10 = random.randrange(0, 100, 1) / 100
+        m_prob6 = random.randrange(0, 100, 1) / 100
+        m_prob7 = random.randrange(0, 100, 1) / 100
+        m_prob8 = random.randrange(0, 100, 1) / 100
+        m_prob9 = random.randrange(0, 100, 1) / 100
+        m_prob10 = random.randrange(0, 100, 1) / 100
 
         prob1_TP = 1 - (((-m_prob1 + 1) * 20) * pow(baseN, (-m_prob1 + 1))) / abs
         prob1_TN = 1 - round((m_prob1 * 20) * pow(baseP, m_prob1)) / abs
@@ -143,6 +143,21 @@ class CutoffSelection(Page):
 
         prob5_TP = 1 - (((-m_prob5 + 1) * 20) * pow(baseN, (-m_prob5 + 1))) / abs
         prob5_TN = 1 - round((m_prob5 * 20) * pow(baseP, m_prob5)) / abs
+
+        prob6_TP = 1 - (((-m_prob6 + 1) * 20) * pow(baseN, (-m_prob6 + 1))) / abs
+        prob6_TN = 1 - round((m_prob6 * 20) * pow(baseP, m_prob6)) / abs
+
+        prob7_TP = 1 - (((-m_prob7 + 1) * 20) * pow(baseN, (-m_prob7 + 1))) / abs
+        prob7_TN = 1 - round((m_prob7 * 20) * pow(baseP, m_prob7)) / abs
+
+        prob8_TP = 1 - (((-m_prob8 + 1) * 20) * pow(baseN, (-m_prob8 + 1))) / abs
+        prob8_TN = 1 - round((m_prob8 * 20) * pow(baseP, m_prob8)) / abs
+
+        prob9_TP = 1 - (((-m_prob9 + 1) * 20) * pow(baseN, (-m_prob9 + 1))) / abs
+        prob9_TN = 1 - round((m_prob9 * 20) * pow(baseP, m_prob9)) / abs
+
+        prob10_TP = 1 - (((-m_prob10 + 1) * 20) * pow(baseN, (-m_prob10 + 1))) / abs
+        prob10_TN = 1 - round((m_prob10 * 20) * pow(baseP, m_prob10)) / abs
 
         if m_prob1 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob1_TP, 1-prob1_TP], k=1)
@@ -234,7 +249,95 @@ class CutoffSelection(Page):
                 player.payoff += .1 - player.c_FN / 100
                 player.out5 = "FN"
 
+        if m_prob6 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob6_TP, 1-prob6_TP], k=1)
+            player.out6 = "TP"
+            if "TP" in out:
+                player.payoff += .1
+                player.out6 = "TP"
+            else:
+                player.payoff += .1 - player.c_FP / 100
+                player.out6 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob6_TN, 1-prob6_TN], k=1)
+            if "TN" in out:
+                player.payoff += .1
+                player.out6 = "TN"
+            else:
+                player.payoff += .1 - player.c_FN / 100
+                player.out6 = "FN"
 
+        if m_prob7 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob7_TP, 1-prob7_TP], k=1)
+            player.out7 = "TP"
+            if "TP" in out:
+                player.payoff += .1
+                player.out7 = "TP"
+            else:
+                player.payoff += .1 - player.c_FP / 100
+                player.out7 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob7_TN, 1-prob7_TN], k=1)
+            if "TN" in out:
+                player.payoff += .1
+                player.out7 = "TN"
+            else:
+                player.payoff += .1 - player.c_FN / 100
+                player.out7 = "FN"
+
+        if m_prob8 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob8_TP, 1-prob8_TP], k=1)
+            player.out8 = "TP"
+            if "TP" in out:
+                player.payoff += .1
+                player.out8 = "TP"
+            else:
+                player.payoff += .1 - player.c_FP / 100
+                player.out8 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob8_TN, 1-prob8_TN], k=1)
+            if "TN" in out:
+                player.payoff += .1
+                player.out8 = "TN"
+            else:
+                player.payoff += .1 - player.c_FN / 100
+                player.out8 = "FN"
+
+        if m_prob9 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob9_TP, 1-prob9_TP], k=1)
+            player.out9 = "TP"
+            if "TP" in out:
+                player.payoff += .1
+                player.out9 = "TP"
+            else:
+                player.payoff += .1 - player.c_FP / 100
+                player.out9 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob9_TN, 1-prob9_TN], k=1)
+            if "TN" in out:
+                player.payoff += .1
+                player.out9 = "TN"
+            else:
+                player.payoff += .1 - player.c_FN / 100
+                player.out9 = "FN"
+
+        if m_prob10 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob10_TP, 1-prob10_TP], k=1)
+            player.out10 = "TP"
+            if "TP" in out:
+                player.payoff += .1
+                player.out10 = "TP"
+            else:
+                player.payoff += .1 - player.c_FP / 100
+                player.out10 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob10_TN, 1-prob10_TN], k=1)
+            if "TN" in out:
+                player.payoff += .1
+                player.out10 = "TN"
+            else:
+                player.payoff += .1 - player.c_FN / 100
+                player.out10 = "FN"
 
         #if 100 - (costr - costoptr) > 0:
         #    player.payoff = (100 - (costr - costoptr)) / 100
