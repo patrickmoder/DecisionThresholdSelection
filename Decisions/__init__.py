@@ -62,6 +62,11 @@ class Player(BasePlayer):
     out8 = models.StringField()
     out9 = models.StringField()
     out10 = models.StringField()
+    m_prob1 = models.FloatField()
+    prob1_FP = models.FloatField()
+    prob1_FN = models.FloatField()
+    prob1_TP = models.FloatField()
+    prob1_TN = models.FloatField()
 
     #cost_opt = models.IntegerField()
     #reward = models.IntegerField()
@@ -119,7 +124,7 @@ class CutoffSelection(Page):
             #((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
-        m_prob1 = random.randrange(0, 100, 1) / 100
+        player.m_prob1 = random.randrange(0, 100, 1) / 100
         m_prob2 = random.randrange(0, 100, 1) / 100
         m_prob3 = random.randrange(0, 100, 1) / 100
         m_prob4 = random.randrange(0, 100, 1) / 100
@@ -130,10 +135,10 @@ class CutoffSelection(Page):
         m_prob9 = random.randrange(0, 100, 1) / 100
         m_prob10 = random.randrange(0, 100, 1) / 100
 
-        prob1_FP = (((-m_prob1 + 1) * 20) * pow(baseN, (-m_prob1 + 1))) / abs
-        prob1_FN = round((m_prob1 * 20) * pow(baseP, m_prob1)) / abs
-        prob1_TP = (player.n_P - prob1_FN) / abs
-        prob1_TN = (player.n_N - prob1_FP) / abs
+        player.prob1_FP = (((-player.m_prob1 + 1) * 20) * pow(baseN, (-player.m_prob1 + 1))) / abs
+        player.prob1_FN = round((player.m_prob1 * 20) * pow(baseP, player.m_prob1)) / abs
+        player.prob1_TP = (player.n_P - player.prob1_FN) / abs
+        player.prob1_TN = (player.n_N - player.prob1_FP) / abs
 
         prob2_FP = (((-m_prob2 + 1) * 20) * pow(baseN, (-m_prob2 + 1))) / abs
         prob2_FN = round((m_prob2 * 20) * pow(baseP, m_prob2)) / abs
@@ -180,21 +185,21 @@ class CutoffSelection(Page):
         prob10_TP = (player.n_P - prob10_FN) / abs
         prob10_TN = (player.n_N - prob10_FP) / abs
 
-        if m_prob1 >= thr:
-            out = random.choices(["TP", "FP"], weights = [prob1_TP, prob1_FP], k=1)
+        if player.m_prob1 >= thr:
+            out = random.choices(["TP", "FP"], weights = [player.prob1_TP, player.prob1_FP], k=1)
             if "TP" in out:
                 player.payoff += .1
                 player.out1 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out1 = "FP"
         else:
-            out = random.choices(["TN", "FN"], weights = [prob1_TN, prob1_FN], k=1)
+            out = random.choices(["TN", "FN"], weights = [player.prob1_TN, player.prob1_FN], k=1)
             if "TN" in out:
                 player.payoff += .1
                 player.out1 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out1 = "FN"
 
         if m_prob2 >= thr:
@@ -203,7 +208,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out2 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out2 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob2_TN, prob2_FN], k=1)
@@ -211,7 +216,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out2 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out2 = "FN"
 
         if m_prob3 >= thr:
@@ -220,7 +225,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out3 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out3 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob3_TN, prob3_FN], k=1)
@@ -228,7 +233,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out3 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out3 = "FN"
 
         if m_prob4 >= thr:
@@ -237,7 +242,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out4 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out4 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob4_TN, prob4_FN], k=1)
@@ -245,7 +250,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out4 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out4 = "FN"
 
         if m_prob5 >= thr:
@@ -254,7 +259,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out5 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out5 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob5_TN, prob5_FN], k=1)
@@ -262,7 +267,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out5 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out5 = "FN"
 
         if m_prob6 >= thr:
@@ -271,7 +276,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out6 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out6 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob6_TN, prob6_FN], k=1)
@@ -279,7 +284,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out6 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out6 = "FN"
 
         if m_prob7 >= thr:
@@ -288,7 +293,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out7 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out7 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob7_TN, prob7_FN], k=1)
@@ -296,7 +301,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out7 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out7 = "FN"
 
         if m_prob8 >= thr:
@@ -305,7 +310,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out8 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out8 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob8_TN, prob8_FN], k=1)
@@ -313,7 +318,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out8 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out8 = "FN"
 
         if m_prob9 >= thr:
@@ -322,7 +327,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out9 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out9 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob9_TN, prob9_FN], k=1)
@@ -330,7 +335,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out9 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out9 = "FN"
 
         if m_prob10 >= thr:
@@ -339,7 +344,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out10 = "TP"
             else:
-                player.payoff += .1 - player.c_FP / 100
+                player.payoff -= player.c_FP / 100
                 player.out10 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob10_TN, prob10_FN], k=1)
@@ -347,7 +352,7 @@ class CutoffSelection(Page):
                 player.payoff += .1
                 player.out10 = "TN"
             else:
-                player.payoff += .1 - player.c_FN / 100
+                player.payoff -= player.c_FN / 100
                 player.out10 = "FN"
 
         #if 100 - (costr - costoptr) > 0:
