@@ -161,7 +161,6 @@ class CutoffSelection(Page):
 
         if m_prob1 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob1_TP, 1-prob1_TP], k=1)
-            player.out1 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out1 = "TP"
@@ -179,7 +178,6 @@ class CutoffSelection(Page):
 
         if m_prob2 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob2_TP, 1-prob2_TP], k=1)
-            player.out2 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out2 = "TP"
@@ -197,7 +195,6 @@ class CutoffSelection(Page):
 
         if m_prob3 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob3_TP, 1-prob3_TP], k=1)
-            player.out3 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out3 = "TP"
@@ -215,7 +212,6 @@ class CutoffSelection(Page):
 
         if m_prob4 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob4_TP, 1-prob4_TP], k=1)
-            player.out4 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out4 = "TP"
@@ -233,7 +229,6 @@ class CutoffSelection(Page):
 
         if m_prob5 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob5_TP, 1-prob5_TP], k=1)
-            player.out5 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out5 = "TP"
@@ -251,7 +246,6 @@ class CutoffSelection(Page):
 
         if m_prob6 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob6_TP, 1-prob6_TP], k=1)
-            player.out6 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out6 = "TP"
@@ -269,7 +263,6 @@ class CutoffSelection(Page):
 
         if m_prob7 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob7_TP, 1-prob7_TP], k=1)
-            player.out7 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out7 = "TP"
@@ -287,7 +280,6 @@ class CutoffSelection(Page):
 
         if m_prob8 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob8_TP, 1-prob8_TP], k=1)
-            player.out8 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out8 = "TP"
@@ -305,7 +297,6 @@ class CutoffSelection(Page):
 
         if m_prob9 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob9_TP, 1-prob9_TP], k=1)
-            player.out9 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out9 = "TP"
@@ -323,7 +314,6 @@ class CutoffSelection(Page):
 
         if m_prob10 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob10_TP, 1-prob10_TP], k=1)
-            player.out10 = "TP"
             if "TP" in out:
                 player.payoff += .1
                 player.out10 = "TP"
