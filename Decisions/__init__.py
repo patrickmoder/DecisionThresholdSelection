@@ -6,7 +6,7 @@ doc = 'When Artificial Intelligence based models are used to make predictions ab
 class C(BaseConstants):
     NAME_IN_URL = 'Decisions'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 9
+    NUM_ROUNDS = 13
     THRESHOLD_RANGE = 1
     BUDGET_START = cu(8)
 class Subsession(BaseSubsession):
