@@ -52,6 +52,7 @@ class Player(BasePlayer):
     treat = models.StringField(choices=[['rand1', 'rand1'], ['rand2', 'rand2'], ['rand3', 'rand3'], ['rand4', 'rand4']])
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
+    outcome = models.StringField()
     #cost_opt = models.IntegerField()
     #reward = models.IntegerField()
     #theta = models.IntegerField()
@@ -99,17 +100,35 @@ class CutoffSelection(Page):
         )
     def before_next_page(player, timeout_happened):
         thr = player.selected_threshold / 100
+        abs = player.n_N + player.n_P
         baseN = player.n_N / 20
         baseP = player.n_P / 20
-        thropt = player.th_opt / 100
-        costoptr = player.c_FN * round((thropt * 20) * pow(baseP, thropt)) + player.c_FP * round(
-            ((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
-        costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
-            ((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
+        #thropt = player.th_opt / 100
+        #costoptr = player.c_FN * round((thropt * 20) * pow(baseP, thropt)) + player.c_FP * round(
+            #((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
+        #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
+            #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
+        m_prob = random.randrange(0, 1, 0.01)
+        prob_TP = 1 - (((-thr + 1) * 20) * pow(baseN, (-thr + 1))) / abs
+        prob_TN = 1 - round((thr * 20) * pow(baseP, thr)) / abs
 
-        if 100 - (costr - costoptr) > 0:
-            player.payoff = (100 - (costr - costoptr)) / 100
+        if m_prob >= thr:
+            player.outcome = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            if player.outcome == "TP":
+                player.payoff = 100
+            else:
+                player.payoff = 100 - player.c_FP
         else:
-            player.payoff = 0
+            player.outcome = random.choices(["FN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
+            if player.outcome == "TN":
+                player.payoff = 100
+            else:
+                player.payoff = 100 - player.c_FN
+
+
+        #if 100 - (costr - costoptr) > 0:
+        #    player.payoff = (100 - (costr - costoptr)) / 100
+        #else:
+        #    player.payoff = 0
 
 page_sequence = [CutoffSelection]
