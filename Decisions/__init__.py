@@ -115,7 +115,7 @@ class CutoffSelection(Page):
 
         if m_prob >= thr:
             out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
-            if TP in out:
+            if "TP" in out:
                 player.payoff = 100
                 player.outcome = "TP"
             else:
@@ -123,7 +123,7 @@ class CutoffSelection(Page):
                 player.outcome = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
-            if TN in out:
+            if "TN" in out:
                 player.payoff = 100
                 player.outcome = "TN"
             else:
