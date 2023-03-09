@@ -52,7 +52,16 @@ class Player(BasePlayer):
     treat = models.StringField(choices=[['rand1', 'rand1'], ['rand2', 'rand2'], ['rand3', 'rand3'], ['rand4', 'rand4']])
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
-    outcome = models.StringField()
+    out1 = models.StringField()
+    out2 = models.StringField()
+    out3 = models.StringField()
+    out4 = models.StringField()
+    out5 = models.StringField()
+    #out6 = models.StringField()
+    #out7 = models.StringField()
+    #out8 = models.StringField()
+    #out9 = models.StringField()
+    #out10 = models.StringField()
     #cost_opt = models.IntegerField()
     #reward = models.IntegerField()
     #theta = models.IntegerField()
@@ -109,26 +118,110 @@ class CutoffSelection(Page):
             #((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
-        m_prob = random.randrange(0, 100, 1) / 100
+        m_prob1 = random.randrange(0, 100, 1) / 100
+        m_prob2 = random.randrange(0, 100, 1) / 100
+        m_prob3 = random.randrange(0, 100, 1) / 100
+        m_prob4 = random.randrange(0, 100, 1) / 100
+        m_prob5 = random.randrange(0, 100, 1) / 100
+        #m_prob6 = random.randrange(0, 100, 1) / 100
+        #m_prob7 = random.randrange(0, 100, 1) / 100
+        #m_prob8 = random.randrange(0, 100, 1) / 100
+        #m_prob9 = random.randrange(0, 100, 1) / 100
+        #m_prob10 = random.randrange(0, 100, 1) / 100
+
         prob_TP = 1 - (((-m_prob + 1) * 20) * pow(baseN, (-m_prob + 1))) / abs
         prob_TN = 1 - round((m_prob * 20) * pow(baseP, m_prob)) / abs
 
-        if m_prob >= thr:
+        if m_prob1 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            player.out1 = "TP"
             if "TP" in out:
                 player.payoff = 100
-                player.outcome = "TP"
+                player.out1 = "TP"
             else:
                 player.payoff = 100 - player.c_FP
-                player.outcome = "FP"
+                player.out1 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
             if "TN" in out:
                 player.payoff = 100
-                player.outcome = "TN"
+                player.out1 = "TN"
             else:
                 player.payoff = 100 - player.c_FN
-                player.outcome = "FN"
+                player.out1 = "FN"
+
+        if m_prob2 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            player.out2 = "TP"
+            if "TP" in out:
+                player.payoff = 100
+                player.out2 = "TP"
+            else:
+                player.payoff = 100 - player.c_FP
+                player.out2 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
+            if "TN" in out:
+                player.payoff = 100
+                player.out2 = "TN"
+            else:
+                player.payoff = 100 - player.c_FN
+                player.out2 = "FN"
+
+        if m_prob3 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            player.out3 = "TP"
+            if "TP" in out:
+                player.payoff = 100
+                player.out3 = "TP"
+            else:
+                player.payoff = 100 - player.c_FP
+                player.out3 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
+            if "TN" in out:
+                player.payoff = 100
+                player.out3 = "TN"
+            else:
+                player.payoff = 100 - player.c_FN
+                player.out3 = "FN"
+
+        if m_prob4 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            player.out4 = "TP"
+            if "TP" in out:
+                player.payoff = 100
+                player.out4 = "TP"
+            else:
+                player.payoff = 100 - player.c_FP
+                player.out4 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
+            if "TN" in out:
+                player.payoff = 100
+                player.out4 = "TN"
+            else:
+                player.payoff = 100 - player.c_FN
+                player.out4 = "FN"
+
+        if m_prob5 >= thr:
+            out = random.choices(["TP", "FP"], weights = [prob_TP, 1-prob_TP], k=1)
+            player.out5 = "TP"
+            if "TP" in out:
+                player.payoff = 100
+                player.out5 = "TP"
+            else:
+                player.payoff = 100 - player.c_FP
+                player.out5 = "FP"
+        else:
+            out = random.choices(["TN", "FN"], weights = [prob_TN, 1-prob_TN], k=1)
+            if "TN" in out:
+                player.payoff = 100
+                player.out5 = "TN"
+            else:
+                player.payoff = 100 - player.c_FN
+                player.out5 = "FN"
+
 
 
         #if 100 - (costr - costoptr) > 0:
