@@ -99,6 +99,7 @@ class CutoffSelection(Page):
             list_rand4 = list_rand4
         )
     def before_next_page(player, timeout_happened):
+        import random
         thr = player.selected_threshold / 100
         abs = player.n_N + player.n_P
         baseN = player.n_N / 20
