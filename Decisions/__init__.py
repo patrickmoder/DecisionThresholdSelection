@@ -148,90 +148,90 @@ class CutoffSelection(Page):
             out = random.choices(["TP", "FP"], weights = [prob1_TP, 1-prob1_TP], k=1)
             player.out1 = "TP"
             if "TP" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out1 = "TP"
             else:
-                player.payoff = 100 - player.c_FP
+                player.payoff += .1 - player.c_FP / 100
                 player.out1 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob1_TN, 1-prob1_TN], k=1)
             if "TN" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out1 = "TN"
             else:
-                player.payoff = 100 - player.c_FN
+                player.payoff += .1 - player.c_FN / 100
                 player.out1 = "FN"
 
         if m_prob2 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob2_TP, 1-prob2_TP], k=1)
             player.out2 = "TP"
             if "TP" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out2 = "TP"
             else:
-                player.payoff = 100 - player.c_FP
+                player.payoff += .1 - player.c_FP / 100
                 player.out2 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob2_TN, 1-prob2_TN], k=1)
             if "TN" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out2 = "TN"
             else:
-                player.payoff = 100 - player.c_FN
+                player.payoff += .1 - player.c_FN / 100
                 player.out2 = "FN"
 
         if m_prob3 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob3_TP, 1-prob3_TP], k=1)
             player.out3 = "TP"
             if "TP" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out3 = "TP"
             else:
-                player.payoff = 100 - player.c_FP
+                player.payoff += .1 - player.c_FP / 100
                 player.out3 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob3_TN, 1-prob3_TN], k=1)
             if "TN" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out3 = "TN"
             else:
-                player.payoff = 100 - player.c_FN
+                player.payoff += .1 - player.c_FN / 100
                 player.out3 = "FN"
 
         if m_prob4 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob4_TP, 1-prob4_TP], k=1)
             player.out4 = "TP"
             if "TP" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out4 = "TP"
             else:
-                player.payoff = 100 - player.c_FP
+                player.payoff += .1 - player.c_FP / 100
                 player.out4 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob4_TN, 1-prob4_TN], k=1)
             if "TN" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out4 = "TN"
             else:
-                player.payoff = 100 - player.c_FN
+                player.payoff += .1 - player.c_FN / 100
                 player.out4 = "FN"
 
         if m_prob5 >= thr:
             out = random.choices(["TP", "FP"], weights = [prob5_TP, 1-prob5_TP], k=1)
             player.out5 = "TP"
             if "TP" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out5 = "TP"
             else:
-                player.payoff = 100 - player.c_FP
+                player.payoff += .1 - player.c_FP / 100
                 player.out5 = "FP"
         else:
             out = random.choices(["TN", "FN"], weights = [prob5_TN, 1-prob5_TN], k=1)
             if "TN" in out:
-                player.payoff = 100
+                player.payoff += .1
                 player.out5 = "TN"
             else:
-                player.payoff = 100 - player.c_FN
+                player.payoff += .1 - player.c_FN / 100
                 player.out5 = "FN"
 
 
