@@ -52,8 +52,8 @@ class Player(BasePlayer):
     treat = models.StringField(choices=[['rand1', 'rand1'], ['rand2', 'rand2'], ['rand3', 'rand3'], ['rand4', 'rand4']])
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
-    help_button = models.BooleanField(initial=0, blank=True)
-    help = models.BooleanField(initial =  0)
+    #help_button = models.IntegerField(initial=0, blank=True)
+    clicked_help = models.IntegerField(initial=0)
     out1 = models.StringField()
     out2 = models.StringField()
     out3 = models.StringField()
@@ -81,7 +81,7 @@ class Player(BasePlayer):
 
 class CutoffSelection(Page):
     form_model = 'player'
-    form_fields = ['selected_threshold', 'help_button']
+    form_fields = ['selected_threshold', 'clicked_help']
     @staticmethod
     def vars_for_template(player: Player):
         abs = player.n_N + player.n_P
