@@ -1,0 +1,99 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Introduction to your task{{ endblock }}
+
+{{ block content }}
+
+<p>
+    In the following experiment, your task will be to adjust an AI algorithm that is applied to predict breakdowns of your 10 machines.
+    In every of the 13 rounds, you will receive information on:
+    <ul>
+    <li>The sample size of the training set that was used to train the AI algorithm.</li>
+    <li>How many machines in the training set break down in the next 48 hours and how many do not.</li>
+    <li>Misclassification costs after False Alarms and Missed Hits.</li>
+    <li>The AI algorithm's expected prediction outcomes for the training set.</li>
+    </ul>
+</p>
+<p>
+    Your task is to choose a decision threshold for the AI algorithm.
+    After you confirm your choice, the AI algorithm gets applied to predict breakdowns of your 10 machines in the next 48 hours.
+</p>
+<p>
+
+</p>
+
+<p>
+    Let us illustrate the task with our previous example. Misclassification costs were 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
+    Remember that when choosing a decision threshold D of 0.65, predictions by the AI algorithm for the 20 machines in the training set are as follows:
+    <ul>
+        <li>13 correct predictions: 6 Correct Predictions of Breakdown, 7 Correct Predictions of No Breakdown</li>
+        <li>7 incorrect predictions: 3 False Alarms and 4 Missed Hits</li>
+    </ul>
+    <br>
+    Let us assume that we choose D = 0.65 for this round.
+    When the AI algorithm gets applied to predict breakdowns of our 10 machines in the next 48 hours,
+    the prediction outcomes for this particular round are as follows (also displayed in the matrix below):
+    <!--The AI algorithm predicted which class (positive or negative) an object belongs to.
+    Out of a set of 20 objects, 10 objects belonged to the positive class and 10 objects belonged to the negative class.
+    Costs for misclassifications were 5$ for each False Positive (FP) classification and 1$ for each False Negative (FN) classification, respectively.
+    With our selected threshold D, the algorithm made 13 correct classifications (accuracy 0.65).
+    Moreover, misclassification costs were 3 x 5$ (=15$) for False Positive classifications and 4 x 1$ (=4$) for False Negative clsasifications, resulting in 19$ overall.-->
+<!--<p> Now, let us assume that the optimal threshold D<sub>opt</sub> is different from our previously chosen threshold D.
+    In fact, with D<sub>opt</sub> we expect the following outcomes, also displayed in the confusion matrix below:-->
+    <ul>
+        <li>8 correct predictions: 3 Correct Predictions of Breakdown, 5 Correct Predictions of No Breakdown</li>
+        <li>2 incorrect predictions: 1 False Alarm and 1 Missed Hit</li>
+    </ul>
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes after applying the AI algorithm</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
+           <td id="tp" style="color:green">3</td>
+           <td id ="fn" style="color:red">1</td>
+       </tr>
+       <tr>
+           <td>No Breakdown</td>
+           <td id ="fp" style="color:red">1</td>
+           <td id ="tn" style="color:green">5</td>
+       </tr>
+    </tbody>
+</table>
+
+<p>
+    Consequently, after applying the AI algorithm, misclassification costs of 1 x 5 cost units (=5 cost units) for False Alarms and 1 x 1 cost units (=1 cost unit) for Missed Hits get realized, resulting in 6 cost units overall.
+    Your bonus payoff for every round will depend on the resulting misclassification costs. We will explain its calculation on the next page.
+
+    <!--For the optimal threshold D<sub>opt</sub> we would expect misclassification costs of 2 x 5$ (=10$) for False Positive classifications and 6 x 1$ (=6$) for False Negative classifications, resulting in 16$ overall.
+    As we can see, we expect less overall costs than with the previously chosen threshold (19$).
+    Comparing all possible thresholds and their resulting misclassification costs, we find that 16$ is the lowest number possible (the optimum) and therefore the corresponding threshold is named D<sub>opt</sub>.
+    We display the overall misclassification costs for D<sub>opt</sub> in the cost matrix below.
+</p>
+<p>
+    Note that the overall number of correct classifications with the optimal threshold D<sub>opt</sub> is 12 (accuracy 0.60) and therefore below the number of correct classifications (13, accuracy 0.65) with our previously selected threshold D.
+    Despite D<sub>opt</sub> being suboptimal regarding accuracy, remember that the optimal threshold D<sub>opt</sub> is always the threshold that minimizes costs in our setting.
+</p>-->
+
+<p>
+Please confirm that you understood the introduction to your task. By clicking "Next" you will move to the next round.
+</p>
+
+
+{{ next_button }}
+
+{{ endblock }}

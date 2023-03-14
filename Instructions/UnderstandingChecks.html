@@ -12,35 +12,35 @@
 </h3>
 
 <p>
-    The following (incomplete) "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
+    The following (incomplete) matrix compares the predicted to the actual states when predicting machine breakdowns.
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix</caption>
+    <caption align="right">Prediction Outcomes</caption>
     <thead>
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted Class</th>
+            <th colspan="2">Predicted State</th>
         </tr>
     </thead>
     <tbody>
         <tr>
            <td></td>
            <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
        </tr>
        <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
-           <td id="tp" style="color:green">TP</td>
-           <td id ="fn" style="color:red">FN</td>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
+           <td id="tp" style="color:green">Correct Prediction of<br>Breakdown</td>
+           <td id ="fn" style="color:red">Missed Hit</td>
        </tr>
        <tr>
            <td>Negative</td>
            <td id ="fp" style="color:black">?</td>
-           <td id ="tn" style="color:green">TN</td>
+           <td id ="tn" style="color:green">Correct Prediction of<br>No Breakdown</td>
        </tr>
     </tbody>
 </table>
@@ -51,47 +51,13 @@
 
 <br /> <br />
 
-<p>
-    The following "confusion matrix" shows the actual classification outcomes of an AI algorithm.
-    We assume misclassification costs of 1$ for each False Positive (FP) classification and 5$ for each False Negative (FN) classification, respectively
-</p>
-<table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Classification Outcomes)</caption>
-    <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th colspan="2">Predicted Class</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-           <td></td>
-           <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
-       </tr>
-       <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
-           <td id="tp" style="color:green">10</td>
-           <td id ="fn" style="color:red">3</td>
-       </tr>
-       <tr>
-           <td>Negative</td>
-           <td id ="fp" style="color:red">5</td>
-           <td id ="tn" style="color:green">22</td>
-       </tr>
-    </tbody>
-</table>
-
 <h3>
     Question 2:
 </h3>
 
-{{ formfield 'Accuracy_Understanding_Check' }}
+{{ formfield 'Threshold_Introduction_Easy' }}
 
-{{ formfield_errors 'Accuracy_Understanding_Check' }}
+{{ formfield_errors 'Threshold_Introduction_Easy' }}
 
 <br /> <br />
 
@@ -99,9 +65,9 @@
     Question 3:
 </h3>
 
-{{ formfield 'Misclassification_Costs_Understanding_Check' }}
+{{ formfield 'Threshold_Introduction_Understanding_Check' }}
 
-{{ formfield_errors 'Misclassification_Costs_Understanding_Check' }}
+{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
 
 <br /> <br />
 
@@ -109,11 +75,95 @@
     Question 4:
 </h3>
 
-{{ formfield 'Threshold_Introduction_Understanding_Check' }}
+Let us consider the following example:
+In a training set that is used to train the AI algorithm, out of a sample of 170 machines, 70 break down in the next 48 hours and 100 machines do not break down.
+In our example, we assume misclassification costs of 1 cost unit for each False Alarm and 5 cost units for each Missed Hit, respectively.
 
-{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
+<p>
+    You can move the slider to select a threshold (between 0 and 1).
+</p>
+
+<input type="range" min="0" max="100" step="1" style="width: 500px;" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this)" >
+
+<p id="threshold"></p>
+
+<!-- by leaving the threshold (and the results) blank initially, we prompt the user to move the slider, reducing the anchoring/default effect. -->
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
+           <td id="tp" style="color:green"></td>
+           <td id ="fn" style="color:red"></td>
+       </tr>
+       <tr>
+           <td>No Breakdown</td>
+           <td id ="fp" style="color:red"></td>
+           <td id ="tn" style="color:green"></td>
+       </tr>
+    </tbody>
+</table>
+
+{{ formfield 'Misclassification_Costs_Understanding_Check' }}
+
+{{ formfield_errors 'Misclassification_Costs_Understanding_Check' }}
 
 <br /> <br />
+
+<script>
+
+    let threshold = document.getElementById('threshold');
+    function updateThreshold(input) {
+        let theta = parseInt(input.value);
+        let th = theta/100;
+        threshold.innerHTML = `Your selected threshold is ${th}.`
+    };
+
+    let tp = document.getElementById('tp');
+    function updateTP(input) {
+        let tptheta = parseInt(input.value);
+        let tpth = tptheta / 100;
+        let tpcalc = 70 - Math.round((tpth * 20) * Math.pow(3.5, tpth));
+        tp.innerHTML = `${tpcalc}`
+    };
+    let fn = document.getElementById('fn');
+    function updateFN(input) {
+        let fntheta = parseInt(input.value);
+        let fnth = fntheta / 100;
+        let fncalc = Math.round((fnth * 20) * Math.pow(3.5, fnth));
+        fn.innerHTML = `${fncalc}`
+    };
+    let fp = document.getElementById('fp');
+    function updateFP(input) {
+        let fptheta = parseInt(input.value);
+        let fpth = fptheta / 100;
+        let fpcalc = Math.round(((-fpth + 1)* 20) * Math.pow(5, (-fpth + 1)));
+        fp.innerHTML = `${fpcalc}`
+    };
+    let tn = document.getElementById('tn');
+    function updateTN(input) {
+        let tntheta = parseInt(input.value);
+        let tnth = tntheta / 100;
+        let tncalc = 100 - Math.round(((-tnth + 1)* 20) * Math.pow(5, -tnth + 1));
+        tn.innerHTML = `${tncalc}`
+    };
+
+</script>
 
 <p>
     Please confirm your answers by clicking "Next". If your answers are correct, you can start with the experiment.

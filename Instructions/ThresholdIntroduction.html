@@ -4,28 +4,37 @@
 {{ block content }}
 
 <p>
-    For the AI algorithm, the balance between positive and negative classifications can be adjusted. This adjustment results in a trade-off between the four outcomes in the confusion matrix. An increase in one column sum consequently leads to a decrease in the other column sum, while the total numbers of TP+FN and TN+FP (the row sums) stay the same.
+    Before applying the AI algorithm in a real-world setting, the balance between breakdown- and no-breakdown-predictions can be adjusted.
+
 </p>
+<!--<p>
+    When predicting more breakdowns, consequently less predictions of smooth operations are
+    An increase in one column sum consequently leads to a decrease in the other column sum, while the total numbers of TP+FN and TN+FP (the row sums) stay the same.
+</p>-->
 
 <p>
-This adjustment can be made by varying the decision threshold D. One can set D between [0;1]:
+The AI algorithm outputs a certain breakdown-likelihood for each particular machine in the next 48 hours.
+One can vary the decision threshold D between 0 and 1 to indicate the breakdown-likelihood above which machines shall be predicted as being at risk of breakdown.
+As a result, the likelihood output by the AI algorithm is translated into a binary prediction:
+if the likelihood is above D, we predict a breakdown in the next 48 hours; while if below D, we predict no breakdown in the next 48 hours.
+The adjustment of D results in the following trade-off:
 <ul>
-    <li>The larger the threshold D, the more objects are classified as negative, i.e., more TN and FN.</li>
-    <li>The smaller the threshold D, the more objects are classified as positive, i.e., more TP and FP.</li>
+    <li>The smaller the threshold D, the more often breakdowns will be predicted.</li>
+    <li>The larger the threshold D, the less often breakdowns will be predicted.</li>
 </ul>  
 </p>
 
 <p>
-For the confusion matrix we introduced earlier, we show the relationship of the threshold D and the absolute classification outcomes in the following table.
+For the matrix we introduced earlier, we show the relationship of the threshold D and the absolute prediction outcomes in the following table.
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix</caption>
+    <caption align="right">Prediction Outcomes</caption>
     <thead>
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted Class</th>
+            <th colspan="2">Predicted State</th>
             <th></th>
         </tr>
     </thead>
@@ -33,27 +42,27 @@ For the confusion matrix we introduced earlier, we show the relationship of the 
         <tr>
            <td></td>
            <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
            <td><i>Row sum</i></td>
        </tr>
        <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
-           <td id="tp" style="color:green">TP</td>
-           <td id ="fn" style="color:red">FN</td>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
+           <td id="tp" style="color:green">Correct Prediction of<br>Breakdown</td>
+           <td id ="fn" style="color:red">Missed Hit</td>
            <td><i>constant</i></td>
        </tr>
        <tr>
-           <td>Negative</td>
-           <td id ="fp" style="color:red">FP</td>
-           <td id ="tn" style="color:green">TN</td>
+           <td>No Breakdown</td>
+           <td id ="fp" style="color:red">False Alarm</td>
+           <td id ="tn" style="color:green">Correct Prediction of<br>No Breakdown</td>
            <td><i>constant</i></td>
        </tr>
        <tr>
            <td></td>
            <td><i>Column sum</i></td>
-           <td><i>Increases with<br>decreasing D</i></td>
+           <td><i>Decreases with<br>increasing D</i></td>
            <td><i>Increases with<br>increasing D</i></td>
            <td></td>
        </tr>

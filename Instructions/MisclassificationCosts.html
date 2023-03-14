@@ -3,49 +3,57 @@
 
 {{ block content }}
 
-<p>
+<!--<p>
     In general, one tries to make as many correct classifications as possible: we can calculate the <b>accuracy</b> of an algorithm by dividing the total number of correct classifications (TP+TN) by the total number of samples.
     The accuracy is a number between 0 and 1, with higher values indicating more accurate classifications. <br />
-    When making an incorrect classifications (FP or FN), we also expect <b>misclassification costs</b>.
-    Such misclassification costs can be different for False Positive (FP) and False Negative (FN) classifications.
-    Both the accuracy and the misclassification costs are affected by the selected decision threshold D.
+</p>-->
+
+<p>
+    In our setting, we assume that correct predictions are equally valuable.
+    Yet, when making incorrect predictions of machine breakdowns, we expect <b>misclassification costs</b>.
+    Such misclassification costs can be different and depend on the environment where the AI algorithm is applied:
+    <ul>
+        <li>After False Alarms, one might start unnecessary maintenance activities and suffer from unnecessary down-times of machines.</li>
+        <li>After Missed Hits, one might lose the opportunity to prevent the breakdown and suffer from avoidable down-times of machines.</li>
+    </ul>
 </p>
 
 <p>
-    Let us illustrate these considerations in an example: imagine a well-trained AI algorithm that predicts which class (positive or negative) an object belongs to.
-    Out of a set of 20 objects, 10 objects belong to the positive and 10 objects belong to the negative class.
-    In our example, we assume misclassification costs of 5$ for each False Positive (FP) classification and 1$ for each False Negative (FN) classification, respectively.
-    Now, let us assume that we choose a decision threshold D, with which the classifications by the AI algorithm are the following (also displayed in the confusion matrix below):
+    Let us illustrate these considerations in an example:
+    in the training set that is used to train the AI algorithm, out of a sample of 20 machines, 10 break down in the next 48 hours and 10 machines do not break down.
+    In our example, we assume misclassification costs of 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
+    Now, let us assume that we choose a decision threshold D of 0.65, which determines that above a likelihood of 0.65, we predict a machine to breakdown.
+    With D = 0.65, the predictions by the AI algorithm for the 20 machines in the training set (also displayed in the matrix below) are as follows:
     <ul>
-        <li>13 correct classifications: 6 True Positives, 7 True Negatives</li>
-        <li>7 incorrect classifications: 3 False Positives and 4 False Negatives</li>
+        <li>13 correct predictions: 6 Correct Predictions of Breakdown, 7 Correct Predictions of No Breakdown</li>
+        <li>7 incorrect predictions: 3 False Alarms and 4 Missed Hits</li>
 </ul>
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Classification Outcomes)</caption>
+    <caption align="right">Prediction Outcomes</caption>
     <thead>
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted Class</th>
+            <th colspan="2">Predicted State</th>
         </tr>
     </thead>
     <tbody>
         <tr>
            <td></td>
            <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
        </tr>
        <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
            <td id="tp" style="color:green">6</td>
            <td id ="fn" style="color:red">4</td>
        </tr>
        <tr>
-           <td>Negative</td>
+           <td>No Breakdown</td>
            <td id ="fp" style="color:red">3</td>
            <td id ="tn" style="color:green">7</td>
        </tr>
@@ -53,12 +61,11 @@
 </table>
 
 <p>
-    Our chosen threshold D results in a prediction accuracy of 0.65 (13 correct classifications out of 20 objects in total).
-    Moreover, we would expect misclassification costs of 3 x 5$ (=15$) for False Positive classifications and 4 x 1$ (=4$) for False Negative classifications, resulting in 19$ overall.
-    We display the overall misclassification costs in the "cost matrix" below.
+    <!--Our chosen threshold D results in a prediction accuracy of 0.65 (13 correct classifications out of 20 objects in total).-->
+    Consequently, on our training set we would expect misclassification costs of 3 x 5 cost units (=15 cost units) for False Alarms and 4 x 1 cost unit (=4 cost units) for Missed Hits, resulting in 19 cost units overall.
 </p>
 
-<table id="costmatrix" cellpadding="4px" border="1px">
+<!--<table id="costmatrix" cellpadding="4px" border="1px">
     <caption align="right">Cost Matrix (Absolute Misclassification Costs [$])</caption>
     <thead>
         <tr>
@@ -86,7 +93,7 @@
            <td> - </td>
        </tr>
     </tbody>
-</table>
+</table>-->
 
 
 {{ next_button }}

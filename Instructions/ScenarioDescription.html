@@ -8,59 +8,65 @@
     In an effort to predict a characteristic of an object, an Artificial Intelligence (AI) algorithm gets trained to make such predictions. The AI algorithm has a binary output that indicates whether an object is going to have that characteristic of interest (positive) or not (negative). Either the positive or the negative characteristic can be present, and there are no other characterstics.
 </p>-->
 
-<p>
+<!--<p>
     In an effort to classify an object, an Artificial Intelligence (AI) algorithm gets trained to make such classifications.
     The AI algorithm has a binary output that indicates whether an object belongs to the class of interest (positive) or not (negative).
     Some examples are classifying an object as A or B, black or white, big or small, and so on.
+</p>-->
+
+<p>
+    In an effort to predict machine breakdowns, an artificial intelligence (AI) algorithm is trained to make such predictions.
+    The AI algorithm has a binary output that indicates whether a particular machine is going to break down within the next 48 hours or not.
 </p>
 
 <p>
-    When the AI algorithm makes a correct classification, we therefore differentiate between two outcomes:
+    When the AI algorithm makes a correct prediction, we therefore differentiate between two outcomes:
 <ul>
-  <li>True Positive (TP): the AI algorithm correctly predicts a positive class.</li>
-  <li>True Negative (TN): the AI algorithm correctly predicts a negative class.</li>
+  <li>Correct prediction of a breakdown.</li>
+  <li>Correct prediction of smooth operations (no breakdown). </li>
 </ul>   
 </p>
 
 <p>
-    Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false classifications occasionally.
-    Such false predictions, or misclassifications, can appear in two different flavors:
+    Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false predictions occasionally.
+    Such false predictions can appear in two different flavors:
 <ul>
-  <li>False Positive (FP): the AI algorithm predicts a positive class but the object belongs to the negative class.</li>
-  <li>False Negative (FN): the AI algorithm predicts a negative class but the object belongs to the positive class.</li>
+  <li>False alarm: the AI algorithm predicts a machine breakdown but the machine is operating smoothly in the next 48 hours.</li>
+  <li>Missed hit: the AI algorithm predicts smooth operations but the machine breaks down in the next 48 hours.</li>
 </ul>   
 </p>
 
 <p>
-    The following "confusion matrix" compares the predicted to the actual characteristics and summarizes the four outcomes introduced above.
+    By comparing the actual state (breakdown vs. no breakdown) to the predicted state (breakdown vs. no breakdown),
+    the following matrix summarizes the four prediction outcomes introduced above.
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix</caption>
+    <caption align="right">Prediction Outcomes</caption>
     <thead>
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted Class</th>
+            <th colspan="2">Predicted State</th>
         </tr>
     </thead>
     <tbody>
         <tr>
            <td></td>
            <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
        </tr>
        <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
-           <td id="tp" style="color:green">TP</td>
-           <td id ="fn" style="color:red">FN</td>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
+           <td id="tp" style="color:green">Correct Prediction of<br>Breakdown</td>
+           <td id ="fn" style="color:red">Missed Hit</td>
        </tr>
        <tr>
-           <td>Negative</td>
-           <td id ="fp" style="color:black">FP</td>
-           <td id ="tn" style="color:green">TN</td>
+           <td>No Breakdown</td>
+           <td id ="fp" style="color:red">False Alarm</td>
+           <td id ="tn" style="color:green">Correct Prediction of<br>No Breakdown</td>
        </tr>
     </tbody>
 </table>
