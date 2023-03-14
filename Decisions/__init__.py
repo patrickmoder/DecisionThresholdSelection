@@ -52,7 +52,7 @@ class Player(BasePlayer):
     treat = models.StringField(choices=[['rand1', 'rand1'], ['rand2', 'rand2'], ['rand3', 'rand3'], ['rand4', 'rand4']])
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
-    help_button = models.BooleanField(initial=0)
+    help_button = models.BooleanField(initial=0, blank=True)
     help = models.BooleanField(initial =  0)
     out1 = models.StringField()
     out2 = models.StringField()
