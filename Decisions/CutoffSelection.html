@@ -8,8 +8,9 @@
 </h3>
 
 <p>
-    You want to predict breakdowns of your 10 machines with the aid of an AI algorithm.
+    You want to predict breakdowns of your 10 machines in the next 48 hours with the aid of an AI algorithm.
     In the training set that is used to train the AI algorithm, out of a sample of <b>{{ abs }}</b> machines, <b>{{ player.n_P }}</b> break down in the next 48 hours and <b>{{ player.n_N }}</b> machines do not break down.
+    For your 10 machines, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
     We expect misclassification costs of <b>{{ player.c_FP }}</b> cost unit(s) for each False Alarm and <b>{{ player.c_FN }}</b> cost unit(s) for each Missed Hit, respectively.
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
 <ul>
@@ -252,7 +253,7 @@ function track() {
 <p> Remember: Your maximum bonus payoff for this round is 50 cost units.
     It will be reduced by every cost unit that gets realized after incorrect breakdown predictions for your 10 machines.
     It won't get reduced below 0 (no risk of negative bonus payoff).
-    You will receive information about your performance and the respective bonus payoffs after the last round.
+    You will receive information about your performance and the respective bonus payoff after the last round.
 </p>
 
 <p> Please click next to confirm your selection and move to the next round. <p/>
