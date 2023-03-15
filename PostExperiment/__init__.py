@@ -42,4 +42,4 @@ class PostExperimentSurvey(Page):
 class FinalPage(Page):
     pass
 
-page_sequence = [FinalPage, PostExperimentSurvey]
+page_sequence = [PostExperimentSurvey, FinalPage]
