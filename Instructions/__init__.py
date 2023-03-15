@@ -20,8 +20,10 @@ class Player(BasePlayer):
     Accuracy_Understanding_Check = models.StringField(
         choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
         label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
-    Misclassification_Costs_Understanding_Check = models.IntegerField(
-        label='<b> Based on the confusion matrix shown above, what are the overall misclassification costs [$]? </b>')
+    Misclassification_Costs_Understanding_Check_1 = models.IntegerField(
+        label='<b> For a threshold D = 0.32, what is the overall number of incorrect predictions on the training set? </b>')
+    Misclassification_Costs_Understanding_Check_2 = models.IntegerField(
+        label='<b> For a threshold D = 0.74, what is the cost to be expected after incorrect predictions on the training set? </b>')
     Threshold_Introduction_Understanding_Check = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='<b> Do you agree with the following statement? "In order to reduce Missed Hits, the decision threshold D should be increased." </b>')
@@ -29,6 +31,7 @@ class Player(BasePlayer):
         choices=[['Breakdown', 'Breakdown'], ['No Breakdown', 'No Breakdown']],
         label='<b> Imagine, an AI algorithm outputs a breakdown-likelihood for a particular machine of 0.41 in the next 48 hours and your chosen decision threshold D is 0.35.'
               'What would be predicted to happen in the next 48 hours for that particular machine? </b>')
+    Payoff_Introduction_Understanding_Check = models.IntegerField(label='<b>Your maximum payoff for this round is 50 cost units. According to the payoff calculation rule introduced earlier, what would be your payoff for this round?</b>')
     understand_instr = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='Did you understand the instructions and how your payoff gets calculated?')
@@ -59,7 +62,7 @@ class PayoffCalculation(Page):
 
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Easy', 'Threshold_Introduction_Understanding_Check', 'Misclassification_Costs_Understanding_Check']
+    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Easy', 'Misclassification_Costs_Understanding_Check_1', 'Misclassification_Costs_Understanding_Check_2', 'Threshold_Introduction_Understanding_Check', 'Payoff_Introduction_Understanding_Check']
     @staticmethod
     def is_displayed(player: Player):
         return player.understand_instr != False
@@ -67,7 +70,8 @@ class UnderstandingChecks(Page):
     @staticmethod
     def error_message(player:Player, values):
         solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)', Threshold_Introduction_Easy='Breakdown',
-                         Threshold_Introduction_Understanding_Check=False, Misclassification_Costs_Understanding_Check=20)
+                         Misclassification_Costs_Understanding_Check_1=51, Misclassification_Costs_Understanding_Check_2=293,
+                         Threshold_Introduction_Understanding_Check=False, Payoff_Introduction_Understanding_Check=39)
         if values != solutions:
             player.num_failed_attempts += 1
             return "One or more answers were incorrect. Please try again."

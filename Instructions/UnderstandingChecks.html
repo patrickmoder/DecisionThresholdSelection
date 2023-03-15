@@ -59,28 +59,15 @@
 
 {{ formfield_errors 'Threshold_Introduction_Easy' }}
 
-<br /> <br />
 
-<h3>
-    Question 3:
-</h3>
-
-{{ formfield 'Threshold_Introduction_Understanding_Check' }}
-
-{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
-
-<br /> <br />
-
-<h3>
-    Question 4:
-</h3>
+<br /> <br /> <br /> <br />
 
 Let us consider the following example:
 In a training set that is used to train the AI algorithm, out of a sample of 170 machines, 70 break down in the next 48 hours and 100 machines do not break down.
 In our example, we assume misclassification costs of 1 cost unit for each False Alarm and 5 cost units for each Missed Hit, respectively.
 
 <p>
-    You can move the slider to select a threshold (between 0 and 1).
+    You can move the slider to select the threshold D (between 0 and 1).
 </p>
 
 <input type="range" min="0" max="100" step="1" style="width: 500px;" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this)" >
@@ -119,11 +106,52 @@ In our example, we assume misclassification costs of 1 cost unit for each False 
     </tbody>
 </table>
 
-{{ formfield 'Misclassification_Costs_Understanding_Check' }}
+<h3>
+    Question 3:
+</h3>
 
-{{ formfield_errors 'Misclassification_Costs_Understanding_Check' }}
+{{ formfield 'Misclassification_Costs_Understanding_Check_1' }}
+
+{{ formfield_errors 'Misclassification_Costs_Understanding_Check_1' }}
 
 <br /> <br />
+
+<h3>
+    Question 4:
+</h3>
+
+{{ formfield 'Misclassification_Costs_Understanding_Check_2' }}
+
+{{ formfield_errors 'Misclassification_Costs_Understanding_Check_2' }}
+
+<br /> <br />
+
+
+<h3>
+    Question 5:
+</h3>
+
+{{ formfield 'Threshold_Introduction_Understanding_Check' }}
+
+{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
+
+
+<br /> <br />
+
+Let us assume that in the example above you select the threshold D = 0.66 in a particular round.
+When the AI algorithm gets applied to predict breakdowns of your 10 machines, the following outcomes get realized:
+<ul>
+    <li>3 Correct Predictions of Breakdowns and 4 Correct Predictions of No Breakdown</li>
+    <li>2 Missed Hits and 1 False Alarm</li>
+</ul>
+
+<h3>
+    Question 6:
+</h3>
+
+{{ formfield 'Payoff_Introduction_Understanding_Check' }}
+
+{{ formfield_errors 'Payoff_Introduction_Understanding_Check' }}
 
 <script>
 
