@@ -17,7 +17,7 @@ class Player(BasePlayer):
     age = models.IntegerField(label='Your age?', min=18)
     similar_task = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Have you ever done any similar task before?')
     similar_exp = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Have you taken part in a similar experiment before?')
-    choice_criterion = models.StringField(choices=[['cost', 'cost'], ['probability of positive characteristic', 'probability of positive characteristic'], ['probability of negative characteristic', 'probability of negative characteristic'], ['algorithm performance', 'algorithm performance'], ['other', 'other']], label='What criterion did you use to select the threshold?')
+    choice_criterion = models.StringField(choices=[['cost', 'overall cost'], ['cost after missed hits', 'cost after missed hits'], ['cost after false alarms', 'cost after false alarms'], ['probability of positive characteristic', 'probability of breakdown'], ['probability of negative characteristic', 'probability of no breakdown'], ['algorithm performance', 'algorithm performance'], ['other', 'other']], label='What criterion did you use to select the threshold?')
     choice_criterion_add = models.StringField(label='Which additional criteria did you use to select the threshold?', blank=True)
     gender = models.StringField(choices=[['female', 'female'], ['male', 'male'], ['diverse', 'diverse'], ['do not want to disclose', 'do not want to disclose']], label='Your gender?')
     nationality = models.StringField(label='Your nationality?')
@@ -27,7 +27,7 @@ class Player(BasePlayer):
     strategy_change = models.BooleanField(choices=[[True, 'Yes'], [False, 'No']], label='Did you change your strategy to select the threshold during the experiment?')
     strategy_how_why = models.LongStringField(label='If yes, why and how did you adjust your strategy?', blank=True)
     strategy_when = models.IntegerField(label='If yes, after how many rounds did you adjust the strategy?', max=9, min=1, blank=True)
-    optimal_how_often = models.StringField(choices=[['never', 'never'], ['rarely', 'rarely'], ['sometimes', 'sometimes'], ['often', 'often'], ['always', 'always']], label='How often do you think that you selected the optimal threshold?')
+    optimal_how_often = models.StringField(choices=[['never', 'never'], ['rarely', 'rarely'], ['sometimes', 'sometimes'], ['often', 'often'], ['always', 'always']], label='How often do you think did you select the optimal threshold?')
     optimal_confident = models.StringField(choices=[['not at all', 'not at all'], ['slightly', 'slightly'], ['quite a bit', 'quite a bit'], ['very', 'very'], ['extremely', 'extremely']], label='How confident are you that you selected the optimal threshold in the majority of rounds in this experiment?')
     feedback_general = models.LongStringField(blank=True, label='Do you like to share any other feedback with the experimenters?')
     study_field = models.StringField(choices=[['Formal sciences (incl. mathematics, computer science, etc.)', 'Formal sciences (incl. mathematics, computer science, etc.)'], ['Natural sciences (incl. physics, engineering, medicine, etc.)', 'Natural sciences (incl. physics, engineering, medicine, etc.)'], ['Social sciences (incl. economics, psychology, jurisprudence, etc.)', 'Social sciences (incl. economics, psychology, jurisprudence, etc.)']], label='Your field of study?')
@@ -42,4 +42,4 @@ class PostExperimentSurvey(Page):
 class FinalPage(Page):
     pass
 
-page_sequence = [PostExperimentSurvey, FinalPage]
+page_sequence = [FinalPage, PostExperimentSurvey]
