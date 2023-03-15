@@ -5,9 +5,20 @@
 <p>
     Thank you for participating in the experiment.
 </p>
+
+<p>
+    Your performance in the 13 rounds was as follows:
+    {{ player.in_round(1).payoff }}
+    {{ player.in_all_rounds.payoff}}
+    {{ Decisions.CutoffSelection.player.in_all_rounds.payoff }}
+
+</p>
+
 <p>
     Your overall payoff is {{ participant.payoff_plus_participation_fee }}.
 </p>
+
+
 
 {{ formfields }}
 

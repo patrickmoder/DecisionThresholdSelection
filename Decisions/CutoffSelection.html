@@ -8,27 +8,25 @@
 </h3>
 
 <p>
-    You try to predict whether an object belongs to the positive or the negative class.
-    Out of <b>{{ abs }}</b> objects, <b>{{ player.n_N }}</b> objects belong to the negative class, and <b>{{ player.n_P }}</b> objects belong to the positive class.
-    Expected costs of misclassification are <b>{{ player.c_FN }}</b> unit(s) for False Negative (FN) and <b>{{ player.c_FP }}</b> unit(s) for False Positive (FP) classification outcomes, respectively.
-    
+    You want to predict breakdowns of your 10 machines with the aid of an AI algorithm.
+    In the training set that is used to train the AI algorithm, out of a sample of <b>{{ abs }}</b> machines, <b>{{ player.n_P }}</b> break down in the next 48 hours and <b>{{ player.n_N }}</b> machines do not break down.
+    We expect misclassification costs of <b>{{ player.c_FP }}</b> cost unit(s) for each False Alarm and <b>{{ player.c_FN }}</b> cost unit(s) for each Missed Hit, respectively.
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
-    
 <ul>
   <li>Expected number of False Negatives (FN): n(FN) = (θ * 20) * (5 ^ θ), rounded to the next integer.</li>
   <li>Expected number of False Positives (FP): n(FP) = ((-θ + 1) * 20) * (5 ^ (-θ + 1)), rounded to the next integer.</li>
-</ul>-->
-
-    <b>Remember: Your aim is to choose a decision threshold that minimizes the expected costs.</b>
+</ul>
+<b>Remember: Your aim is to choose a decision threshold that minimizes the expected costs.</b>-->
 </p>
 
 <p>
-    Depending on your threshold selection, you see different evaluation metrics, a confusion matrix (expected prediction outcomes) and a cost matrix (expected costs).
+    You can adjust the algorithm by selecting the decision threshold D.
+    Depending on your threshold selection, you see a matrix with prediction outcomes on the training set.
     If you need more help, please click the button "Need Help?" below to display a graphical visualization.
 </p>
 
 <p>
-    Move the slider to select a threshold (between 0 and 1).
+    Move the slider to select the threshold D (between 0 and 1) for this round.
 </p>
 
 <input type="range" min="0" name="selected_threshold" max="100" step="1" style="width: 500px;" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)" >
@@ -40,36 +38,36 @@
 <!-- by leaving the threshold (and the results) blank initially, we prompt the user to move the slider, reducing the anchoring/default effect. -->
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Confusion Matrix (Absolute Observations)</caption>
+    <caption align="right">Prediction Outcomes (on Training Set)</caption>
     <thead>
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted Class</th>
+            <th colspan="2">Predicted State</th>
         </tr>
     </thead>
     <tbody>
         <tr>
            <td></td>
            <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
+           <td>Breakdown</td>
+           <td>No Breakdown</td>
        </tr>
        <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Breakdown</td>
            <td id="tp" style="color:green"></td>
            <td id ="fn" style="color:red"></td>
        </tr>
        <tr>
-           <td>Negative</td>
+           <td>No Breakdown</td>
            <td id ="fp" style="color:red"></td>
            <td id ="tn" style="color:green"></td>
        </tr>
     </tbody>
 </table>
 
-<table id="costmatrix" cellpadding="4px" border="1px">
+<!--<table id="costmatrix" cellpadding="4px" border="1px">
     <caption align="right">Cost Matrix (Cost Units)</caption>
     <thead>
         <tr>
@@ -97,7 +95,7 @@
            <td> - </td>
        </tr>
     </tbody>
-</table>
+</table>-->
 
 <button type="button" id="help_button" name="help_button" onclick="showHelp(this);track(this)">
     Need Help?
@@ -147,17 +145,17 @@ for (var x = 0; x <= 1; x += 0.01) {
 
 // Define Plot Data
 var data = [
-  {x: x1Values, y: y1Values, mode:"lines", name:"False Negative Observations"},
-  {x: x2Values, y: y2Values, mode:"lines", name:"False Positive Observations"},
-  {x: x4Values, y: y4Values, mode:"lines", name:"False Negative Costs"},
-  {x: x5Values, y: y5Values, mode:"lines", name:"False Positive Costs"},
-  {x: x3Values, y: y3Values, mode:"lines", name:"Overall Cost"}
+  {x: x1Values, y: y1Values, mode:"lines", name:"Missed Hits"},
+  {x: x2Values, y: y2Values, mode:"lines", name:"False Alarms"},
+  {x: x4Values, y: y4Values, mode:"lines", name:"Costs after Missed Hits"},
+  {x: x5Values, y: y5Values, mode:"lines", name:"Costs after False Alarms"},
+  {x: x3Values, y: y3Values, mode:"lines", name:"Overall Cost after incorrect predictions"}
 ];
 
 //Define Plot Layout
 var layout = {
-    title: "Expected Outcome and Costs",
-    xaxis: {title: "Threshold"}
+    title: "Prediction Outcome and Costs on Training Set",
+    xaxis: {title: "Decision Threshold D"}
 };
 
 // Display Plot using Plotly
@@ -191,19 +189,19 @@ function track() {
     function updateThreshold(input) {
         let theta = parseInt(input.value);
         let th = theta/100;
-        let cost = {{ player.c_FN }} * Math.round((th * 20) * Math.pow({{ baseP }}, th)) + {{ player.c_FP }} * Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1)));
-        let acc = (({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + ({{ player.n_N }} - Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, -th + 1)))) / {{ abs }};
-        let accr = +acc.toFixed(2);
-        let fone = (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th)))) / (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1))) + Math.round((th * 20) * Math.pow({{ baseP }}, th)));
-        let foner = +fone.toFixed(2);
-        let thOpt = {{ player.th_opt }} / 100;
-        let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
-        if ((100 - (cost - costOpt)) > 0) {
-            var pay = 100 - (cost - costOpt);
-        } else {
-            var pay = 0;
-        };
-        threshold.innerHTML = `Your selected threshold is ${th}. <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <!-- <br /><br /> <i>+++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!</i>-->`
+        //let cost = {{ player.c_FN }} * Math.round((th * 20) * Math.pow({{ baseP }}, th)) + {{ player.c_FP }} * Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1)));
+        //let acc = (({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + ({{ player.n_N }} - Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, -th + 1)))) / {{ abs }};
+        //let accr = +acc.toFixed(2);
+        //let fone = (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th)))) / (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1))) + Math.round((th * 20) * Math.pow({{ baseP }}, th)));
+        //let foner = +fone.toFixed(2);
+        //let thOpt = {{ player.th_opt }} / 100;
+        //let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
+        //if ((100 - (cost - costOpt)) > 0) {
+        //    var pay = 100 - (cost - costOpt);
+        //} else {
+        //    var pay = 0;
+        //};
+        threshold.innerHTML = `Your selected threshold is ${th}. <!-- <br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /><br /> <i>+++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!</i>-->`
     };
     let tp = document.getElementById('tp');
     function updateTP(input) {
@@ -249,9 +247,13 @@ function track() {
     }
 </script>
 
-<p> Remember: For every cost unit that your threshold selection is above the cost minimum (achieved with the optimal threshold D<sub>opt</sub>), your bonus payoff of 100 cents (for this round) will be reduced by 1 cent, but won't get reduced below 0 cents (no risk of negative payoff).</p>
-        
-    <!--+++ Your payoff is {{ player.payoff }}. -> TO BE REMOVED!!! +++ -->
+<br />
+
+<p> Remember: Your maximum bonus payoff for this round is 50 cost units.
+    It will be reduced by every cost unit that gets realized after incorrect breakdown predictions for your 10 machines.
+    It won't get reduced below 0 (no risk of negative bonus payoff).
+    You will receive information about your performance and the respective bonus payoffs after the last round.
+</p>
 
 <p> Please click next to confirm your selection and move to the next round. <p/>
 
