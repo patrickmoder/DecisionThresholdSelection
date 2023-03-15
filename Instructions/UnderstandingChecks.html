@@ -7,10 +7,6 @@
     Please answer the following four questions before you can proceed with the experiment.
 </p>
 
-<h3>
-    Question 1:
-</h3>
-
 <p>
     The following (incomplete) matrix compares the predicted to the actual states when predicting machine breakdowns.
 </p>
@@ -34,16 +30,20 @@
        <tr>
            <td rowspan="2"><b>Actual State</b></td>
            <td>Breakdown</td>
-           <td id="tp" style="color:green">Correct Prediction of<br>Breakdown</td>
-           <td id ="fn" style="color:red">Missed Hit</td>
+           <td style="color:green">Correct Prediction of<br>Breakdown</td>
+           <td style="color:red">Missed Hit</td>
        </tr>
        <tr>
            <td>Negative</td>
-           <td id ="fp" style="color:black">?</td>
-           <td id ="tn" style="color:green">Correct Prediction of<br>No Breakdown</td>
+           <td style="color:black">?</td>
+           <td style="color:green">Correct Prediction of<br>No Breakdown</td>
        </tr>
     </tbody>
 </table>
+
+<h3>
+    Question 1:
+</h3>
 
 {{ formfield 'Confusion_Matrix_missing_value' }}
 
@@ -60,12 +60,12 @@
 {{ formfield_errors 'Threshold_Introduction_Easy' }}
 
 
-<br /> <br /> <br /> <br />
-
+<br /> <br />
+<p>
 Let us consider the following example:
 In a training set that is used to train the AI algorithm, out of a sample of 170 machines, 70 break down in the next 48 hours and 100 machines do not break down.
 In our example, we assume misclassification costs of 1 cost unit for each False Alarm and 5 cost units for each Missed Hit, respectively.
-
+</p>
 <p>
     You can move the slider to select the threshold D (between 0 and 1).
 </p>
@@ -114,7 +114,7 @@ In our example, we assume misclassification costs of 1 cost unit for each False 
 
 {{ formfield_errors 'Misclassification_Costs_Understanding_Check_1' }}
 
-<br /> <br />
+<br />
 
 <h3>
     Question 4:
@@ -124,7 +124,7 @@ In our example, we assume misclassification costs of 1 cost unit for each False 
 
 {{ formfield_errors 'Misclassification_Costs_Understanding_Check_2' }}
 
-<br /> <br />
+<br />
 
 
 <h3>
@@ -138,12 +138,6 @@ In our example, we assume misclassification costs of 1 cost unit for each False 
 
 <br /> <br />
 
-Let us assume that in the example above you select the threshold D = 0.66 in a particular round.
-When the AI algorithm gets applied to predict breakdowns of your 10 machines, the following outcomes get realized:
-<ul>
-    <li>3 Correct Predictions of Breakdowns and 4 Correct Predictions of No Breakdown</li>
-    <li>2 Missed Hits and 1 False Alarm</li>
-</ul>
 
 <h3>
     Question 6:
