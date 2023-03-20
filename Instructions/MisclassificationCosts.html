@@ -20,10 +20,10 @@
 <p>
     Let us illustrate these considerations in an example:
     In our example, we assume misclassification costs of 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
-    That means that wrongly predicting a machine's breakdown is five times more expensive than wrongly predicting a machine not to break down.
+    In other words, wrongly predicting a machine's breakdown is five times more expensive than wrongly predicting a machine not to break down.
     In the training set that is used to train the AI algorithm, out of a sample of 20 machines, 10 break down in the next 48 hours and 10 machines do not break down.
-
-    <br />
+</p>
+<p>
     Now, let us assume that we choose a decision threshold D of 0.65, which determines that for all predicted breakdown probabilities above a value of 0.65, we predict the machine to break down.
     With D = 0.65, the predictions by the AI algorithm for the 20 machines in the training set (also displayed in the matrix below) would be as follows:
     <ul>
@@ -65,8 +65,8 @@
 <p>
     <!--Our chosen threshold D results in a prediction accuracy of 0.65 (13 correct classifications out of 20 objects in total).-->
     Consequently, on our training set we would expect misclassification costs of <br />
-      3 x 5 cost units (=15 cost units) for False Alarms <br />
-    <u>+ 4 x 1 cost unit</u> (=4 cost units) for Missed Hits
+    &nbsp;&nbsp;3 x 5 cost units (=15 cost units) for False Alarms <br />
+    <u>+ 4 x 1 cost unit</u> (=4 cost units) for Missed Hits<br />
     = 19 cost units overall
 </p>
 

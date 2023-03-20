@@ -4,7 +4,7 @@
 {{ block content }}
 
 <p>
-    Before applying the AI algorithm in a real-world setting, the balance between breakdown- and no-breakdown-predictions has to be calibrated.
+    Before applying the AI algorithm in a real-world setting, the trade-off between breakdown- and no-breakdown-predictions has to be calibrated.
 
 </p>
 <!--<p>
@@ -18,6 +18,8 @@
 if the probability is above a threshold D, we predict a breakdown in the next 48 hours;
     while if the probability is below the threshold D, we predict no breakdown in the next 48 hours.
     The threshold D has to be between 0 and 1.
+</p>
+<p>
     You, as the operations manager, have to set the threshold D to calibrate the AI algorithm.
     The selection of D affects the following trade-off:
 <ul>
@@ -36,7 +38,7 @@ For the matrix we introduced earlier, we show the relationship of the threshold 
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted State</th>
+            <th colspan="2" style="text-align: center">Predicted State</th>
             <th></th>
         </tr>
     </thead>
