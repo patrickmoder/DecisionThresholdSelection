@@ -15,29 +15,29 @@
 </p>-->
 
 <p>
-    For production companies, machine breakdowns are a difficult issue.
-    Machine breakdowns can lead to costly production stops and should ideally be avoided.
-    One approach to this is the early prediction of failures so that maintenance measures can be initiated in good time.
+    Machine breakdowns at production companies can lead to costly production stops, while too early maintenance leads to unnecessary maintenance cost.
+    One approach to this is the early prediction of machine failures, so that maintenance measures can be initiated at the right time.
+    This approach trades off the two costs.
 </p>
 <p>
     In the following experiment, an artificial intelligence (AI) algorithm is trained to predict machine breakdowns.
-    The AI algorithm has a binary output that indicates whether a particular machine is going to break down within the next 48 hours or not.
+    The AI algorithm has a binary (yes/no) output that indicates whether a particular machine is going to break down within the next 48 hours or not.
 </p>
 
 <p>
-    When the AI algorithm makes a correct prediction, we therefore differentiate between two outcomes:
+    Correct predictions of the AI algorithm can be of two types:
 <ul>
-  <li>Correct prediction of a breakdown.</li>
-  <li>Correct prediction of smooth operations (no breakdown). </li>
+  <li>Correct prediction of a machine's breakdown.</li>
+  <li>Correct prediction of a machine's smooth operations (no breakdown). </li>
 </ul>   
 </p>
 
 <p>
     Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false predictions occasionally.
-    Such false predictions can appear in two different flavors:
+    Such false predictions can also be of two types:
 <ul>
-  <li>False alarm: the AI algorithm predicts a machine breakdown but the machine is operating smoothly in the next 48 hours.</li>
-  <li>Missed hit: the AI algorithm predicts smooth operations but the machine breaks down in the next 48 hours.</li>
+  <li>False alarm: the AI algorithm predicts a machine's breakdown but the machine is operating smoothly in the next 48 hours.</li>
+  <li>Missed hit: the AI algorithm predicts a machine's smooth operations but the machine breaks down in the next 48 hours.</li>
 </ul>   
 </p>
 
@@ -77,7 +77,7 @@
 </table>
 
 <p>
-Please confirm that you understood the scenario description. By clicking "Next" you will move to the next page.
+Please read the scenario description carefully. By clicking "Next" you will move to the next page.
 </p>
 
 {{ next_button }}

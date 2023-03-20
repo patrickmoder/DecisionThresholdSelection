@@ -121,6 +121,7 @@ class CutoffSelection(Page):
         )
     def before_next_page(player, timeout_happened):
         import random
+        #import numpy as np
         thr = player.selected_threshold / 100
         abs = player.n_N + player.n_P
         baseN = player.n_N / 20
@@ -130,16 +131,16 @@ class CutoffSelection(Page):
             #((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
-        player.m_prob1 = random.randrange(1, 99, 1) / 100
-        player.m_prob2 = random.randrange(1, 99, 1) / 100
-        player.m_prob3 = random.randrange(1, 99, 1) / 100
-        player.m_prob4 = random.randrange(1, 99, 1) / 100
-        player.m_prob5 = random.randrange(1, 99, 1) / 100
-        player.m_prob6 = random.randrange(1, 99, 1) / 100
-        player.m_prob7 = random.randrange(1, 99, 1) / 100
-        player.m_prob8 = random.randrange(1, 99, 1) / 100
-        player.m_prob9 = random.randrange(1, 99, 1) / 100
-        player.m_prob10 = random.randrange(1, 99, 1) / 100
+        player.m_prob1 = random.uniform(1, 99) / 100
+        player.m_prob2 = random.uniform(1, 99) / 100
+        player.m_prob3 = random.uniform(1, 99) / 100
+        player.m_prob4 = random.uniform(1, 99) / 100
+        player.m_prob5 = random.uniform(1, 99) / 100
+        player.m_prob6 = random.uniform(1, 99) / 100
+        player.m_prob7 = random.uniform(1, 99) / 100
+        player.m_prob8 = random.uniform(1, 99) / 100
+        player.m_prob9 = random.uniform(1, 99) / 100
+        player.m_prob10 = random.uniform(1, 99) / 100
 
         prob1_FP = (((-player.m_prob1 + 1) * 20) * pow(baseN, (-player.m_prob1 + 1))) / abs
         prob1_FN = round((player.m_prob1 * 20) * pow(baseP, player.m_prob1)) / abs

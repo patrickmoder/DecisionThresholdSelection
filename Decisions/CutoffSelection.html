@@ -8,10 +8,10 @@
 </h3>
 
 <p>
-    You want to predict breakdowns of your 10 machines in the next 48 hours with the aid of an AI algorithm.
-    In the training set that is used to train the AI algorithm, out of a sample of <b>{{ abs }}</b> machines, <b>{{ player.n_P }}</b> break down in the next 48 hours and <b>{{ player.n_N }}</b> machines do not break down.
-    For your 10 machines, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
-    We expect misclassification costs of <b>{{ player.c_FP }}</b> cost unit(s) for each False Alarm and <b>{{ player.c_FN }}</b> cost unit(s) for each Missed Hit, respectively.
+    You want to predict breakdowns of 10 machines in the next 48 hours with the aid of an AI algorithm.
+    In the training set that is used to train the AI algorithm, out of a sample of <h3><b>{{ abs }}</b></h3> machines, <h3><b>{{ player.n_P }}</b></h3> broke down in the subsequent 48 hours and <h3><b>{{ player.n_N }}</b></h3> machines did not break down.
+    For the 10 machines you want to predict breakdowns for, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
+    We expect misclassification costs of <h3><b>{{ player.c_FP }}</b></h3> cost unit(s) for each False Alarm and <h3><b>{{ player.c_FN }}</b></h3> cost unit(s) for each Missed Hit, respectively.
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
 <ul>
   <li>Expected number of False Negatives (FN): n(FN) = (θ * 20) * (5 ^ θ), rounded to the next integer.</li>
@@ -21,13 +21,13 @@
 </p>
 
 <p>
-    You can adjust the algorithm by selecting the decision threshold D.
+    You can calibrate the AI algorithm by selecting a decision threshold D.
     Depending on your threshold selection, you see a matrix with prediction outcomes on the training set.
     If you need more help, please click the button "Need Help?" below to display a graphical visualization.
 </p>
 
 <p>
-    Move the slider to select the threshold D (between 0 and 1) for this round.
+    Move the slider to select a threshold D (between 0 and 1) for this round.
 </p>
 
 <input type="range" min="0" name="selected_threshold" max="100" step="1" style="width: 500px;" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this);updateFNC(this);updateFPC(this);updatePay(this)" >

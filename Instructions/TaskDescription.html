@@ -4,35 +4,38 @@
 {{ block content }}
 
 <p>
-    In the following experiment, your task will be to adjust an AI algorithm that is applied to predict breakdowns of your 10 machines.
-    In every of the 13 rounds, you will receive information on:
+    In the following experiment, your task will be to adjust the threshold D of an AI algorithm that is applied to predict breakdowns machines.
+    You will play 13 rounds. In every of the 13 rounds, you will receive information on:
     <ul>
     <li>The sample size of the training set that was used to train the AI algorithm.</li>
-    <li>How many machines in the training set break down in the next 48 hours and how many do not.</li>
+    <li>How many machines in the training set broke down in the subsequent 48 hours and how many did not.</li>
     <li>Misclassification costs after False Alarms and Missed Hits.</li>
     <li>The AI algorithm's expected prediction outcomes for the training set.</li>
     </ul>
 </p>
 <p>
-    Your task is to choose a decision threshold for the AI algorithm.
-    After you confirm your choice, the AI algorithm gets applied to predict breakdowns of your 10 machines in the next 48 hours.
-    For your 10 machines, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
+    Your task is to choose a threshold D for the AI algorithm.
+    Then, this configuration is usd to predict breakdowns of 10 machines.
+    For these 10 machines, you can expect that the data in the training set is representative of the future breakdowns.
 </p>
 <p>
+    You can use a slider to enter your value of D.
+    After you confirm your choice, the AI algorithm will predict breakdowns of the 10 machines in the next 48 hours based on your threshold D.
 
 </p>
 
 <p>
-    Let us illustrate the task with our previous example. Misclassification costs were 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
-    Remember that when choosing a decision threshold D of 0.65, predictions by the AI algorithm for the 20 machines on the training set are as follows:
+    Let us illustrate the task with our previous example.
+    Misclassification costs are 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
+    Remember from the previous screen that when choosing a threshold D of 0.65, predictions by the AI algorithm for the 20 machines on the training set were as follows:
     <ul>
         <li>13 correct predictions: 6 Correct Predictions of Breakdown, 7 Correct Predictions of No Breakdown</li>
         <li>7 incorrect predictions: 3 False Alarms and 4 Missed Hits</li>
     </ul>
     <br>
-    Let us assume that Jane chooses D = 0.65 for this round.
-    When the AI algorithm gets applied to predict breakdowns of Jane's 10 machines in the next 48 hours,
-    the prediction outcomes for this particular round are as follows (also displayed in the matrix below):
+    Let us assume that you chose D = 0.65 for this round.
+    When the AI algorithm is applied to predict breakdowns of the 10 machines in the next 48 hours,
+    the prediction outcomes for this particular round would be as follows (also displayed in the matrix below):
     <!--The AI algorithm predicted which class (positive or negative) an object belongs to.
     Out of a set of 20 objects, 10 objects belonged to the positive class and 10 objects belonged to the negative class.
     Costs for misclassifications were 5$ for each False Positive (FP) classification and 1$ for each False Negative (FN) classification, respectively.
@@ -77,9 +80,15 @@
 </table>
 
 <p>
-    Consequently, after applying the AI algorithm, misclassification costs of 1 x 5 cost units (=5 cost units) for False Alarms and 1 x 1 cost units (=1 cost unit) for Missed Hits get realized, resulting in 6 cost units overall.
-    Jane's (and your) bonus payoff for every round will depend on the misclassification costs after applying the AI algorithm. We will explain its calculation on the next page.
-
+    Consequently, after applying the AI algorithm, the following misclassification costs are realized:<br />
+      1 x 5 cost units (=5 cost units) for False Alarms<br />
+    <ul>+ 1 x 1 cost units</ul> (=1 cost unit) for Missed Hits<br />
+    = 6 cost units
+</p>
+<p>
+    Your bonus payoff for every round will depend on the misclassification costs after applying the AI algorithm.
+    We will explain its calculation on the next page.
+</p>
     <!--For the optimal threshold D<sub>opt</sub> we would expect misclassification costs of 2 x 5$ (=10$) for False Positive classifications and 6 x 1$ (=6$) for False Negative classifications, resulting in 16$ overall.
     As we can see, we expect less overall costs than with the previously chosen threshold (19$).
     Comparing all possible thresholds and their resulting misclassification costs, we find that 16$ is the lowest number possible (the optimum) and therefore the corresponding threshold is named D<sub>opt</sub>.
@@ -91,7 +100,7 @@
 </p>-->
 
 <p>
-Please confirm that you understood the introduction to your task. By clicking "Next" you will move to the next round.
+Please read the introduction to your task carefully. By clicking "Next" you will move to the next round.
 </p>
 
 

@@ -9,22 +9,23 @@
 </p>-->
 
 <p>
-    In our setting, we assume that correct predictions are equally valuable.
-    Yet, when making incorrect predictions of machine breakdowns, we expect misclassification costs.
-    Such misclassification costs can vary and depend on the environment where the AI algorithm is applied:
+    When making incorrect predictions of machine breakdowns, we have different misclassification costs.
+    Such misclassification costs can vary and depend on the environment to which the AI algorithm is applied:
     <ul>
-        <li>After False Alarms, one might start unnecessary maintenance activities and suffer from unnecessary down-times of machines.</li>
-        <li>After Missed Hits, one might lose the opportunity to prevent the breakdown and suffer from avoidable down-times of machines.</li>
+        <li>After False Alarms, we face unnecessary maintenance activities that cause unnecessary down-times of machines.</li>
+        <li>After Missed Hits, we lose the opportunity to prevent the breakdown and face costly down-times of machines.</li>
     </ul>
 </p>
 
 <p>
     Let us illustrate these considerations in an example:
-    in the training set that is used to train the AI algorithm, out of a sample of 20 machines, 10 break down in the next 48 hours and 10 machines do not break down.
     In our example, we assume misclassification costs of 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
+    That means that wrongly predicting a machine's breakdown is five times more expensive than wrongly predicting a machine not to break down.
+    In the training set that is used to train the AI algorithm, out of a sample of 20 machines, 10 break down in the next 48 hours and 10 machines do not break down.
+
     <br />
-    Now, let us assume that we choose a decision threshold D of 0.65, which determines that above a likelihood of 0.65, we predict a machine to breakdown.
-    With D = 0.65, the predictions by the AI algorithm for the 20 machines in the training set (also displayed in the matrix below) are as follows:
+    Now, let us assume that we choose a decision threshold D of 0.65, which determines that for all predicted breakdown probabilities above a value of 0.65, we predict the machine to break down.
+    With D = 0.65, the predictions by the AI algorithm for the 20 machines in the training set (also displayed in the matrix below) would be as follows:
     <ul>
         <li>13 correct predictions: 6 Correct Predictions of Breakdown, 7 Correct Predictions of No Breakdown</li>
         <li>7 incorrect predictions: 3 False Alarms and 4 Missed Hits</li>
@@ -63,7 +64,10 @@
 
 <p>
     <!--Our chosen threshold D results in a prediction accuracy of 0.65 (13 correct classifications out of 20 objects in total).-->
-    Consequently, on our training set we would expect misclassification costs of 3 x 5 cost units (=15 cost units) for False Alarms and 4 x 1 cost unit (=4 cost units) for Missed Hits, resulting in 19 cost units overall.
+    Consequently, on our training set we would expect misclassification costs of <br />
+      3 x 5 cost units (=15 cost units) for False Alarms <br />
+    <u>+ 4 x 1 cost unit</u> (=4 cost units) for Missed Hits
+    = 19 cost units overall
 </p>
 
 <!--<table id="costmatrix" cellpadding="4px" border="1px">
@@ -96,6 +100,7 @@
     </tbody>
 </table>-->
 
+Please read the introduction to misclassification costs carefully. By clicking "Next" you will move to the next page.
 
 {{ next_button }}
 

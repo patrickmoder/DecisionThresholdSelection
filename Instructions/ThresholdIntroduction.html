@@ -4,7 +4,7 @@
 {{ block content }}
 
 <p>
-    Before applying the AI algorithm in a real-world setting, the balance between breakdown- and no-breakdown-predictions can be adjusted.
+    Before applying the AI algorithm in a real-world setting, the balance between breakdown- and no-breakdown-predictions has to be calibrated.
 
 </p>
 <!--<p>
@@ -13,14 +13,16 @@
 </p>-->
 
 <p>
-The AI algorithm outputs a certain breakdown-likelihood for each particular machine in the next 48 hours.
-One can vary the decision threshold D between 0 and 1 to indicate the breakdown-likelihood above which machines shall be predicted as being at risk of breakdown.
-As a result, the likelihood output by the AI algorithm is translated into a binary prediction:
-if the likelihood is above D, we predict a breakdown in the next 48 hours; while if below D, we predict no breakdown in the next 48 hours.
-The adjustment of D results in the following trade-off:
+    For each machine, the AI algorithm calculates a breakdown probability in the next 48 hours.
+    The probability output by the AI algorithm is then translated into a binary (yes/no) prediction:
+if the probability is above a threshold D, we predict a breakdown in the next 48 hours;
+    while if the probability is below the threshold D, we predict no breakdown in the next 48 hours.
+    The threshold D has to be between 0 and 1.
+    You, as the operations manager, have to set the threshold D to calibrate the AI algorithm.
+    The selection of D affects the following trade-off:
 <ul>
-    <li>The smaller the threshold D, the more often breakdowns will be predicted.</li>
-    <li>The larger the threshold D, the less often breakdowns will be predicted.</li>
+    <li>The smaller the threshold D, the more often breakdowns will be predicted (i.e., machines with lower breakdown probabilities are predicted to break down).</li>
+    <li>The larger the threshold D, the less often breakdowns will be predicted (i.e., only machines with higher breakdown probabilities are predicted to break down).</li>
 </ul>  
 </p>
 
@@ -44,7 +46,7 @@ For the matrix we introduced earlier, we show the relationship of the threshold 
            <td></td>
            <td>Breakdown</td>
            <td>No Breakdown</td>
-           <td><i>Row sum</i></td>
+           <td><i>Absolute number of<br>actual states</i></td>
        </tr>
        <tr>
            <td rowspan="2"><b>Actual State</b></td>
@@ -61,7 +63,7 @@ For the matrix we introduced earlier, we show the relationship of the threshold 
        </tr>
        <tr>
            <td></td>
-           <td><i>Column sum</i></td>
+           <td><i>Absolute number of<br>predicted states</i></td>
            <td><i>Decreases with<br>increasing D</i></td>
            <td><i>Increases with<br>increasing D</i></td>
            <td></td>
@@ -70,7 +72,7 @@ For the matrix we introduced earlier, we show the relationship of the threshold 
 </table>
 
 <p>
-Please confirm that you understood the introduction to the decision threshold D. By clicking "Next" you will move to the next page.
+Please read the introduction to the decision threshold D carefully. By clicking "Next" you will move to the next page.
 </p>
 
 {{ next_button }}
