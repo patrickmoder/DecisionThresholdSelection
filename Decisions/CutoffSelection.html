@@ -9,9 +9,9 @@
 
 <p>
     You want to predict breakdowns of 10 machines in the next 48 hours with the aid of an AI algorithm.
-    In the training set that is used to train the AI algorithm, out of a sample of <h3><b>{{ abs }}</b></h3> machines, <h3><b>{{ player.n_P }}</b></h3> broke down in the subsequent 48 hours and <h3><b>{{ player.n_N }}</b></h3> machines did not break down.
+    In the training set that is used to train the AI algorithm, out of a sample of <span style="font-size: 150%; "><b>{{ abs }}</b></span> machines, <span style="font-size: 150%; "><b>{{ player.n_P }}</b></span> broke down in the subsequent 48 hours and <span style="font-size: 150%; "><b>{{ player.n_N }}</b></span> machines did not break down.
     For the 10 machines you want to predict breakdowns for, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
-    We expect misclassification costs of <h3><b>{{ player.c_FP }}</b></h3> cost unit(s) for each False Alarm and <h3><b>{{ player.c_FN }}</b></h3> cost unit(s) for each Missed Hit, respectively.
+    We expect misclassification costs of <span style="font-size: 150%; "><b>{{ player.c_FP }}</b></span> cost unit(s) for each False Alarm and <span style="font-size: 150%; "><b>{{ player.c_FN }}</b></span> cost unit(s) for each Missed Hit, respectively.
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
 <ul>
   <li>Expected number of False Negatives (FN): n(FN) = (θ * 20) * (5 ^ θ), rounded to the next integer.</li>
