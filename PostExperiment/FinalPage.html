@@ -15,14 +15,19 @@
     <table>
   <tr>
     <th>Round</th>
-    <th>Payoff</th>
     <th>Selected<br>Threshold</th>
-    <!--<th>Realizations</th>-->
+    <th>Realizations for the 10 machines</th>
+    <th>Payoff</th>
+    <!--<th>Optimal threshold<br>(min. costs)</th>-->
   </tr>
   <tr>
     <td>1</td>
-    <td>{{ participant.payoff_r1 }}, {{ participant.th_select_r1 }}, {{ participant.th_opt_r1 }} </td>
-    <td>{{ participant.realizations_r1}}</td>
+    <td> {{ participant.th_select_r1 }}</td>
+    <td>
+      {{ participant.realization_r1_m1 }}, {{ participant.realization_r1_m2 }}, {{ participant.realization_r1_m3 }}, {{ participant.realization_r1_m4 }}, {{ participant.realization_r1_m5 }},
+      {{ participant.realization_r1_m6 }}, {{ participant.realization_r1_m7 }}, {{ participant.realization_r1_m8 }}, {{ participant.realization_r1_m9 }}, {{ participant.realization_r1_m10 }}
+    </td>
+    <td>{{ participant.payoff_r1 }}</td>
   </tr>
   <tr>
     <td>2</td>
