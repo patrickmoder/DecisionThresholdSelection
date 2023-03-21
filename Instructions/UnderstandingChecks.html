@@ -31,7 +31,7 @@
            <td rowspan="2"><b>Actual State</b></td>
            <td>Breakdown</td>
            <td style="color:green">Correct Prediction of<br>Breakdown</td>
-           <td style="color:red">Missed Hit</td>
+           <td style="color:red">Missed<br>Hit</td>
        </tr>
        <tr>
            <td>Negative</td>
@@ -59,12 +59,16 @@
 
 {{ formfield_errors 'Threshold_Introduction_Easy' }}
 
+<br />
 
-<br /> <br />
+<hr>
+
+<br />
+
 <p>
 For the remaining questions, let us consider the following example:
 In the training set that is used to train the AI algorithm, out of a sample of 170 machines, 70 break down in the next 48 hours and 100 machines do not break down.
-In our example, we expect misclassification costs of 1 cost unit for each False Alarm and 5 cost units for each Missed Hit, respectively.
+In our example, we expect misclassification costs of 3 cost unit for each False Alarm and 2 cost units for each Missed Hit, respectively.
 </p>
 <p>
     You can move the slider to select a threshold D (between 0 and 1).

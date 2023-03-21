@@ -24,13 +24,13 @@ class Player(BasePlayer):
     Misclassification_Costs_Understanding_Check_1 = models.IntegerField(
         label='<b> For a threshold D = 0.32, what is the overall number of incorrect predictions on the training set? </b>')
     Misclassification_Costs_Understanding_Check_2 = models.IntegerField(
-        label='<b> For a threshold D = 0.52, what is the cost to be expected after incorrect predictions on the training set? </b>')
+        label='<b> For a threshold D = 0.53, what is the cost for incorrect predictions on the training set? </b>')
     Threshold_Introduction_Understanding_Check = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
         label='<b> Do you agree with the following statement? "In order to reduce Missed Hits, the decision threshold D should be increased." </b>')
     Threshold_Introduction_Easy = models.StringField(
         choices=[['Breakdown', 'Breakdown'], ['No Breakdown', 'No Breakdown']],
-        label='Imagine, an AI algorithm outputs a breakdown-likelihood for a particular machine of 0.41 in the next 48 hours and your chosen decision threshold D is 0.35. <b>What would be predicted to happen in the next 48 hours for that particular machine? </b>')
+        label='Imagine, an AI algorithm outputs a breakdown-probability for a particular machine of 0.41 in the next 48 hours and your chosen decision threshold D is 0.35. <b>What would be predicted to happen in the next 48 hours for that particular machine? </b>')
     Payoff_Introduction_Understanding_Check = models.IntegerField(label='Let us consider that in the example above you select the threshold D = 0.66 in one particular round of the experiment. When the AI algorithm gets applied to predict breakdowns of your 10 machines, the following outcomes get realized <i>(remember that these numbers will be shown to you only after the last round of the experiment)</i>:'
                                                                         '<ul><li>3 Correct Predictions of Breakdowns and 4 Correct Predictions of No Breakdown</li><li>2 Missed Hits and 1 False Alarm</li></ul>'
                                                                         '<b>Remember that your maximum bonus payoff for each round is 50 cost units. According to the payoff calculation rule introduced earlier, what would be your bonus payoff (cost units) for this round?</b>')
@@ -73,8 +73,8 @@ class UnderstandingChecks(Page):
     @staticmethod
     def error_message(player:Player, values):
         solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)', Threshold_Introduction_Easy='Breakdown',
-                         Misclassification_Costs_Understanding_Check_1=51, Misclassification_Costs_Understanding_Check_2=121,
-                         Threshold_Introduction_Understanding_Check=False, Payoff_Introduction_Understanding_Check=39)
+                         Misclassification_Costs_Understanding_Check_1=51, Misclassification_Costs_Understanding_Check_2=102,
+                         Threshold_Introduction_Understanding_Check=False, Payoff_Introduction_Understanding_Check=43)
         if values != solutions:
             player.num_failed_attempts += 1
             return "One or more answers were incorrect. Please try again."
