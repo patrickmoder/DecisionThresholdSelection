@@ -132,7 +132,7 @@ class CutoffSelection(Page):
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
         #player.m_prob1 = random.uniform(1, 99) / 100
-        player.m_prob1 = np.random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob1 = np.random.Generator.binomial(n = 100, p = float(player.n_P / abs)) / 100
         player.m_prob2 = np.random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
         player.m_prob3 = np.random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
         player.m_prob4 = np.random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
