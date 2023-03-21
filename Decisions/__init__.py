@@ -363,6 +363,10 @@ class CutoffSelection(Page):
                 player.payoff -= player.c_FN / 100
                 player.out10 = "FN"
 
+        participant = player.participant
+        pl_r1 = player.in_round(1)
+        participant.payoff_r1 = pl_r1.payoff
+
         #if 100 - (costr - costoptr) > 0:
         #    player.payoff = (100 - (costr - costoptr)) / 100
         #else:
