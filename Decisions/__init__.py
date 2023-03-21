@@ -378,9 +378,6 @@ class CutoffSelection(Page):
         participant.realizations_r1_m8 = pl_r1.out8
         participant.realizations_r1_m9 = pl_r1.out9
         participant.realizations_r1_m10 = pl_r1.out10
-        participant.realizations_r1_m11 = pl_r1.out11
-        participant.realizations_r1_m12 = pl_r1.out12
-        participant.realizations_r1_m13 = pl_r1.out13
         pl_r2 = player.in_round(2)
         participant.payoff_r2 = pl_r2.payoff
         pl_r3 = player.in_round(3)
