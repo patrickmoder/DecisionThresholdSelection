@@ -131,16 +131,17 @@ class CutoffSelection(Page):
             #((-thropt + 1) * 20) * pow(baseN, (-thropt + 1)))
         #costr = player.c_FN * round((thr * 20) * pow(baseP, thr)) + player.c_FP * round(
             #((-thr + 1) * 20) * pow(baseN, (-thr + 1)))
-        player.m_prob1 = random.uniform(1, 99) / 100
-        player.m_prob2 = random.uniform(1, 99) / 100
-        player.m_prob3 = random.uniform(1, 99) / 100
-        player.m_prob4 = random.uniform(1, 99) / 100
-        player.m_prob5 = random.uniform(1, 99) / 100
-        player.m_prob6 = random.uniform(1, 99) / 100
-        player.m_prob7 = random.uniform(1, 99) / 100
-        player.m_prob8 = random.uniform(1, 99) / 100
-        player.m_prob9 = random.uniform(1, 99) / 100
-        player.m_prob10 = random.uniform(1, 99) / 100
+        #player.m_prob1 = random.uniform(1, 99) / 100
+        player.m_prob1 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob2 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob3 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob4 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob5 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob6 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob7 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob8 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob9 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
+        player.m_prob10 = random.Generator.binomial(n = 100, p = player.n_P / abs) / 100
 
         prob1_FP = (((-player.m_prob1 + 1) * 20) * pow(baseN, (-player.m_prob1 + 1))) / abs
         prob1_FN = round((player.m_prob1 * 20) * pow(baseP, player.m_prob1)) / abs
