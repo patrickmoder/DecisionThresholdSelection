@@ -7,7 +7,8 @@ USE_POINTS = False
 DEMO_PAGE_INTRO_HTML = ''
 PARTICIPANT_FIELDS = ['payoff_r1', 'payoff_r2', 'payoff_r3', 'payoff_r4', 'payoff_r5', 'payoff_r6',
                       'payoff_r7', 'payoff_r8', 'payoff_r9', 'payoff_r10', 'payoff_r11', 'payoff_r12',
-                      'payoff_r13']
+                      'payoff_r13',
+                      'th_select_r1', 'th_opt_r1', 'realizations_r1']
 SESSION_FIELDS = []
 ROOMS = []
 

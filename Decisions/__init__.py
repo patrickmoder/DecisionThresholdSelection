@@ -366,6 +366,9 @@ class CutoffSelection(Page):
         participant = player.participant
         pl_r1 = player.in_round(1)
         participant.payoff_r1 = pl_r1.payoff
+        participant.th_select_r1 = pl_r1.selected_threshold / 100
+        participant.th_opt_r1 = pl_r1.th_opt
+        participant.realizations_r1 = list(pl_r1.out1, pl_r1.out2)
         pl_r2 = player.in_round(2)
         participant.payoff_r2 = pl_r2.payoff
         pl_r3 = player.in_round(3)
