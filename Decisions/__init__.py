@@ -366,6 +366,30 @@ class CutoffSelection(Page):
         participant = player.participant
         pl_r1 = player.in_round(1)
         participant.payoff_r1 = pl_r1.payoff
+        pl_r2 = player.in_round(2)
+        participant.payoff_r2 = pl_r2.payoff
+        pl_r3 = player.in_round(3)
+        participant.payoff_r3 = pl_r3.payoff
+        pl_r4 = player.in_round(4)
+        participant.payoff_r4 = pl_r4.payoff
+        pl_r5 = player.in_round(5)
+        participant.payoff_r5 = pl_r5.payoff
+        pl_r6 = player.in_round(6)
+        participant.payoff_r6 = pl_r6.payoff
+        pl_r7 = player.in_round(7)
+        participant.payoff_r7 = pl_r7.payoff
+        pl_r8 = player.in_round(8)
+        participant.payoff_r8 = pl_r8.payoff
+        pl_r9 = player.in_round(9)
+        participant.payoff_r9 = pl_r9.payoff
+        pl_r10 = player.in_round(10)
+        participant.payoff_r10 = pl_r10.payoff
+        pl_r11 = player.in_round(11)
+        participant.payoff_r11 = pl_r11.payoff
+        pl_r12 = player.in_round(12)
+        participant.payoff_r12 = pl_r12.payoff
+        pl_r13 = player.in_round(13)
+        participant.payoff_r13 = pl_r13.payoff
 
         #if 100 - (costr - costoptr) > 0:
         #    player.payoff = (100 - (costr - costoptr)) / 100
