@@ -53,6 +53,7 @@ class Player(BasePlayer):
     th_opt = models.FloatField()
     selected_threshold = models.IntegerField()
     clicked_help = models.IntegerField(initial=0, blank=True)
+    moved_slider = models.IntegerField(initial=0, blank=True)
     out1 = models.StringField()
     out2 = models.StringField()
     out3 = models.StringField()
