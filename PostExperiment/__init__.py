@@ -31,7 +31,35 @@ class Player(BasePlayer):
     optimal_confident = models.StringField(choices=[['not at all', 'not at all'], ['slightly', 'slightly'], ['quite a bit', 'quite a bit'], ['very', 'very'], ['extremely', 'extremely']], label='How confident are you that you selected the optimal threshold in the majority of rounds in this experiment?')
     feedback_general = models.LongStringField(blank=True, label='Do you like to share any other feedback with the experimenters?')
     study_field = models.StringField(choices=[['Formal sciences (incl. mathematics, computer science, etc.)', 'Formal sciences (incl. mathematics, computer science, etc.)'], ['Natural sciences (incl. physics, engineering, medicine, etc.)', 'Natural sciences (incl. physics, engineering, medicine, etc.)'], ['Social sciences (incl. economics, psychology, jurisprudence, etc.)', 'Social sciences (incl. economics, psychology, jurisprudence, etc.)']], label='Your field of study?')
-class PostExperimentSurvey(Page):
+
+    AI_pos1 = models.StringField(label='For routine transactions, I would rather interact with an artificially intelligent system than with a human.',
+                                  choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos5 = models.StringField(label='I am impressed by what Artificial Intelligence can do.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos7 = models.StringField(label='I am interested in using artificially intelligent systems in my daily life.',
+                                 choices = [['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos12 = models.StringField(label='Artificial Intelligence is exciting.',
+                                 choices = [['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos13 = models.StringField(label='An artificially intelligent agent would be better than an employee in many routine jobs.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos14 = models.StringField(label='	There are many beneficial applications of Artificial Intelligence.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos16 = models.StringField(label='Artificially intelligent systems can perform better than humans.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_pos18 = models.StringField(label='	I would like to use Artificial Intelligence in my own job.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_neg6 = models.StringField(label='	I think artificially intelligent systems make many errors.',
+                                  choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_neg9 = models.StringField(label='Artificial Intelligence might take control of people.',
+                                  choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_neg10 = models.StringField(label='	I think Artificial Intelligence is dangerous.',
+                                  choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_neg15 = models.StringField(label='	I shiver with discomfort when I think about future uses of Artificial Intelligence.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+    AI_neg19 = models.StringField(label='	People like me will suffer if Artificial Intelligence is used more and more.',
+                                 choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
+
+    class PostExperimentSurvey(Page):
     form_model = 'player'
     form_fields = ['age', 'gender', 'nationality', 'study_progress', 'highest_degree', 'study_field', 'professional_experience',
                    'similar_exp', 'similar_task', 'optimal_confident', 'optimal_how_often',
@@ -39,7 +67,11 @@ class PostExperimentSurvey(Page):
                    'strategy_change', 'strategy_how_why', 'strategy_when',
                    'feedback_general']
 
+class PostExperimentAIAttitude(Page):
+    form_model = 'player'
+    form_fields = ['AI_pos1', 'AI_pos5', 'AI_pos7', 'AI_pos12', 'AI_pos13', 'AI_pos14',
+                   'AI_pos16', 'AI_pos18', 'AI_neg6', 'AI_neg9', 'AI_neg10', 'AI_neg15', 'AI_neg19']
 class FinalPage(Page):
     pass
 
-page_sequence = [FinalPage]
+page_sequence = [PostExperimentAIAttitude, PostExperimentAIAttitude, FinalPage]
