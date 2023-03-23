@@ -81,7 +81,7 @@ class Player(BasePlayer):
 
 class CutoffSelection(Page):
     form_model = 'player'
-    form_fields = ['selected_threshold', 'clicked_help']
+    form_fields = ['selected_threshold', 'clicked_help', 'moved_slider']
     @staticmethod
     def vars_for_template(player: Player):
         abs = player.n_N + player.n_P
