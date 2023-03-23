@@ -74,4 +74,4 @@ class PostExperimentAIAttitude(Page):
 class FinalPage(Page):
     pass
 
-page_sequence = [PostExperimentAIAttitude, PostExperimentAIAttitude, FinalPage]
+page_sequence = [PostExperimentAIAttitude, PostExperimentSurvey, FinalPage]
