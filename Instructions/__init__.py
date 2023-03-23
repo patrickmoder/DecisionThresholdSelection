@@ -2,7 +2,7 @@
 from otree.api import *
 c = cu
 
-doc = 'When Artificial Intelligence based models are used to make predictions about a future state in operations management, they often classify two different outcomes: positive or negative. In order to adjust the algorithm for a given problem, one can tune the cutoff value, that determines the decision threshold between positive and negative predictions. The threshold should ideally be selected at a cutoff value that minimizes the costs for consequences after misclassifications (false negatives and false positives). We hypothesize that despite provided with all relevant cost information, decision makers may not select a cutoff that minimizes the overall costs but deviate from it. We are interested in which decision problem characteristics, cognitive limitations and human biases explain that behavior.'
+doc = 'When Artificial Intelligence based models are used to make predictions about a future state in operations management, they often classify two different outcomes: positive or negative. In order to adjust the algorithm for a given problem, one can tune the cutoff value, that determines the decision threshold between positive and negative predictions. The threshold should ideally be selected at a cutoff value that minimizes the costs for consequences after incorrect predictions (false alarms and missed hits). We hypothesize that despite provided with all relevant cost information, decision makers may not select a threshold that minimizes the overall costs but deviate from it. We are interested in which decision problem characteristics, cognitive limitations and human biases explain that behavior.'
 class C(BaseConstants):
     NAME_IN_URL = 'Instructions'
     PLAYERS_PER_GROUP = None
@@ -24,10 +24,10 @@ class Player(BasePlayer):
     Misclassification_Costs_Understanding_Check_1 = models.IntegerField(
         label='<b> For a threshold D = 0.32, what is the overall number of incorrect predictions on the training set? </b>')
     Misclassification_Costs_Understanding_Check_2 = models.IntegerField(
-        label='<b> For a threshold D = 0.53, what is the cost for incorrect predictions on the training set? </b>')
+        label='<b> For a threshold D = 0.53, what are the total costs for incorrect predictions on the training set? </b>')
     Threshold_Introduction_Understanding_Check = models.BooleanField(
         choices=[[True, 'Yes'], [False, 'No']],
-        label='<b> Do you agree with the following statement? "In order to reduce Missed Hits, the decision threshold D should be increased." </b>')
+        label='<b> Do you agree with the following statement? "In order to reduce Missed Hits, the threshold D should be increased." </b>')
     Threshold_Introduction_Easy = models.StringField(
         choices=[['Breakdown', 'Breakdown'], ['No Breakdown', 'No Breakdown']],
         label='Imagine, an AI algorithm outputs a breakdown-probability for a particular machine of 0.41 in the next 48 hours and your chosen decision threshold D is 0.35. <b>What would be predicted to happen in the next 48 hours for that particular machine? </b>')

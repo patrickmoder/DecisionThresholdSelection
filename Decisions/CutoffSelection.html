@@ -1,5 +1,5 @@
 {{ extends 'global/Page.html' }}
-{{ block title }}Please select a threshold.{{ endblock }}
+{{ block title }}Please select a threshold D.{{ endblock }}
 
 {{ block content }}
 
@@ -21,7 +21,7 @@
 </p>
 
 <p>
-    You can calibrate the AI algorithm by selecting a decision threshold D.
+    You can calibrate the AI algorithm by selecting a threshold D.
     Depending on your threshold selection, you see a matrix with prediction outcomes on the training set.
     If you need more help, please click the button "Need Help?" below to display a graphical visualization.
 </p>
@@ -150,17 +150,17 @@ for (var x = 0; x <= 1; x += 0.01) {
 
 // Define Plot Data
 var data = [
-  {x: x1Values, y: y1Values, mode:"lines", name:"Missed Hits"},
-  {x: x2Values, y: y2Values, mode:"lines", name:"False Alarms"},
-  {x: x4Values, y: y4Values, mode:"lines", name:"Costs after Missed Hits"},
-  {x: x5Values, y: y5Values, mode:"lines", name:"Costs after False Alarms"},
-  {x: x3Values, y: y3Values, mode:"lines", name:"Overall Cost after incorrect predictions"}
+  {x: x1Values, y: y1Values, mode:"lines", name:"Number of Missed Hits"},
+  {x: x2Values, y: y2Values, mode:"lines", name:"Number of False Alarms"},
+  {x: x4Values, y: y4Values, mode:"lines", name:"Costs for Missed Hits [cost units]"},
+  {x: x5Values, y: y5Values, mode:"lines", name:"Costs for False Alarms [cost units]"},
+  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for incorrect predictions [cost units]"}
 ];
 
 //Define Plot Layout
 var layout = {
-    title: "Prediction Outcomes and Misclassification Costs on Training Set",
-    xaxis: {title: "Decision Threshold D"}
+    title: "Prediction Outcomes and Costs for Incorrect Predictions on Training Set",
+    xaxis: {title: "Threshold D"}
 };
 
 // Display Plot using Plotly

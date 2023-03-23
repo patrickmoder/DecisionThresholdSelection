@@ -1,5 +1,5 @@
 {{ extends 'global/Page.html' }}
-{{ block title }}Introduction to the decision threshold{{ endblock }}
+{{ block title }}Introduction to the decision threshold D{{ endblock }}
 
 {{ block content }}
 
@@ -17,7 +17,7 @@
 <p>
     For each machine, the AI algorithm calculates a breakdown probability in the next 48 hours.
     The probability output by the AI algorithm is then translated into a binary (yes/no) prediction:
-if the probability is above a threshold D, we predict a breakdown in the next 48 hours;
+if the probability is equal or above the threshold D, we predict a breakdown in the next 48 hours;
     while if the probability is below the threshold D, we predict no breakdown in the next 48 hours.
     The threshold D has to be between 0 and 1.
 </p>
@@ -76,7 +76,7 @@ For the matrix we introduced earlier, we show the relationship of the threshold 
 </table>
 
 <p>
-Please read the introduction to the decision threshold D carefully. By clicking "Next" you will move to the next page.
+Please read the introduction to the threshold D carefully. By clicking "Next" you will move to the next page.
 </p>
 
 {{ next_button }}

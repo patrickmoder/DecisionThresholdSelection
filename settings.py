@@ -1,6 +1,6 @@
 from os import environ
 SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fee=5)
-SESSION_CONFIGS = [dict(name='ExperimentDecisionThreshold', num_demo_participants=12, app_sequence=['Decisions', 'PostExperiment'])]
+SESSION_CONFIGS = [dict(name='ExperimentDecisionThreshold', num_demo_participants=12, app_sequence=['Decisions', 'choice_list', 'PostExperiment'])]
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'EUR'
 USE_POINTS = False
@@ -49,7 +49,8 @@ PARTICIPANT_FIELDS = ['payoff_r1', 'payoff_r2', 'payoff_r3', 'payoff_r4', 'payof
                       'realizations_r12_m9', 'realizations_r12_m10',
                       'realizations_r13_m1', 'realizations_r13_m2', 'realizations_r13_m3', 'realizations_r13_m4',
                       'realizations_r13_m5', 'realizations_r13_m6', 'realizations_r13_m7', 'realizations_r13_m8',
-                      'realizations_r13_m9', 'realizations_r13_m10']
+                      'realizations_r13_m9', 'realizations_r13_m10',
+                      'payoff_lottery']
 SESSION_FIELDS = []
 ROOMS = []
 
