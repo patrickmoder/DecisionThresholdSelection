@@ -34,14 +34,20 @@ tr:nth-child(even) {
     Your overall payoff is {{ participant.payoff_plus_participation_fee }}.
 </p>
 <p>
-    Your payoff per round was:
+    Your bonus payoff per round is displayed in the table below. How to read the realizations column:
+<ul>
+    <li >TP (True Positive): Correct Prediction of Breakdown</li>
+    <li >TN (True Negative): Correct Prediction of No Breakdown</li>
+    <li >TP (False Positive): False Alarm</li>
+    <li >TP (False Negative): Missed Hit</li>
+</ul>
 
     <table>
   <tr>
     <th>Round</th>
     <th>Selected<br>Threshold</th>
     <th>Realizations for the 10 machines</th>
-    <th>Payoff</th>
+    <th>Bonus payoff</th>
     <!--<th>Optimal threshold<br>(min. costs)</th>-->
   </tr>
   <tr>
