@@ -1,6 +1,26 @@
 {{ extends 'global/Page.html' }}
 {{ block title }}Thanks for your participation!{{ endblock }}
 
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
 {{ block content }}
 <p>
     Thank you for participating in the experiment.
@@ -31,68 +51,111 @@
   </tr>
   <tr>
     <td>2</td>
+    <td> {{ participant.th_select_r2 }}</td>
+    <td>
+      {{ participant.realizations_r2_m1 }}, {{ participant.realizations_r2_m2 }}, {{ participant.realizations_r2_m3 }}, {{ participant.realizations_r2_m4 }}, {{ participant.realizations_r2_m5 }},
+      {{ participant.realizations_r2_m6 }}, {{ participant.realizations_r2_m7 }}, {{ participant.realizations_r2_m8 }}, {{ participant.realizations_r2_m9 }}, {{ participant.realizations_r2_m10 }}
+    </td>
     <td>{{ participant.payoff_r2 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>3</td>
+    <td> {{ participant.th_select_r3 }}</td>
+    <td>
+      {{ participant.realizations_r3_m1 }}, {{ participant.realizations_r3_m2 }}, {{ participant.realizations_r3_m3 }}, {{ participant.realizations_r3_m4 }}, {{ participant.realizations_r3_m5 }},
+      {{ participant.realizations_r3_m6 }}, {{ participant.realizations_r3_m7 }}, {{ participant.realizations_r3_m8 }}, {{ participant.realizations_r3_m9 }}, {{ participant.realizations_r3_m10 }}
+    </td>
     <td>{{ participant.payoff_r3 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>4</td>
+    <td> {{ participant.th_select_r4 }}</td>
+    <td>
+      {{ participant.realizations_r4_m1 }}, {{ participant.realizations_r4_m2 }}, {{ participant.realizations_r4_m3 }}, {{ participant.realizations_r4_m4 }}, {{ participant.realizations_r4_m5 }},
+      {{ participant.realizations_r4_m6 }}, {{ participant.realizations_r4_m7 }}, {{ participant.realizations_r4_m8 }}, {{ participant.realizations_r4_m9 }}, {{ participant.realizations_r4_m10 }}
+    </td>
     <td>{{ participant.payoff_r4 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>5</td>
+    <td> {{ participant.th_select_r5 }}</td>
+    <td>
+      {{ participant.realizations_r5_m1 }}, {{ participant.realizations_r5_m2 }}, {{ participant.realizations_r5_m3 }}, {{ participant.realizations_r5_m4 }}, {{ participant.realizations_r5_m5 }},
+      {{ participant.realizations_r5_m6 }}, {{ participant.realizations_r5_m7 }}, {{ participant.realizations_r5_m8 }}, {{ participant.realizations_r5_m9 }}, {{ participant.realizations_r5_m10 }}
+    </td>
     <td>{{ participant.payoff_r5 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>6</td>
+    <td> {{ participant.th_select_r6 }}</td>
+    <td>
+      {{ participant.realizations_r6_m1 }}, {{ participant.realizations_r6_m2 }}, {{ participant.realizations_r6_m3 }}, {{ participant.realizations_r6_m4 }}, {{ participant.realizations_r6_m5 }},
+      {{ participant.realizations_r6_m6 }}, {{ participant.realizations_r6_m7 }}, {{ participant.realizations_r6_m8 }}, {{ participant.realizations_r6_m9 }}, {{ participant.realizations_r6_m10 }}
+    </td>
     <td>{{ participant.payoff_r6 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>7</td>
+    <td> {{ participant.th_select_r7 }}</td>
+    <td>
+      {{ participant.realizations_r7_m1 }}, {{ participant.realizations_r7_m2 }}, {{ participant.realizations_r7_m3 }}, {{ participant.realizations_r7_m4 }}, {{ participant.realizations_r7_m5 }},
+      {{ participant.realizations_r7_m6 }}, {{ participant.realizations_r7_m7 }}, {{ participant.realizations_r7_m8 }}, {{ participant.realizations_r7_m9 }}, {{ participant.realizations_r7_m10 }}
+    </td>
     <td>{{ participant.payoff_r7 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>8</td>
+    <td> {{ participant.th_select_r8 }}</td>
+    <td>
+      {{ participant.realizations_r8_m1 }}, {{ participant.realizations_r8_m2 }}, {{ participant.realizations_r8_m3 }}, {{ participant.realizations_r8_m4 }}, {{ participant.realizations_r8_m5 }},
+      {{ participant.realizations_r8_m6 }}, {{ participant.realizations_r8_m7 }}, {{ participant.realizations_r8_m8 }}, {{ participant.realizations_r8_m9 }}, {{ participant.realizations_r8_m10 }}
+    </td>
     <td>{{ participant.payoff_r8 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>9</td>
+    <td> {{ participant.th_select_r9 }}</td>
+    <td>
+      {{ participant.realizations_r9_m1 }}, {{ participant.realizations_r9_m2 }}, {{ participant.realizations_r9_m3 }}, {{ participant.realizations_r9_m4 }}, {{ participant.realizations_r9_m5 }},
+      {{ participant.realizations_r9_m6 }}, {{ participant.realizations_r9_m7 }}, {{ participant.realizations_r9_m8 }}, {{ participant.realizations_r9_m9 }}, {{ participant.realizations_r9_m10 }}
+    </td>
     <td>{{ participant.payoff_r9 }}</td>
-    <td>...</td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td>{{ participant.payoff_r9 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>10</td>
+    <td> {{ participant.th_select_r10 }}</td>
+    <td>
+      {{ participant.realizations_r10_m1 }}, {{ participant.realizations_r10_m2 }}, {{ participant.realizations_r10_m3 }}, {{ participant.realizations_r10_m4 }}, {{ participant.realizations_r10_m5 }},
+      {{ participant.realizations_r10_m6 }}, {{ participant.realizations_r10_m7 }}, {{ participant.realizations_r10_m8 }}, {{ participant.realizations_r10_m9 }}, {{ participant.realizations_r10_m10 }}
+    </td>
     <td>{{ participant.payoff_r10 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>11</td>
+    <td> {{ participant.th_select_r11 }}</td>
+    <td>
+      {{ participant.realizations_r11_m1 }}, {{ participant.realizations_r11_m2 }}, {{ participant.realizations_r11_m3 }}, {{ participant.realizations_r11_m4 }}, {{ participant.realizations_r11_m5 }},
+      {{ participant.realizations_r11_m6 }}, {{ participant.realizations_r11_m7 }}, {{ participant.realizations_r11_m8 }}, {{ participant.realizations_r11_m9 }}, {{ participant.realizations_r11_m10 }}
+    </td>
     <td>{{ participant.payoff_r11 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>12</td>
+    <td> {{ participant.th_select_r12 }}</td>
+    <td>
+      {{ participant.realizations_r12_m1 }}, {{ participant.realizations_r12_m2 }}, {{ participant.realizations_r12_m3 }}, {{ participant.realizations_r12_m4 }}, {{ participant.realizations_r12_m5 }},
+      {{ participant.realizations_r12_m6 }}, {{ participant.realizations_r12_m7 }}, {{ participant.realizations_r12_m8 }}, {{ participant.realizations_r12_m9 }}, {{ participant.realizations_r12_m10 }}
+    </td>
     <td>{{ participant.payoff_r12 }}</td>
-    <td>...</td>
   </tr>
   <tr>
     <td>13</td>
+    <td> {{ participant.th_select_r13 }}</td>
+    <td>
+      {{ participant.realizations_r13_m1 }}, {{ participant.realizations_r13_m2 }}, {{ participant.realizations_r13_m3 }}, {{ participant.realizations_r13_m4 }}, {{ participant.realizations_r13_m5 }},
+      {{ participant.realizations_r13_m6 }}, {{ participant.realizations_r13_m7 }}, {{ participant.realizations_r13_m8 }}, {{ participant.realizations_r13_m9 }}, {{ participant.realizations_r13_m10 }}
+    </td>
     <td>{{ participant.payoff_r13 }}</td>
-    <td>...</td>
   </tr>
 </table>
 
