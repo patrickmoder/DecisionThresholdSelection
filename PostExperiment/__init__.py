@@ -60,12 +60,12 @@ class Player(BasePlayer):
                                  choices=[['Agree', 'Agree'], ['Neutral', 'Neutral'], ['Disagree', 'Disagree']])
 
 class PostExperimentSurvey(Page):
-form_model = 'player'
-form_fields = ['age', 'gender', 'nationality', 'study_progress', 'highest_degree', 'study_field', 'professional_experience',
-               'similar_exp', 'similar_task', 'optimal_confident', 'optimal_how_often',
-               'choice_criterion', 'choice_criterion_add',
-               'strategy_change', 'strategy_how_why', 'strategy_when',
-               'feedback_general']
+    form_model = 'player'
+    form_fields = ['age', 'gender', 'nationality', 'study_progress', 'highest_degree', 'study_field', 'professional_experience',
+                   'similar_exp', 'similar_task', 'optimal_confident', 'optimal_how_often',
+                   'choice_criterion', 'choice_criterion_add',
+                   'strategy_change', 'strategy_how_why', 'strategy_when',
+                   'feedback_general']
 
 class PostExperimentAIAttitude(Page):
     form_model = 'player'
