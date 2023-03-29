@@ -103,17 +103,17 @@ In our example, we expect costs for incorrect predictions of 3 cost unit for eac
         <tr>
            <td></td>
            <td></td>
-           <td>{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
-           <td>No { if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
        </tr>
        <tr>
            <td rowspan="2"><b>Actual State</b></td>
-           <td>{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
            <td id="tp" style="color:green"></td>
            <td id ="fn" style="color:red"></td>
        </tr>
        <tr>
-           <td>No { if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
            <td id ="fp" style="color:red"></td>
            <td id ="tn" style="color:green"></td>
        </tr>
