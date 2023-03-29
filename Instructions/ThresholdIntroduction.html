@@ -3,6 +3,12 @@
 
 {{ block content }}
 
+{{ if participant.scenario == "breakdown" }}
+<p> you are in the even group</p>
+{{ else }}
+<p> you are in the odd group</p>
+{{ endif }}
+
 <p>
     Before applying the AI algorithm in a real-world setting, the trade-off between breakdown- and no-breakdown-predictions has to be calibrated.
     The calibration can be made with the help of the training set that is used to train the AI algorithm.
