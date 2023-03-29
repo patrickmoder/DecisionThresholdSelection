@@ -120,7 +120,7 @@ class UnderstandingChecks(Page):
             if values[field_name] != solutions[field_name]:
                 player.num_failed_attempts += 1
                 error_messages[field_name] = 'Wrong answer'
-                return error_messages
+                #return error_messages
                 #return "One or more answers were incorrect. Please try again."
 
         #if values != solutions:
