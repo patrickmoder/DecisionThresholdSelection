@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    The following (incomplete) matrix compares the predicted to the actual states when predicting machine breakdowns.
+    The following (incomplete) matrix compares the predicted to the actual states when predicting {{ if participant.scenario == "breakdown" }}machine breakdowns{{ else }}customer complaints{{ endif }}.
 </p>
 
 <table id="confusionmatrix" cellpadding="4px" border="1px">
@@ -24,19 +24,19 @@
         <tr>
            <td></td>
            <td></td>
-           <td>Breakdown</td>
-           <td>No Breakdown</td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
        </tr>
        <tr>
            <td rowspan="2"><b>Actual State</b></td>
-           <td>Breakdown</td>
-           <td style="color:green">Correct Prediction of<br>Breakdown</td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td style="color:green">Correct Prediction of<br>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
            <td style="color:red">Missed<br>Hit</td>
        </tr>
        <tr>
            <td>Negative</td>
            <td style="color:black">?</td>
-           <td style="color:green">Correct Prediction of<br>No Breakdown</td>
+           <td style="color:green">Correct Prediction of<br>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
        </tr>
     </tbody>
 </table>

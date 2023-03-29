@@ -15,7 +15,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     Confusion_Matrix_missing_value = models.StringField(
-        choices=[['True Positive (TP)', 'Correct Prediction of Breakdown'], ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
+        choices=[['True Positive (TP)', 'Correct Prediction of {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}'], ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
                  ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
         label='<b> What outcome is missing (?) in the matrix above? </b>')
     #Accuracy_Understanding_Check = models.StringField(
