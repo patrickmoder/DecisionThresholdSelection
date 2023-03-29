@@ -44,7 +44,13 @@ class Player(BasePlayer):
 class Welcome(Page):
     pass
 class ScenarioDescription(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player: Player):
+        participant = player.participant
+        if player.id_in_group % 2 == 0:
+            participant.scenario = "breakdown"
+        else:
+            participant.scenario = "complaint"
 class ThresholdIntroduction(Page):
     pass
 class MisclassificationCosts(Page):
