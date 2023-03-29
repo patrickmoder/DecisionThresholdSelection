@@ -3,6 +3,12 @@
 
 {{ block content }}
 
+{{ if participant.scenario == "breakdown" }}
+<p> you are in the even group</p>
+{{ else }}
+<p> you are in the odd group</p>
+{{ endif }}
+
 <h3>
     This is round {{ subsession.round_number }} of {{ C.NUM_ROUNDS }}.
 </h3>
