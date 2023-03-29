@@ -98,9 +98,11 @@ class UnderstandingChecks(Page):
 
     @staticmethod
     def error_message(player:Player, values):
-        solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)', Threshold_Introduction_Easy='Breakdown',
+        solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)', Confusion_Matrix_missing_value_C='False Positive (FP)',
+                         Threshold_Introduction_Easy='Breakdown', Threshold_Introduction_Easy_C='Breakdown',
                          Misclassification_Costs_Understanding_Check_1=51, Misclassification_Costs_Understanding_Check_2=102,
-                         Threshold_Introduction_Understanding_Check=False, Payoff_Introduction_Understanding_Check=43)
+                         Threshold_Introduction_Understanding_Check=False,
+                         Payoff_Introduction_Understanding_Check=43, Payoff_Introduction_Understanding_Check_C=43)
 
         error_messages = dict()
 
