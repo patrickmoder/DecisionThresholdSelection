@@ -144,16 +144,9 @@ In our example, we expect costs for incorrect predictions of 3 cost unit for eac
 <h3>
     Question 5:
 </h3>
-{{ if participant.scenario == "breakdown" }}
+
 {{ formfield 'Threshold_Introduction_Understanding_Check' }}
-{{ else }}
-{{ formfield 'Threshold_Introduction_Understanding_Check_C' }}
-{{ elseif }}
-
-
 {{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
-{{ formfield_errors 'Threshold_Introduction_Understanding_Check_C' }}
-
 
 <br />
 
@@ -161,10 +154,14 @@ In our example, we expect costs for incorrect predictions of 3 cost unit for eac
 <h3>
     Question 6:
 </h3>
-
+{{ if participant.scenario == "breakdown" }}
 {{ formfield 'Payoff_Introduction_Understanding_Check' }}
+{{ else }}
+{{ formfield 'Payoff_Introduction_Understanding_Check_C' }}
+{{ elseif }}
 
 {{ formfield_errors 'Payoff_Introduction_Understanding_Check' }}
+{{ formfield_errors 'Payoff_Introduction_Understanding_Check_C' }}
 
 <script>
 
