@@ -98,6 +98,7 @@ class UnderstandingChecks(Page):
 
     @staticmethod
     def error_message(player:Player, values):
+        participant = player.participant
         if participant.scenario == "breakdown":
             solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)',
                          Threshold_Introduction_Easy='Breakdown',
