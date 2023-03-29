@@ -7,7 +7,7 @@
     In general, one tries to make as many correct classifications as possible: we can calculate the <b>accuracy</b> of an algorithm by dividing the total number of correct classifications (TP+TN) by the total number of samples.
     The accuracy is a number between 0 and 1, with higher values indicating more accurate classifications. <br />
 </p>-->
-
+{{ if participant.scenario == "breakdown" }}
 <p>
     In our setting, we assume that correct predictions have equally valuable consequences that can therefore be neglected.
     Yet, when making incorrect predictions of machine breakdowns, we face different costs.
@@ -71,35 +71,72 @@
     = 19 cost units overall
 </p>
 
-<!--<table id="costmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Cost Matrix (Absolute Misclassification Costs [$])</caption>
+{{ else }}
+<p>
+    In our setting, we assume that correct predictions have equally valuable consequences that can therefore be neglected.
+    Yet, when making incorrect predictions of customer complaints, we face different costs.
+    Such costs for incorrect predictions can vary and depend on the environment to which the AI algorithm is applied:
+    <ul>
+        <li>For False Alarms, we face unnecessary interventions that cause unnecessary operational costs.</li>
+        <li>For Missed Hits, we lose the opportunity to prevent the complaint and face unsatisfied customers and lost sales.</li>
+    </ul>
+</p>
+
+<p>
+    Let us illustrate these considerations in an example:
+    in our example, we assume costs of 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
+    In other words, wrongly predicting a customer complaint is five times more expensive than wrongly predicting a satisfied customer.
+    In the training set that is used to train the AI algorithm, out of a sample of 20 customer, 10 complain about a delivery delay and 10 customers do not complain.
+</p>
+<p>
+    Now, let us assume that we choose a threshold D of 0.65, which determines that for all complaint probabilities above a value of 0.65, we predict the customer to complain.
+    With D = 0.65, the predictions by the AI algorithm for the 20 customers in the training set (also displayed in the matrix below) would be as follows:
+    <ul>
+        <li>13 correct predictions: 6 Correct Predictions of Complaint, 7 Correct Predictions of No Complaint</li>
+        <li>7 incorrect predictions: 3 False Alarms and 4 Missed Hits</li>
+</ul>
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes</caption>
     <thead>
         <tr>
             <th></th>
             <th></th>
-            <th colspan="2">Predicted Class</th>
+            <th colspan="2" style="text-align: center">Predicted State</th>
         </tr>
     </thead>
     <tbody>
         <tr>
            <td></td>
            <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
+           <td>Complaint</td>
+           <td>No Complaint</td>
        </tr>
        <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
-           <td> - </td>
-           <td id ="fnc">4</td>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Complaint</td>
+           <td id="tp" style="color:green">6</td>
+           <td id ="fn" style="color:red">4</td>
        </tr>
        <tr>
-           <td>Negative</td>
-           <td id ="fpc">15</td>
-           <td> - </td>
+           <td>No Complaint</td>
+           <td id ="fp" style="color:red">3</td>
+           <td id ="tn" style="color:green">7</td>
        </tr>
     </tbody>
-</table>-->
+</table>
+
+<p>
+    <!--Our chosen threshold D results in a prediction accuracy of 0.65 (13 correct classifications out of 20 objects in total).-->
+    Consequently, on our training set we would expect cost for incorrect predictions of <br />
+    &nbsp;&nbsp;&nbsp;3 x 5 cost units (=15 cost units) for False Alarms <br />
+    <u>+ 4 x 1 cost unit</u> (=4 cost units) for Missed Hits<br />
+    = 19 cost units overall
+</p>
+{{ endif }}
+
+
 <p>
     Please read the introduction to costs for incorrect predictions carefully. By clicking "Next" you will move to the next page.
 </p>

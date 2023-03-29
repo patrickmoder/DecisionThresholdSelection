@@ -40,8 +40,8 @@ tr:nth-child(even) {
 <p>
     Your bonus payoff per round is displayed in the table below. How to read the realizations column:
 <ul>
-    <li >TP (True Positive): Correct Prediction of Breakdown</li>
-    <li >TN (True Negative): Correct Prediction of No Breakdown</li>
+    <li >TP (True Positive): Correct Prediction of {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</li>
+    <li >TN (True Negative): Correct Prediction of No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</li>
     <li >FP (False Positive): False Alarm</li>
     <li >FN (False Negative): Missed Hit</li>
 </ul>
@@ -50,7 +50,7 @@ tr:nth-child(even) {
   <tr>
     <th>Round</th>
     <th>Selected<br>Threshold</th>
-    <th>Realizations for the 10 machines</th>
+    <th>Realizations for the 10 {{ if participant.scenario == "breakdown" }}machines{{ else }}customers{{ endif }}</th>
     <th>Bonus payoff</th>
     <!--<th>Optimal threshold<br>(min. costs)</th>-->
   </tr>
@@ -175,8 +175,6 @@ tr:nth-child(even) {
 
 </p>
 </body>
-
-
 
 {{ formfields }}
 

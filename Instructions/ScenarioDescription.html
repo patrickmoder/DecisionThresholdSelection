@@ -14,12 +14,6 @@
     Some examples are classifying an object as A or B, black or white, big or small, and so on.
 </p>-->
 {{ if participant.scenario == "breakdown" }}
-<p> you are in the even group</p>
-{{ else }}
-<p> you are in the odd group</p>
-{{ endif }}
-
-
 <p>
     Machine breakdowns at production companies can lead to costly production stops, while too early maintenance leads to unnecessary maintenance cost.
     One approach to this is the early prediction of machine failures, so that maintenance measures can be initiated at the right time.
@@ -81,6 +75,70 @@
        </tr>
     </tbody>
 </table>
+
+{{ else }}
+<p>
+    Customer complaints about delivery delays can lead to unsatisfied customers and lost sales, while accelerating delivery plans for actually happy customers can lead to unnecessary operations costs.
+    One approach to this is the early prediction of customer complaints, so that operational interventions can be initiated at the right time.
+    This approach trades off the two costs.
+</p>
+<p>
+    In the following experiment, an artificial intelligence (AI) algorithm is trained to predict customer complaints.
+    The AI algorithm has a binary (yes/no) output that indicates whether a particular customer is going to complain about a delivery delay.
+</p>
+
+<p>
+    Correct predictions of the AI algorithm can be of two types:
+<ul>
+  <li>Correct prediction of a customer complaint.</li>
+  <li>Correct prediction of a satisfied customer (no complaint). </li>
+</ul>
+</p>
+
+<p>
+    Although being properly trained on this task, the AI algorithm is not entirely perfect and makes false predictions occasionally.
+    Such false predictions can also be of two types:
+<ul>
+  <li>False alarm: the AI algorithm predicts a customer complaint but the customer is satisfied despite the delivery delay.</li>
+  <li>Missed hit: the AI algorithm predicts a satisfied customer but the customer complains about the delivery delay.</li>
+</ul>
+</p>
+
+<p>
+    By comparing the actual state (complaint vs. no complaint) to the predicted state (complaint vs. no complaint),
+    the following matrix summarizes the four prediction outcomes introduced above.
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2" style="text-align: center">Predicted State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Complaint</td>
+           <td>No Complaint</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Complaint</td>
+           <td id="tp" style="color:green">Correct Prediction of<br>Complaint</td>
+           <td id ="fn" style="color:red">Missed<br>Hit</td>
+       </tr>
+       <tr>
+           <td>No Complaint</td>
+           <td id ="fp" style="color:red">False<br>Alarm</td>
+           <td id ="tn" style="color:green">Correct Prediction of<br>No Complaint</td>
+       </tr>
+    </tbody>
+</table>
+{{ endif }}
 
 <p>
 Please read the scenario description carefully. By clicking "Next" you will move to the next page.

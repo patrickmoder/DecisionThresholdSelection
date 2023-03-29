@@ -3,11 +3,10 @@
 
 {{ block content }}
 
-
 <p>
-    In every of the 13 rounds that you play, you can earn a bonus payoff in addition to your participation fee.
+    In every of the 18 rounds that you play, you can earn a bonus payoff in addition to your participation fee.
     Your maximum bonus payoff per round is 50 cost units.
-    This value will be reduced by the costs for incorrect predictions realized for the 10 machines.
+    This value will be reduced by the costs for incorrect predictions realized for the 10 {{ if participant.scenario == "breakdown" }} machines. {{ else }} customers. {{ endif }}
     The bonus will not become negative.
     <!--For every cost unit that your threshold selection is above the cost minimum (achieved with the optimal threshold D<sub>opt</sub>), your bonus payoff per round (1€ = 100 cents) will be reduced by 1 cent, but won't get reduced below 0 cents (no risk of negative payoff).-->
 </p>
@@ -25,6 +24,7 @@
     Together with the bonus payoffs from all other rounds, this amount is added to your participation fee of 5.00€.
     <!--After the last round, your cumulated bonus payoffs will be translated to real money, with 100 units equal to 1€. In the example above, we would get 97ct (0.97€) for this round. -->
 </p>
+
 
 <p>
 Please read carefully how your final payoff gets calculated. By clicking "Next" you will move to the comprehension questions.

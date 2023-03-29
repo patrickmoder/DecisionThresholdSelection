@@ -3,29 +3,26 @@
 
 {{ block content }}
 
-{{ if participant.scenario == "breakdown" }}
-<p> you are in the even group</p>
-{{ else }}
-<p> you are in the odd group</p>
-{{ endif }}
-
 <h3>
     This is round {{ subsession.round_number }} of {{ C.NUM_ROUNDS }}.
 </h3>
 
+
+{{ if participant.scenario == "breakdown" }}
 <p>
     You want to predict breakdowns of 10 machines in the next 48 hours with the aid of an AI algorithm.
     In the training set that is used to train the AI algorithm, out of a sample of <span style="font-size: 150%; "><b>{{ abs }}</b></span> machines, <span style="font-size: 150%; "><b>{{ player.n_P }}</b></span> broke down in the subsequent 48 hours and <span style="font-size: 150%; "><b>{{ player.n_N }}</b></span> machines did not break down.
     For the 10 machines you want to predict breakdowns for, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
 </p>
+{{ else }}
+<p>
+    You want to predict complaints about delivery delays of 10 customers with the aid of an AI algorithm.
+    In the training set that is used to train the AI algorithm, out of a sample of <span style="font-size: 150%; "><b>{{ abs }}</b></span> customers, <span style="font-size: 150%; "><b>{{ player.n_P }}</b></span> complaint about a delivery delay and <span style="font-size: 150%; "><b>{{ player.n_N }}</b></span> customers did not complain.
+    For the 10 customers you want to predict complaints for, you can expect the same distribution of customers with and without complaint as in the training set.
+</p>
+{{ endif }}
 <p>
     We expect misclassification costs of <span style="font-size: 150%; "><b>{{ player.c_FP }}</b></span> cost unit(s) for each False Alarm and <span style="font-size: 150%; "><b>{{ player.c_FN }}</b></span> cost unit(s) for each Missed Hit, respectively.
-    <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
-<ul>
-  <li>Expected number of False Negatives (FN): n(FN) = (θ * 20) * (5 ^ θ), rounded to the next integer.</li>
-  <li>Expected number of False Positives (FP): n(FP) = ((-θ + 1) * 20) * (5 ^ (-θ + 1)), rounded to the next integer.</li>
-</ul>
-<b>Remember: Your aim is to choose a decision threshold that minimizes the expected costs.</b>-->
 </p>
 
 <p>
@@ -59,52 +56,22 @@
         <tr>
            <td></td>
            <td></td>
-           <td>Breakdown</td>
-           <td>No Breakdown</td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
        </tr>
        <tr>
            <td rowspan="2"><b>Actual State</b></td>
-           <td>Breakdown</td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
            <td id="tp" style="color:green"></td>
            <td id ="fn" style="color:red"></td>
        </tr>
        <tr>
-           <td>No Breakdown</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
            <td id ="fp" style="color:red"></td>
            <td id ="tn" style="color:green"></td>
        </tr>
     </tbody>
 </table>
-
-<!--<table id="costmatrix" cellpadding="4px" border="1px">
-    <caption align="right">Cost Matrix (Cost Units)</caption>
-    <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th colspan="2">Predicted Class</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-           <td></td>
-           <td></td>
-           <td>Positive</td>
-           <td>Negative</td>
-       </tr>
-       <tr>
-           <td rowspan="2"><b>Actual Class</b></td>
-           <td>Positive</td>
-           <td> - </td>
-           <td id ="fnc"></td>
-       </tr>
-       <tr>
-           <td>Negative</td>
-           <td id ="fpc"></td>
-           <td> - </td>
-       </tr>
-    </tbody>
-</table>-->
 
 <button type="button" id="help_button" name="help_button" onclick="showHelp(this);track(this)">
     Need Help?
@@ -122,7 +89,7 @@
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<div id="myPlot" style="width:100%;max-width:700px"></div>
+<div id="myPlot" style="width:100%"></div>
 
 <script>
 var fns = "Math.round((x * 20) * Math.pow({{ baseP }}, x))";
@@ -193,35 +160,11 @@ function sliderMoved() {
 </script>   
 
 
-<!--<script>
-    function updatePay(input) {
-        var theta = parseInt(input.value);
-        let th = theta/100;
-        let cost = {{ player.c_FN }} * Math.round((th * 20) * Math.pow({{ baseP }}, th)) + {{ player.c_FP }} * Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1)));
-        let thOpt = {{ player.th_opt }} / 100;
-        let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
-        let pay = 100 - (cost - costOpt);
-        let player.reward = pay;
-    }
-</script>-->
-
 <script>
     let threshold = document.getElementById('threshold');
     function updateThreshold(input) {
         let theta = parseInt(input.value);
         let th = theta/100;
-        //let cost = {{ player.c_FN }} * Math.round((th * 20) * Math.pow({{ baseP }}, th)) + {{ player.c_FP }} * Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1)));
-        //let acc = (({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + ({{ player.n_N }} - Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, -th + 1)))) / {{ abs }};
-        //let accr = +acc.toFixed(2);
-        //let fone = (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th)))) / (2 * ({{ player.n_P }} - Math.round((th * 20) * Math.pow({{ baseP }}, th))) + Math.round(((-th + 1)* 20) * Math.pow({{ baseN }}, (-th + 1))) + Math.round((th * 20) * Math.pow({{ baseP }}, th)));
-        //let foner = +fone.toFixed(2);
-        //let thOpt = {{ player.th_opt }} / 100;
-        //let costOpt = {{ player.c_FN }} * Math.round((thOpt * 20) * Math.pow({{ baseP }}, thOpt)) + {{ player.c_FP }} * Math.round(((-thOpt + 1)* 20) * Math.pow({{ baseN }}, (-thOpt + 1)));
-        //if ((100 - (cost - costOpt)) > 0) {
-        //    var pay = 100 - (cost - costOpt);
-        //} else {
-        //    var pay = 0;
-        //};
         threshold.innerHTML = `Your selected threshold is ${th}.` //<br /> Your overall cost is ${cost}. <br /> Your accuracy is ${accr}. <br /><br /> <i>+++ Below text needs to be removed!!! +++ <br /> The optimal threshold is ${thOpt}. <br /> This leads to optimal costs of ${costOpt}. <br /> Therefore, your bonus payoff for this round will be ${pay}!</i>
     };
     let tp = document.getElementById('tp');

@@ -3,9 +3,10 @@
 
 {{ block content }}
 
+{{ if participant.scenario == "breakdown" }}
 <p>
     In the following experiment, your task will be to adjust the threshold D of an AI algorithm that is applied to predict breakdowns of machines.
-    You will play 13 rounds. In every of the 13 rounds, you will receive information on:
+    You will play 18 rounds. In every of the 18 rounds, you will receive information on:
     <ul>
     <li>The sample size of the training set that was used to train the AI algorithm.</li>
     <li>How many machines in the training set broke down in the subsequent 48 hours and how many did not.</li>
@@ -94,6 +95,84 @@
     Note that the overall number of correct classifications with the optimal threshold D<sub>opt</sub> is 12 (accuracy 0.60) and therefore below the number of correct classifications (13, accuracy 0.65) with our previously selected threshold D.
     Despite D<sub>opt</sub> being suboptimal regarding accuracy, remember that the optimal threshold D<sub>opt</sub> is always the threshold that minimizes costs in our setting.
 </p>-->
+
+{{ else }}
+<p>
+    In the following experiment, your task will be to adjust the threshold D of an AI algorithm that is applied to predict customer complaints.
+    You will play 18 rounds. In every of the 18 rounds, you will receive information on:
+    <ul>
+    <li>The sample size of the training set that was used to train the AI algorithm.</li>
+    <li>How many customers in the training set complaint about a delivery delay and how many did not.</li>
+    <li>Costs for incorrect predictions that can be different for False Alarms and Missed Hits.</li>
+    <li>The AI algorithm's expected prediction outcomes for the training set.</li>
+    </ul>
+</p>
+<p>
+    Your task is to choose a threshold D for the AI algorithm.
+    Then, this configuration is used to predict complaints of 10 customers you are responsible of.
+    For these 10 customers, you can expect that the data in the training set is representative of future complaints.
+    You can use a slider to enter your value of D.
+    After you confirm your choice, the AI algorithm will predict complaints of the 10 customers based on your threshold D.
+</p>
+
+<p>
+    Let us illustrate the task with our previous example.
+    Costs for incorrect predictions are 5 cost units for each False Alarm and 1 cost unit for each Missed Hit, respectively.
+    Remember from the previous screen that when choosing a threshold D of 0.65, predictions by the AI algorithm for the 20 customers in the training set were as follows:
+    <ul>
+        <li>13 correct predictions: 6 Correct Predictions of Complaint, 7 Correct Predictions of No Complaint</li>
+        <li>7 incorrect predictions: 3 False Alarms and 4 Missed Hits</li>
+    </ul>
+    Let us assume that you chose D = 0.65 for this round.
+    When the AI algorithm is applied to predict complaints of the 10 customers,
+    the prediction outcomes for this particular round would be as follows (also displayed in the matrix below):
+    <ul>
+        <li>8 correct predictions: 3 Correct Predictions of Complaint, 5 Correct Predictions of No Complaint</li>
+        <li>2 incorrect predictions: 1 False Alarm and 1 Missed Hit</li>
+    </ul>
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes after applying the AI algorithm</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2" style="text-align: center">Predicted State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Complaint</td>
+           <td>No Complaint</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Complaint</td>
+           <td id="tp" style="color:green">3</td>
+           <td id ="fn" style="color:red">1</td>
+       </tr>
+       <tr>
+           <td>No Complaint</td>
+           <td id ="fp" style="color:red">1</td>
+           <td id ="tn" style="color:green">5</td>
+       </tr>
+    </tbody>
+</table>
+
+<p>
+    Consequently, after applying the AI algorithm, the following costs for incorrect predictions are realized:<br />
+    &nbsp;&nbsp;&nbsp;1 x 5 cost units (=5 cost units) for False Alarms<br />
+    <u>+ 1 x 1 cost units</u> (=1 cost unit) for Missed Hits<br />
+    = 6 cost units.
+</p>
+<p>
+    Your bonus payoff for every round will depend on the costs for incorrect predictions after applying the AI algorithm.
+    We will explain its calculation on the next page.
+</p>
+{{ endif }}
 
 <p>
 Please read the introduction to your task carefully. By clicking "Next" you will move to the next round.

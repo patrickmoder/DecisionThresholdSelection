@@ -4,11 +4,6 @@
 {{ block content }}
 
 {{ if participant.scenario == "breakdown" }}
-<p> you are in the even group</p>
-{{ else }}
-<p> you are in the odd group</p>
-{{ endif }}
-
 <p>
     Before applying the AI algorithm in a real-world setting, the trade-off between breakdown- and no-breakdown-predictions has to be calibrated.
     The calibration can be made with the help of the training set that is used to train the AI algorithm.
@@ -80,6 +75,75 @@ For the matrix we introduced earlier, we show the relationship of the threshold 
        </tr>
     </tbody>
 </table>
+
+{{ else }}
+<p>
+    Before applying the AI algorithm in a real-world setting, the trade-off between complaint- and no-complaint-predictions has to be calibrated.
+    The calibration can be made with the help of the training set that is used to train the AI algorithm.
+    The training set contains data about past machine breakdowns.
+
+</p>
+<p>
+    For each customer, the AI algorithm calculates a complaint probability for a delivery delay.
+    The probability output by the AI algorithm is then translated into a binary (yes/no) prediction:
+if the probability is equal or above the threshold D, we predict a complaint;
+    while if the probability is below the threshold D, we predict no complaint.
+    The threshold D has to be between 0 and 1.
+</p>
+<p>
+    You, as the operations manager, have to set the threshold D to calibrate the AI algorithm.
+    The selection of D affects the following trade-off:
+<ul>
+    <li>The smaller the threshold D, the more often complaints will be predicted (i.e., customers with lower complaint probabilities are predicted to complain).</li>
+    <li>The larger the threshold D, the less often breakdowns will be predicted (i.e., only customers with higher complaint probabilities are predicted to complain).</li>
+</ul>
+</p>
+
+<p>
+For the matrix we introduced earlier, we show the relationship of the threshold D and the absolute prediction outcomes in the following table.
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2" style="text-align: center">Predicted State</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>Complaint</td>
+           <td>No Complaint</td>
+           <td><i>Absolute number of<br>actual states</i></td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>Complaint</td>
+           <td id="tp" style="color:green">Correct Prediction of<br>Complaint</td>
+           <td id ="fn" style="color:red">Missed<br>Hit</td>
+           <td><i>constant</i></td>
+       </tr>
+       <tr>
+           <td>No Complaint</td>
+           <td id ="fp" style="color:red">False<br>Alarm</td>
+           <td id ="tn" style="color:green">Correct Prediction of<br>No Complaint</td>
+           <td><i>constant</i></td>
+       </tr>
+       <tr>
+           <td></td>
+           <td><i>Absolute number of<br>predicted states</i></td>
+           <td><i>Decreases with<br>increasing D</i></td>
+           <td><i>Increases with<br>increasing D</i></td>
+           <td></td>
+       </tr>
+    </tbody>
+</table>
+{{ endif }}
 
 <p>
 Please read the introduction to the threshold D carefully. By clicking "Next" you will move to the next page.
