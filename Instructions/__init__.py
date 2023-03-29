@@ -18,9 +18,9 @@ class Player(BasePlayer):
         choices=[['True Positive (TP)', 'Correct Prediction of Breakdown'], ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
                  ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
         label='<b> What outcome is missing (?) in the matrix above? </b>')
-    Accuracy_Understanding_Check = models.StringField(
-        choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
-        label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
+    #Accuracy_Understanding_Check = models.StringField(
+        #choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
+        #label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
     Misclassification_Costs_Understanding_Check_1 = models.IntegerField(
         label='<b> For a threshold D = 0.32, what is the overall number of incorrect predictions on the training set? </b>')
     Misclassification_Costs_Understanding_Check_2 = models.IntegerField(
@@ -75,9 +75,20 @@ class UnderstandingChecks(Page):
         solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)', Threshold_Introduction_Easy='Breakdown',
                          Misclassification_Costs_Understanding_Check_1=51, Misclassification_Costs_Understanding_Check_2=102,
                          Threshold_Introduction_Understanding_Check=False, Payoff_Introduction_Understanding_Check=43)
-        if values != solutions:
-            player.num_failed_attempts += 1
-            return "One or more answers were incorrect. Please try again."
+
+        error_messages = dict()
+
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                player.num_failed_attempts += 1
+                error_messages[field_name] = 'Wrong answer'
+                return "One or more answers were incorrect. Please try again."
+
+        return error_messages
+
+        #if values != solutions:
+        #    player.num_failed_attempts += 1
+        #    return "One or more answers were incorrect. Please try again."
 
 class CorrectAnswers(Page):
     pass

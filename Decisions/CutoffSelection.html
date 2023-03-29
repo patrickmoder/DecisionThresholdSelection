@@ -11,6 +11,8 @@
     You want to predict breakdowns of 10 machines in the next 48 hours with the aid of an AI algorithm.
     In the training set that is used to train the AI algorithm, out of a sample of <span style="font-size: 150%; "><b>{{ abs }}</b></span> machines, <span style="font-size: 150%; "><b>{{ player.n_P }}</b></span> broke down in the subsequent 48 hours and <span style="font-size: 150%; "><b>{{ player.n_N }}</b></span> machines did not break down.
     For the 10 machines you want to predict breakdowns for, you can expect the same distribution of machines with and without breakdown in the next 48 hours as in the training set.
+</p>
+<p>
     We expect misclassification costs of <span style="font-size: 150%; "><b>{{ player.c_FP }}</b></span> cost unit(s) for each False Alarm and <span style="font-size: 150%; "><b>{{ player.c_FN }}</b></span> cost unit(s) for each Missed Hit, respectively.
     <!--The misclassification behavior of the algorithm dependent on the decision threshold can be described as follows:
 <ul>
@@ -23,7 +25,7 @@
 <p>
     You can calibrate the AI algorithm by selecting a threshold D.
     Depending on your threshold selection, you see a matrix with prediction outcomes on the training set.
-    If you need more help, please click the button "Need Help?" below to display a graphical visualization.
+    If you need more help, please click the button "Need Help?" below to display a graphical visualization, which is free to use.
 </p>
 
 <p>
@@ -152,14 +154,14 @@ for (var x = 0; x <= 1; x += 0.01) {
 var data = [
   {x: x1Values, y: y1Values, mode:"lines", name:"Number of Missed Hits"},
   {x: x2Values, y: y2Values, mode:"lines", name:"Number of False Alarms"},
-  {x: x4Values, y: y4Values, mode:"lines", name:"Costs for Missed Hits [cost units]"},
-  {x: x5Values, y: y5Values, mode:"lines", name:"Costs for False Alarms [cost units]"},
-  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for incorrect predictions [cost units]"}
+  {x: x4Values, y: y4Values, mode:"lines", name:"Costs for<br>Missed Hits"},
+  {x: x5Values, y: y5Values, mode:"lines", name:"Costs for<br>False Alarms"},
+  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for<br>incorrect predictions"}
 ];
 
 //Define Plot Layout
 var layout = {
-    title: "Prediction Outcomes and Costs for Incorrect Predictions on Training Set",
+    title: "Prediction Outcomes and Costs [cost units] for Incorrect Predictions on Training Set",
     xaxis: {title: "Threshold D"}
 };
 
