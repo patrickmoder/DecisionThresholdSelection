@@ -14,10 +14,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    Confusion_Matrix_missing_value = models.StringField(
-        choices=[['True Positive (TP)', 'Correct Prediction of {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}'], ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
-                 ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
-        label='<b> What outcome is missing (?) in the matrix above? </b>')
     #Accuracy_Understanding_Check = models.StringField(
         #choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
         #label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
@@ -39,7 +35,18 @@ class Player(BasePlayer):
     #    label='Did you understand the instructions and how your payoff gets calculated?')
     num_ui_false = models.IntegerField(initial=0)
     num_failed_attempts = models.IntegerField(initial=0)
-
+    if participant.scenario == "breakdown":
+        Confusion_Matrix_missing_value = models.StringField(
+            choices=[['True Positive (TP)', 'Correct Prediction of Breakdown'],
+                     ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
+                     ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
+            label='<b> What outcome is missing (?) in the matrix above? </b>')
+    else:
+        Confusion_Matrix_missing_value = models.StringField(
+            choices=[['True Positive (TP)', 'Correct Prediction of Complaint'],
+                     ['True Negative (TN)', 'Correct Prediction of No Complaint'],
+                     ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
+            label='<b> What outcome is missing (?) in the matrix above? </b>')
 
 class Welcome(Page):
     pass
