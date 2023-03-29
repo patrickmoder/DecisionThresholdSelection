@@ -19,6 +19,11 @@ class Player(BasePlayer):
                  ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
                  ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
         label='<b> What outcome is missing (?) in the matrix above? </b>')
+    Confusion_Matrix_missing_value_Complaint = models.StringField(
+        choices=[['True Positive (TP)', 'Correct Prediction of Complaint'],
+                 ['True Negative (TN)', 'Correct Prediction of No Complaint'],
+                 ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
+        label='<b> What outcome is missing (?) in the matrix above? </b>')
     #Accuracy_Understanding_Check = models.StringField(
         #choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
         #label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
@@ -71,7 +76,7 @@ class PayoffCalculation(Page):
 
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Easy', 'Misclassification_Costs_Understanding_Check_1', 'Misclassification_Costs_Understanding_Check_2', 'Threshold_Introduction_Understanding_Check', 'Payoff_Introduction_Understanding_Check']
+    form_fields = ['Confusion_Matrix_missing_value', 'Confusion_Matrix_missing_value_Complaint', 'Threshold_Introduction_Easy', 'Misclassification_Costs_Understanding_Check_1', 'Misclassification_Costs_Understanding_Check_2', 'Threshold_Introduction_Understanding_Check', 'Payoff_Introduction_Understanding_Check']
     #@staticmethod
     #def is_displayed(player: Player):
     #    return player.understand_instr != False
@@ -89,7 +94,7 @@ class UnderstandingChecks(Page):
                 player.num_failed_attempts += 1
                 error_messages[field_name] = 'Wrong answer'
                 return error_messages
-                return "One or more answers were incorrect. Please try again."
+                #return "One or more answers were incorrect. Please try again."
 
         #if values != solutions:
         #    player.num_failed_attempts += 1

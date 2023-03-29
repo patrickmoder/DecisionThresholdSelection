@@ -47,9 +47,14 @@
     Question 1:
 </h3>
 
+{{ if participant.scenario == "breakdown" }}
 {{ formfield 'Confusion_Matrix_missing_value' }}
+{{ else }}
+{{ formfield 'Confusion_Matrix_missing_value_Complaint' }}
+{{ endif }}
 
 {{ formfield_errors 'Confusion_Matrix_missing_value'}}
+{{ formfield_errors 'Confusion_Matrix_missing_value_Complaint'}}
 
 <br /> <br />
 
