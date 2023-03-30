@@ -41,6 +41,13 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     chose_lottery = models.BooleanField()
     won_lottery = models.BooleanField()
+    lottery10 = models.BooleanField()
+    lottery12 = models.BooleanField()
+    lottery15 = models.BooleanField()
+    lottery18 = models.BooleanField()
+    lottery21 = models.BooleanField()
+    lottery24 = models.BooleanField()
+    lottery27 = models.BooleanField()
 
 
 class Trial(ExtraModel):
@@ -88,6 +95,9 @@ class Stimuli(Page):
         participant = player.participant
         participant.payoff_lottery = player.payoff
 
+        [trial10] = Trial.filter(player=player, sure_payoff=0.10)
+        trial10.chose_lottery = data['chose_lottery']
+        player.lottery10 = trial10.chose_lottery
 
 class Results(Page):
     @staticmethod
