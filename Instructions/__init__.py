@@ -125,7 +125,7 @@ class UnderstandingChecks(Page):
     #    return player.understand_instr != False
 
     @staticmethod
-    def vars_for_template(player:Player):
+    def error_messages(player:Player, values):
         participant = player.participant
         if participant.scenario == "breakdown":
             solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)',
