@@ -106,12 +106,16 @@ class UnderstandingChecks(Page):
                          Threshold_Introduction_Understanding_Check=False,
                          Payoff_Introduction_Understanding_Check=43)
 
+        if values != solutions:
+            player.num_failed_attempts += 1
+
         error_messages = dict()
 
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[field_name] = 'Wrong answer. Please try again.'
-                player.num_failed_attempts += 1
+
+        return error_messages
 
         #return error_messages
                 #return "One or more answers were incorrect. Please try again."
@@ -136,11 +140,13 @@ class UnderstandingChecks_C(Page):
                              Payoff_Introduction_Understanding_Check_C = 43
                              )
 
+        if values != solutions_c:
+            player.num_failed_attempts += 1
+
         error_messages_c = dict()
 
         for field_name in solutions_c:
             if values[field_name] != solutions_c[field_name]:
-                player.num_failed_attempts += 1
                 error_messages_c[field_name] = 'Wrong answer. Please try again.'
 
         return error_messages_c
