@@ -95,6 +95,9 @@ class Stimuli(Page):
         participant = player.participant
         participant.payoff_lottery = player.payoff
 
+        [trial10] = Trial.filter(player=player, sure_payoff=0.10cu)
+        player.lottery10 = trial10.chose_lottery
+
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
