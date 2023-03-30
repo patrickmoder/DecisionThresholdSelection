@@ -53,6 +53,34 @@ class Player(BasePlayer):
               '<b>Remember that your maximum bonus payoff for each round is 50 cost units. According to the payoff calculation rule introduced earlier, what would be your bonus payoff (cost units) for this round?</b>'
         , blank=True)
 
+    def Confusion_Matrix_missing_value_error_message(player, value):
+        if value != 'False Positive (FP)':
+            return 'Your answer is incorrect.'
+    def Confusion_Matrix_missing_value_error_message_C(player, value):
+        if value != 'False Positive (FP)':
+            return 'Your answer is incorrect.'
+    def Threshold_Introduction_Easy_error_message_C(player, value):
+        if value != 'Breakdown':
+            return 'Your answer is incorrect.'
+    def Threshold_Introduction_Easy_C_error_message_C(player, value):
+        if value != 'Breakdown':
+            return 'Your answer is incorrect.'
+    def Misclassification_Costs_Understanding_Check_1_error_message(player, value):
+        if value != 51:
+            return 'Your answer is incorrect.'
+    def Misclassification_Costs_Understanding_Check_2_error_message(player, value):
+        if value != 102:
+            return 'Your answer is incorrect.'
+    def Threshold_Introduction_Understanding_Check_error_message(player, value):
+        if value != False:
+            return 'Your answer is incorrect.'
+    def Payoff_Introduction_Understanding_Check_error_message(player, value):
+        if value != 43:
+            return 'Your answer is incorrect.'
+    def Payoff_Introduction_Understanding_Check_C_error_message(player, value):
+        if value != 43:
+            return 'Your answer is incorrect.'
+
     #understand_instr = models.BooleanField(
     #    choices=[[True, 'Yes'], [False, 'No']],
     #    label='Did you understand the instructions and how your payoff gets calculated?')
@@ -119,7 +147,7 @@ class UnderstandingChecks(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 player.num_failed_attempts += 1
-                error_messages[field_name] = 'Wrong answer'
+                #error_messages[field_name] = 'Wrong answer'
                 #return error_messages
                 #return "One or more answers were incorrect. Please try again."
 
