@@ -113,7 +113,7 @@ class UnderstandingChecks(Page):
                 error_messages[field_name] = 'Wrong answer'
                 player.num_failed_attempts += 1
 
-        return error_messages
+        #return error_messages
                 #return "One or more answers were incorrect. Please try again."
 
 class UnderstandingChecks_C(Page):
@@ -143,7 +143,7 @@ class UnderstandingChecks_C(Page):
                 player.num_failed_attempts += 1
                 error_messages_c[field_name] = 'Please try again'
 
-        return error_messages_c
+        #return error_messages_c
 
 class CorrectAnswers(Page):
     pass
