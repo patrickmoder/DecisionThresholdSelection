@@ -106,7 +106,7 @@ class UnderstandingChecks(Page):
                          Threshold_Introduction_Understanding_Check=False,
                          Payoff_Introduction_Understanding_Check=43)
 
-        error_messages = models.StringField()
+        error_messages = dict()
 
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
@@ -136,14 +136,13 @@ class UnderstandingChecks_C(Page):
                              Payoff_Introduction_Understanding_Check_C = 43
                              )
 
-        error_messages_c = models.StringField()
+        error_messages_c = dict()
 
         for field_name in solutions_c:
             if values[field_name] != solutions_c[field_name]:
                 player.num_failed_attempts += 1
                 error_messages_c[field_name] = 'Please try again'
-
-        return error_messages_c
+                return error_messages_c
 
 class CorrectAnswers(Page):
     pass
