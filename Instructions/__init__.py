@@ -98,7 +98,7 @@ class UnderstandingChecks(Page):
         return participant.scenario == "breakdown"
 
     @staticmethod
-    def error_messages(player:Player, values):
+    def error_messages(player, values):
         solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)',
                          Threshold_Introduction_Easy='Breakdown',
                          Misclassification_Costs_Understanding_Check_1=51,
@@ -106,11 +106,14 @@ class UnderstandingChecks(Page):
                          Threshold_Introduction_Understanding_Check=False,
                          Payoff_Introduction_Understanding_Check=43)
 
+        error_messages = dict()
+
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
-                player.num_failed_attempts += 1
                 error_messages[field_name] = 'Wrong answer'
-                return error_messages
+                player.num_failed_attempts += 1
+
+        return error_messages
                 #return "One or more answers were incorrect. Please try again."
 
 class UnderstandingChecks_C(Page):
@@ -125,19 +128,20 @@ class UnderstandingChecks_C(Page):
         return participant.scenario != "breakdown"
 
     @staticmethod
-    def error_messages(player:Player, values):
-        solutions = dict(Confusion_Matrix_missing_value_C='False Positive (FP)', Threshold_Introduction_Easy_C='Complaint',
+    def error_messages(player, values):
+        solutions_c = dict(Confusion_Matrix_missing_value_C='False Positive (FP)', Threshold_Introduction_Easy_C='Complaint',
                              Misclassification_Costs_Understanding_Check_1=51,
                              Misclassification_Costs_Understanding_Check_2=102,
                              Threshold_Introduction_Understanding_Check=False,
                              Payoff_Introduction_Understanding_Check_C = 43
                              )
 
-        for field_name in solutions:
-            if values[field_name] != solutions[field_name]:
+        for field_name in solutions_c:
+            if values[field_name] != solutions_c[field_name]:
                 player.num_failed_attempts += 1
                 error_messages[field_name] = 'Wrong answer'
-                return error_messages
+
+        return error_messages
 
 class CorrectAnswers(Page):
     pass
