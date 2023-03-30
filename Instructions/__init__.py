@@ -136,6 +136,8 @@ class UnderstandingChecks_C(Page):
                              Payoff_Introduction_Understanding_Check_C = 43
                              )
 
+        error_messages = dict()
+
         for field_name in solutions_c:
             if values[field_name] != solutions_c[field_name]:
                 player.num_failed_attempts += 1
