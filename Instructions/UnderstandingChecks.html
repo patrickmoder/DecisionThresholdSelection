@@ -47,27 +47,18 @@
     Question 1:
 </h3>
 
-{{ if participant.scenario == "breakdown" }}
 {{ formfield 'Confusion_Matrix_missing_value' }}
-{{ else }}
-{{ formfield 'Confusion_Matrix_missing_value_C' }}
-{{ endif }}
 
 {{ formfield_errors 'Confusion_Matrix_missing_value'}}
-{{ formfield_errors 'Confusion_Matrix_missing_value_C'}}
 
 <br /> <br />
 
 <h3>
     Question 2:
 </h3>
-{{ if participant.scenario == "breakdown" }}
+
 {{ formfield 'Threshold_Introduction_Easy' }}
-{{ else }}
-{{ formfield 'Threshold_Introduction_Easy_C' }}
-{{ endif }}
 {{ formfield_errors 'Threshold_Introduction_Easy' }}
-{{ formfield_errors 'Threshold_Introduction_Easy_C' }}
 
 <br />
 
@@ -161,14 +152,8 @@ In our example, we expect costs for incorrect predictions of 3 cost unit for eac
 <h3>
     Question 6:
 </h3>
-{{ if participant.scenario == "breakdown" }}
 {{ formfield 'Payoff_Introduction_Understanding_Check' }}
-{{ else }}
-{{ formfield 'Payoff_Introduction_Understanding_Check_C' }}
-{{ endif }}
-
 {{ formfield_errors 'Payoff_Introduction_Understanding_Check' }}
-{{ formfield_errors 'Payoff_Introduction_Understanding_Check_C' }}
 
 <script>
 
