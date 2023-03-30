@@ -214,7 +214,7 @@ function sliderMoved() {
 <br />
 
 <p> Remember: Your maximum bonus payoff for this round is 50 cost units.
-    It will be reduced by the misclassification costs realized for the 10 machines.
+    It will be reduced by the misclassification costs realized for the 10 {{ if participant.scenario == "breakdown" }}machines{{ else }}customers{{ endif }}.
     The bonus will not become negative.
     You will receive information about your performance and the respective bonus payoff after the last round.
 </p>

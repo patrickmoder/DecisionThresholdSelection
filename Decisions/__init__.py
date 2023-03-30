@@ -635,9 +635,6 @@ class CutoffSelection(Page):
             participant.realizations_r18_m9 = pl_r18.out9
             participant.realizations_r18_m10 = pl_r18.out10
 
-        if player.payoff > 0:
-            player.payoff = player.payoff
-        else:
-            player.payoff = 0
+
 
 page_sequence = [CutoffSelection]
