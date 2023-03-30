@@ -1,0 +1,206 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Comprehension questions{{ endblock }}
+
+{{ block content }}
+
+<p>
+    Please answer the following four questions before you can proceed with the experiment.
+</p>
+
+<p>
+    The following (incomplete) matrix compares the predicted to the actual states when predicting {{ if participant.scenario == "breakdown" }}machine breakdowns{{ else }}customer complaints{{ endif }}.
+</p>
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">Predicted State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td style="color:green">Correct Prediction of<br>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td style="color:red">Missed<br>Hit</td>
+       </tr>
+       <tr>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td style="color:black">?</td>
+           <td style="color:green">Correct Prediction of<br>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+       </tr>
+    </tbody>
+</table>
+
+<br />
+
+<h3>
+    Question 1:
+</h3>
+
+
+{{ formfield 'Confusion_Matrix_missing_value_C' }}
+
+{{ formfield_errors 'Confusion_Matrix_missing_value_C'}}
+
+<br /> <br />
+
+<h3>
+    Question 2:
+</h3>
+
+{{ formfield 'Threshold_Introduction_Easy_C' }}
+{{ formfield_errors 'Threshold_Introduction_Easy_C' }}
+
+<br />
+
+<hr>
+
+<br />
+{{ if participant.scenario == "breakdown" }}
+<p>
+For the remaining questions, let us consider the following example:
+In the training set that is used to train the AI algorithm, out of a sample of 170 machines, 70 break down in the next 48 hours and 100 machines do not break down.
+In our example, we expect costs for incorrect predictions of 3 cost unit for each False Alarm and 2 cost units for each Missed Hit, respectively.
+</p>
+{{ else }}
+<p>
+For the remaining questions, let us consider the following example:
+In the training set that is used to train the AI algorithm, out of a sample of 170 customers, 70 complain and 100 customers do not complain.
+In our example, we expect costs for incorrect predictions of 3 cost unit for each False Alarm and 2 cost units for each Missed Hit, respectively.
+</p>
+{{ endif }}
+<p>
+    You can move the slider to select a threshold D (between 0 and 1).
+</p>
+
+<input type="range" min="0" max="100" step="1" style="width: 500px;" oninput="updateThreshold(this);updateTP(this);updateFN(this);updateFP(this);updateTN(this)" >
+
+<p id="threshold"></p>
+
+<!-- by leaving the threshold (and the results) blank initially, we prompt the user to move the slider, reducing the anchoring/default effect. -->
+
+<table id="confusionmatrix" cellpadding="4px" border="1px">
+    <caption align="right">Prediction Outcomes</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2" style="text-align: center">Predicted State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           <td></td>
+           <td></td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+       </tr>
+       <tr>
+           <td rowspan="2"><b>Actual State</b></td>
+           <td>{{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td id="tp" style="color:green"></td>
+           <td id ="fn" style="color:red"></td>
+       </tr>
+       <tr>
+           <td>No {{ if participant.scenario == "breakdown" }}Breakdown{{ else }}Complaint{{ endif }}</td>
+           <td id ="fp" style="color:red"></td>
+           <td id ="tn" style="color:green"></td>
+       </tr>
+    </tbody>
+</table>
+
+<h3>
+    Question 3:
+</h3>
+
+{{ formfield 'Misclassification_Costs_Understanding_Check_1' }}
+
+{{ formfield_errors 'Misclassification_Costs_Understanding_Check_1' }}
+
+<br />
+
+<h3>
+    Question 4:
+</h3>
+
+{{ formfield 'Misclassification_Costs_Understanding_Check_2' }}
+
+{{ formfield_errors 'Misclassification_Costs_Understanding_Check_2' }}
+
+<br />
+
+
+<h3>
+    Question 5:
+</h3>
+
+{{ formfield 'Threshold_Introduction_Understanding_Check' }}
+{{ formfield_errors 'Threshold_Introduction_Understanding_Check' }}
+
+<br />
+
+
+<h3>
+    Question 6:
+</h3>
+
+{{ formfield 'Payoff_Introduction_Understanding_Check_C' }}
+{{ formfield_errors 'Payoff_Introduction_Understanding_Check_C' }}
+
+<script>
+
+    let threshold = document.getElementById('threshold');
+    function updateThreshold(input) {
+        let theta = parseInt(input.value);
+        let th = theta/100;
+        threshold.innerHTML = `Your selected threshold is ${th}.`
+    };
+
+    let tp = document.getElementById('tp');
+    function updateTP(input) {
+        let tptheta = parseInt(input.value);
+        let tpth = tptheta / 100;
+        let tpcalc = 70 - Math.round((tpth * 20) * Math.pow(3.5, tpth));
+        tp.innerHTML = `${tpcalc}`
+    };
+    let fn = document.getElementById('fn');
+    function updateFN(input) {
+        let fntheta = parseInt(input.value);
+        let fnth = fntheta / 100;
+        let fncalc = Math.round((fnth * 20) * Math.pow(3.5, fnth));
+        fn.innerHTML = `${fncalc}`
+    };
+    let fp = document.getElementById('fp');
+    function updateFP(input) {
+        let fptheta = parseInt(input.value);
+        let fpth = fptheta / 100;
+        let fpcalc = Math.round(((-fpth + 1)* 20) * Math.pow(5, (-fpth + 1)));
+        fp.innerHTML = `${fpcalc}`
+    };
+    let tn = document.getElementById('tn');
+    function updateTN(input) {
+        let tntheta = parseInt(input.value);
+        let tnth = tntheta / 100;
+        let tncalc = 100 - Math.round(((-tnth + 1)* 20) * Math.pow(5, -tnth + 1));
+        tn.innerHTML = `${tncalc}`
+    };
+
+</script>
+
+<p>
+    Please confirm your answers by clicking "Next". If your answers are correct, you can start with the experiment.
+</p>
+
+{{ next_button }}
+
+{{ endblock }}

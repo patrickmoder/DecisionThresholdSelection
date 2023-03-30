@@ -89,25 +89,44 @@ class PayoffCalculation(Page):
 
 class UnderstandingChecks(Page):
     form_model = 'player'
-    form_fields = ['Confusion_Matrix_missing_value', 'Confusion_Matrix_missing_value_C', 'Threshold_Introduction_Easy', 'Threshold_Introduction_Easy_C',
+    form_fields = ['Confusion_Matrix_missing_value', 'Threshold_Introduction_Easy',
                    'Misclassification_Costs_Understanding_Check_1', 'Misclassification_Costs_Understanding_Check_2', 'Threshold_Introduction_Understanding_Check',
-                   'Payoff_Introduction_Understanding_Check', 'Payoff_Introduction_Understanding_Check_C']
-    #@staticmethod
-    #def is_displayed(player: Player):
-    #    return player.understand_instr != False
+                   'Payoff_Introduction_Understanding_Check']
+    @staticmethod
+    def is_displayed(player: Player):
+        participant = player.participant
+        return participant.scenario == "breakdown"
 
     @staticmethod
     def error_messages(player:Player, values):
-        participant = player.participant
-        if participant.scenario == "breakdown":
-            solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)',
+        solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)',
                          Threshold_Introduction_Easy='Breakdown',
                          Misclassification_Costs_Understanding_Check_1=51,
                          Misclassification_Costs_Understanding_Check_2=102,
                          Threshold_Introduction_Understanding_Check=False,
                          Payoff_Introduction_Understanding_Check=43)
-        else:
-            solutions = dict(Confusion_Matrix_missing_value_C='False Positive (FP)', Threshold_Introduction_Easy_C='Breakdown',
+
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                player.num_failed_attempts += 1
+                error_messages[field_name] = 'Wrong answer'
+                return error_messages
+                #return "One or more answers were incorrect. Please try again."
+
+class UnderstandingChecks_C(Page):
+    form_model = 'player'
+    form_fields = ['Confusion_Matrix_missing_value_C', 'Threshold_Introduction_Easy_C',
+                   'Misclassification_Costs_Understanding_Check_1', 'Misclassification_Costs_Understanding_Check_2', 'Threshold_Introduction_Understanding_Check',
+                   'Payoff_Introduction_Understanding_Check_C']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        participant = player.participant
+        return participant.scenario != "breakdown"
+
+    @staticmethod
+    def error_messages(player:Player, values):
+        solutions = dict(Confusion_Matrix_missing_value_C='False Positive (FP)', Threshold_Introduction_Easy_C='Complaint',
                              Misclassification_Costs_Understanding_Check_1=51,
                              Misclassification_Costs_Understanding_Check_2=102,
                              Threshold_Introduction_Understanding_Check=False,
@@ -119,11 +138,9 @@ class UnderstandingChecks(Page):
                 player.num_failed_attempts += 1
                 error_messages[field_name] = 'Wrong answer'
                 return error_messages
-                #return "One or more answers were incorrect. Please try again."
-
 
 class CorrectAnswers(Page):
     pass
 
-page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, TaskDescription, PayoffCalculation, UnderstandingChecks, CorrectAnswers]
+page_sequence = [Welcome, ScenarioDescription, ThresholdIntroduction, MisclassificationCosts, TaskDescription, PayoffCalculation, UnderstandingChecks, UnderstandingChecks_C, CorrectAnswers]
 
