@@ -18,12 +18,12 @@ class Player(BasePlayer):
         choices=[['True Positive (TP)', 'Correct Prediction of Breakdown'],
                  ['True Negative (TN)', 'Correct Prediction of No Breakdown'],
                  ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
-        label='<b> What outcome is missing (?) in the matrix above? </b>', blank=True)
+        label='<b> What outcome is missing (?) in the matrix above? </b>')
     Confusion_Matrix_missing_value_C = models.StringField(
         choices=[['True Positive (TP)', 'Correct Prediction of Complaint'],
                  ['True Negative (TN)', 'Correct Prediction of No Complaint'],
                  ['False Positive (FP)', 'False Alarm'], ['False Negative (FN)', 'Missed Hit']],
-        label='<b> What outcome is missing (?) in the matrix above? </b>', blank=True)
+        label='<b> What outcome is missing (?) in the matrix above? </b>')
     #Accuracy_Understanding_Check = models.StringField(
         #choices=[['0', '0'], ['0.2', '0.2'], ['0.4', '0.4'], ['0.6', '0.6'], ['0.8', '0.8'], ['1', '1']],
         #label='<b> Based on the confusion matrix shown above, what is the classification accuracy of the algorithm? </b>')
@@ -37,49 +37,21 @@ class Player(BasePlayer):
     Threshold_Introduction_Easy = models.StringField(
         choices=[['Breakdown', 'Breakdown'], ['No Breakdown', 'No Breakdown']],
         label='Imagine, an AI algorithm outputs a breakdown-probability for a particular machine of 0.41 in the next 48 hours and your chosen decision threshold D is 0.35. <b>What would be predicted to happen in the next 48 hours for that particular machine? </b>',
-        blank = True)
+        )
     Threshold_Introduction_Easy_C = models.StringField(
         choices=[['Complaint', 'Complaint'], ['No Complaint', 'No Complaint']],
         label='Imagine, an AI algorithm outputs a complaint-probability for a particular customer of 0.41 your chosen decision threshold D is 0.35. <b>What would be predicted to happen for that particular customer? </b>',
-        blank=True)
+        )
 
     Payoff_Introduction_Understanding_Check = models.IntegerField(label='Let us consider that in the example above you select the threshold D = 0.66 in one particular round of the experiment. When the AI algorithm gets applied to predict breakdowns of the 10 machines, the following outcomes get realized <i>(remember that these numbers will be shown to you only after the last round of the experiment)</i>:'
                                                                         '<ul><li>3 Correct Predictions of Breakdowns and 4 Correct Predictions of No Breakdown</li><li>2 Missed Hits and 1 False Alarm</li></ul>'
                                                                         '<b>Remember that your maximum bonus payoff for each round is 50 cost units. According to the payoff calculation rule introduced earlier, what would be your bonus payoff (cost units) for this round?</b>'
-                                                                  , blank=True)
+                                                                  )
     Payoff_Introduction_Understanding_Check_C = models.IntegerField(
         label='Let us consider that in the example above you select the threshold D = 0.66 in one particular round of the experiment. When the AI algorithm gets applied to predict complaints of the 10 customers, the following outcomes get realized <i>(remember that these numbers will be shown to you only after the last round of the experiment)</i>:'
               '<ul><li>3 Correct Predictions of Complaints and 4 Correct Predictions of No Complaints</li><li>2 Missed Hits and 1 False Alarm</li></ul>'
               '<b>Remember that your maximum bonus payoff for each round is 50 cost units. According to the payoff calculation rule introduced earlier, what would be your bonus payoff (cost units) for this round?</b>'
-        , blank=True)
-
-    def Confusion_Matrix_missing_value_error_message(player, value):
-        if value != 'False Positive (FP)':
-            return 'Your answer is incorrect.'
-    def Confusion_Matrix_missing_value_error_message_C(player, value):
-        if value != 'False Positive (FP)':
-            return 'Your answer is incorrect.'
-    def Threshold_Introduction_Easy_error_message_C(player, value):
-        if value != 'Breakdown':
-            return 'Your answer is incorrect.'
-    def Threshold_Introduction_Easy_C_error_message_C(player, value):
-        if value != 'Breakdown':
-            return 'Your answer is incorrect.'
-    def Misclassification_Costs_Understanding_Check_1_error_message(player, value):
-        if value != 51:
-            return 'Your answer is incorrect.'
-    def Misclassification_Costs_Understanding_Check_2_error_message(player, value):
-        if value != 102:
-            return 'Your answer is incorrect.'
-    def Threshold_Introduction_Understanding_Check_error_message(player, value):
-        if value != False:
-            return 'Your answer is incorrect.'
-    def Payoff_Introduction_Understanding_Check_error_message(player, value):
-        if value != 43:
-            return 'Your answer is incorrect.'
-    def Payoff_Introduction_Understanding_Check_C_error_message(player, value):
-        if value != 43:
-            return 'Your answer is incorrect.'
+        )
 
     #understand_instr = models.BooleanField(
     #    choices=[[True, 'Yes'], [False, 'No']],
