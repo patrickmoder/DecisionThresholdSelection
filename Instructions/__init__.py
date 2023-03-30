@@ -142,18 +142,13 @@ class UnderstandingChecks(Page):
                              Payoff_Introduction_Understanding_Check_C = 43
                              )
 
-        #error_messages = dict()
-
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 player.num_failed_attempts += 1
-                #error_messages[field_name] = 'Wrong answer'
-                #return error_messages
+                error_messages[field_name] = 'Wrong answer'
+                return error_messages
                 #return "One or more answers were incorrect. Please try again."
 
-        #if values != solutions:
-        #    player.num_failed_attempts += 1
-        #    return "One or more answers were incorrect. Please try again."
 
 class CorrectAnswers(Page):
     pass
