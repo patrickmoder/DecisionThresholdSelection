@@ -96,7 +96,6 @@ class Stimuli(Page):
         participant.payoff_lottery = player.payoff
 
         [trial10] = Trial.filter(player=player, sure_payoff=0.10)
-        trial10.chose_lottery = data['chose_lottery']
         player.lottery10 = trial10.chose_lottery
 
 class Results(Page):
