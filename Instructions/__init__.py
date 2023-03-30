@@ -141,7 +141,7 @@ class UnderstandingChecks_C(Page):
         for field_name in solutions_c:
             if values[field_name] != solutions_c[field_name]:
                 player.num_failed_attempts += 1
-                error_messages_c[field_name] = 'Wrong answer'
+                error_messages_c[field_name] = 'Please try again'
 
         return error_messages_c
 
