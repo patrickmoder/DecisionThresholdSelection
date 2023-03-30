@@ -6,9 +6,8 @@ doc = 'When Artificial Intelligence based models are used to make predictions ab
 class C(BaseConstants):
     NAME_IN_URL = 'Decisions'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 13
-    THRESHOLD_RANGE = 1
-    BUDGET_START = cu(8)
+    NUM_ROUNDS = 18
+
 class Subsession(BaseSubsession):
     pass
 def creating_session(subsession: Subsession):
@@ -561,9 +560,84 @@ class CutoffSelection(Page):
             participant.realizations_r13_m9 = pl_r13.out9
             participant.realizations_r13_m10 = pl_r13.out10
 
-        #if 100 - (costr - costoptr) > 0:
-        #    player.payoff = (100 - (costr - costoptr)) / 100
-        #else:
-        #    player.payoff = 0
+        if player.round_number == 14:
+            pl_r14 = player.in_round(14)
+            participant.payoff_r14 = pl_r14.payoff
+            participant.th_select_r14 = pl_r14.selected_threshold / 100
+            participant.realizations_r14_m1 = pl_r14.out1
+            participant.realizations_r14_m2 = pl_r14.out2
+            participant.realizations_r14_m3 = pl_r14.out3
+            participant.realizations_r14_m4 = pl_r14.out4
+            participant.realizations_r14_m5 = pl_r14.out5
+            participant.realizations_r14_m6 = pl_r14.out6
+            participant.realizations_r14_m7 = pl_r14.out7
+            participant.realizations_r14_m8 = pl_r14.out8
+            participant.realizations_r14_m9 = pl_r14.out9
+            participant.realizations_r14_m10 = pl_r14.out10
+
+        if player.round_number == 15:
+            pl_r15 = player.in_round(15)
+            participant.payoff_r15 = pl_r15.payoff
+            participant.th_select_r15 = pl_r15.selected_threshold / 100
+            participant.realizations_r15_m1 = pl_r15.out1
+            participant.realizations_r15_m2 = pl_r15.out2
+            participant.realizations_r15_m3 = pl_r15.out3
+            participant.realizations_r15_m4 = pl_r15.out4
+            participant.realizations_r15_m5 = pl_r15.out5
+            participant.realizations_r15_m6 = pl_r15.out6
+            participant.realizations_r15_m7 = pl_r15.out7
+            participant.realizations_r15_m8 = pl_r15.out8
+            participant.realizations_r15_m9 = pl_r15.out9
+            participant.realizations_r15_m10 = pl_r15.out10
+
+        if player.round_number == 16:
+            pl_r16 = player.in_round(16)
+            participant.payoff_r16 = pl_r16.payoff
+            participant.th_select_r16 = pl_r16.selected_threshold / 100
+            participant.realizations_r16_m1 = pl_r16.out1
+            participant.realizations_r16_m2 = pl_r16.out2
+            participant.realizations_r16_m3 = pl_r16.out3
+            participant.realizations_r16_m4 = pl_r16.out4
+            participant.realizations_r16_m5 = pl_r16.out5
+            participant.realizations_r16_m6 = pl_r16.out6
+            participant.realizations_r16_m7 = pl_r16.out7
+            participant.realizations_r16_m8 = pl_r16.out8
+            participant.realizations_r16_m9 = pl_r16.out9
+            participant.realizations_r16_m10 = pl_r16.out10
+
+        if player.round_number == 17:
+            pl_r17 = player.in_round(17)
+            participant.payoff_r17 = pl_r17.payoff
+            participant.th_select_r17 = pl_r17.selected_threshold / 100
+            participant.realizations_r17_m1 = pl_r17.out1
+            participant.realizations_r17_m2 = pl_r17.out2
+            participant.realizations_r17_m3 = pl_r17.out3
+            participant.realizations_r17_m4 = pl_r17.out4
+            participant.realizations_r17_m5 = pl_r17.out5
+            participant.realizations_r17_m6 = pl_r17.out6
+            participant.realizations_r17_m7 = pl_r17.out7
+            participant.realizations_r17_m8 = pl_r17.out8
+            participant.realizations_r17_m9 = pl_r17.out9
+            participant.realizations_r17_m10 = pl_r17.out10
+
+        if player.round_number == 18:
+            pl_r18 = player.in_round(18)
+            participant.payoff_r18 = pl_r18.payoff
+            participant.th_select_r18 = pl_r18.selected_threshold / 100
+            participant.realizations_r18_m1 = pl_r18.out1
+            participant.realizations_r18_m2 = pl_r18.out2
+            participant.realizations_r18_m3 = pl_r18.out3
+            participant.realizations_r18_m4 = pl_r18.out4
+            participant.realizations_r18_m5 = pl_r18.out5
+            participant.realizations_r18_m6 = pl_r18.out6
+            participant.realizations_r18_m7 = pl_r18.out7
+            participant.realizations_r18_m8 = pl_r18.out8
+            participant.realizations_r18_m9 = pl_r18.out9
+            participant.realizations_r18_m10 = pl_r18.out10
+
+        if player.payoff > 0:
+            player.payoff = player.payoff
+        else:
+            player.payoff = 0
 
 page_sequence = [CutoffSelection]
