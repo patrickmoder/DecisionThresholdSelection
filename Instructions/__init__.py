@@ -98,7 +98,7 @@ class UnderstandingChecks(Page):
         return participant.scenario == "breakdown"
 
     @staticmethod
-    def error_messages(player, values):
+    def error_message(player, values):
         solutions = dict(Confusion_Matrix_missing_value='False Positive (FP)',
                          Threshold_Introduction_Easy='Breakdown',
                          Misclassification_Costs_Understanding_Check_1=51,
@@ -128,7 +128,7 @@ class UnderstandingChecks_C(Page):
         return participant.scenario != "breakdown"
 
     @staticmethod
-    def error_messages(player, values):
+    def error_message(player, values):
         solutions_c = dict(Confusion_Matrix_missing_value_C='False Positive (FP)', Threshold_Introduction_Easy_C='Complaint',
                              Misclassification_Costs_Understanding_Check_1=51,
                              Misclassification_Costs_Understanding_Check_2=102,
