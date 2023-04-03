@@ -125,17 +125,18 @@ for (var x = 0; x <= 1; x += 0.01) {
 
 // Define Plot Data
 var data = [
-  {x: x1Values, y: y1Values, mode:"lines", name:"Number of Missed Hits"},
-  {x: x2Values, y: y2Values, mode:"lines", name:"Number of False Alarms"},
+  {x: x1Values, y: y1Values, mode:"lines", name:"Number of<br>Missed Hits"},
+  {x: x2Values, y: y2Values, mode:"lines", name:"Number of<br>False Alarms"},
   {x: x4Values, y: y4Values, mode:"lines", name:"Costs for<br>Missed Hits"},
   {x: x5Values, y: y5Values, mode:"lines", name:"Costs for<br>False Alarms"},
-  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for<br>incorrect predictions"}
+  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for<br>incorrect<br>predictions"}
 ];
 
 //Define Plot Layout
 var layout = {
     title: "Prediction Outcomes and Costs [cost units] for Incorrect Predictions on Training Set",
-    xaxis: {title: "Threshold D"}
+    xaxis: {title: "Threshold D"},
+    hovermode: "x unified"
 };
 
 // Display Plot using Plotly
