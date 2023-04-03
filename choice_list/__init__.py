@@ -84,6 +84,18 @@ class Stimuli(Page):
         for t in range(len(trials)):
             if trials[t].sure_payoff == 0.10:
                 player.lottery10 = trials[t].chose_lottery
+            if trials[t].sure_payoff == 0.12:
+                player.lottery12 = trials[t].chose_lottery
+            if trials[t].sure_payoff == 0.15:
+                player.lottery15 = trials[t].chose_lottery
+            if trials[t].sure_payoff == 0.18:
+                player.lottery18 = trials[t].chose_lottery
+            if trials[t].sure_payoff == 0.21:
+                player.lottery21 = trials[t].chose_lottery
+            if trials[t].sure_payoff == 0.24:
+                player.lottery24 = trials[t].chose_lottery
+            if trials[t].sure_payoff == 0.27:
+                player.lottery27 = trials[t].chose_lottery
 
         selected_trial = random.choice(trials)
         selected_trial.is_selected = True
