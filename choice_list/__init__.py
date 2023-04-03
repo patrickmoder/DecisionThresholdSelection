@@ -41,7 +41,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     chose_lottery = models.BooleanField()
     won_lottery = models.BooleanField()
-    lottery10 = models.BooleanField()
     lottery12 = models.BooleanField()
     lottery15 = models.BooleanField()
     lottery18 = models.BooleanField()
@@ -82,8 +81,6 @@ class Stimuli(Page):
         # if your page has a timeout, you would need to adjust this code.
         trials = Trial.filter(player=player)
         for t in range(len(trials)):
-            if trials[t].sure_payoff == 0.10:
-                player.lottery10 = trials[t].chose_lottery
             if trials[t].sure_payoff == 0.12:
                 player.lottery12 = trials[t].chose_lottery
             if trials[t].sure_payoff == 0.15:
