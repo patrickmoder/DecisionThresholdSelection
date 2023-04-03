@@ -129,22 +129,22 @@ var data = [
   {x: x2Values, y: y2Values, mode:"lines", name:"Number of<br>False Alarms"},
   {x: x4Values, y: y4Values, mode:"lines", name:"Costs for<br>Missed Hits"},
   {x: x5Values, y: y5Values, mode:"lines", name:"Costs for<br>False Alarms"},
-  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for<br>incorrect predictions"}
-];
-
-//Define Plot Layout
-var layout = {
-    title: "Prediction Outcomes and Costs [cost units] for Incorrect Predictions on Training Set",
-    xaxis: {title: "Threshold D"},
-    hovermode: "x unified",
-    hovertemplate:
+  {x: x3Values, y: y3Values, mode:"lines", name:"Total Costs for<br>incorrect predictions"},
+  {hovertemplate:
         "<b>Threshold: %{x}</b><br>" +
         "Missed Hits (MH): %{y1Values}<br>" +
         "False Alarms (FA): %{y2Values}<br>" +
         "Costs for MH: %{y4Values}<br>" +
         "Costs for FA: %{y5Values}<br>" +
         "Total Costs: %{y3Values}<br>" +
-        "<extra></extra>"
+        "<extra></extra>"}
+];
+
+//Define Plot Layout
+var layout = {
+    title: "Prediction Outcomes and Costs [cost units] for Incorrect Predictions on Training Set",
+    xaxis: {title: "Threshold D"},
+    hovermode: "x unified"
 };
 
 // Display Plot using Plotly
