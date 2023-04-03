@@ -146,6 +146,59 @@ class CutoffSelection(Page):
         player.m_prob9 = np.random.binomial(n=100, p=player.n_P/abs) / 100
         player.m_prob10 = np.random.binomial(n=100, p=player.n_P/abs) / 100
 
+        #avoid the extreme cases of probabilities at 0 or 1, since the functions for (in)correct prediction probabilities are not defined here.
+        if player.m_prob1 == 1:
+            player.m_prob1 = 0.99
+        if player.m_prob1 == 0:
+            player.m_prob1 = 0.01
+
+        if player.m_prob2 == 1:
+            player.m_prob2 = 0.99
+        if player.m_prob2 == 0:
+            player.m_prob2 = 0.01
+
+        if player.m_prob3 == 1:
+            player.m_prob3 = 0.99
+        if player.m_prob3 == 0:
+            player.m_prob3 = 0.01
+
+        if player.m_prob4 == 1:
+            player.m_prob4 = 0.99
+        if player.m_prob4 == 0:
+            player.m_prob4 = 0.01
+
+        if player.m_prob5 == 1:
+            player.m_prob5 = 0.99
+        if player.m_prob5 == 0:
+            player.m_prob5 = 0.01
+
+        if player.m_prob6 == 1:
+            player.m_prob6 = 0.99
+        if player.m_prob6 == 0:
+            player.m_prob6 = 0.01
+
+        if player.m_prob7 == 1:
+            player.m_prob7 = 0.99
+        if player.m_prob7 == 0:
+            player.m_prob7 = 0.01
+
+        if player.m_prob8 == 1:
+            player.m_prob8 = 0.99
+        if player.m_prob8 == 0:
+            player.m_prob8 = 0.01
+
+        if player.m_prob9 == 1:
+            player.m_prob9 = 0.99
+        if player.m_prob9 == 0:
+            player.m_prob9 = 0.01
+
+        if player.m_prob10 == 1:
+            player.m_prob10 = 0.99
+        if player.m_prob10 == 0:
+            player.m_prob10 = 0.01
+
+
+
         prob1_FP = (((-player.m_prob1 + 1) * 20) * pow(baseN, (-player.m_prob1 + 1))) / abs
         prob1_FN = round((player.m_prob1 * 20) * pow(baseP, player.m_prob1)) / abs
         prob1_TP = (player.n_P - round((player.m_prob1 * 20) * pow(baseP, player.m_prob1))) / abs
