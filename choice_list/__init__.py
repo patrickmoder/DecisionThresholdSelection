@@ -77,12 +77,14 @@ class Stimuli(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         import random
+        import itertools
 
         # if your page has a timeout, you would need to adjust this code.
         trials = Trial.filter(player=player)
         #choices = Trial.filter(player=player)
-        if trials.Trial.sure_payoff == 0.10:
-            player.lottery10 = choice10.chose_lottery
+        choices = itertools.cycle(trials)
+        if choices.sure_payoff == 0.10:
+            player.lottery10 = choices.chose_lottery
 
         selected_trial = random.choice(trials)
         selected_trial.is_selected = True
