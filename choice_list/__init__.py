@@ -81,7 +81,7 @@ class Stimuli(Page):
         # if your page has a timeout, you would need to adjust this code.
         trials = Trial.filter(player=player)
         #choices = Trial.filter(player=player)
-        choice10 = Trial.filter(player=player, sure_payoff=0.10)
+        choice10 = Trial.filter(player=player, sure_payoff=0.10cu)
         player.lottery10 = choice10.chose_lottery
 
         selected_trial = random.choice(trials)
