@@ -136,7 +136,15 @@ var data = [
 var layout = {
     title: "Prediction Outcomes and Costs [cost units] for Incorrect Predictions on Training Set",
     xaxis: {title: "Threshold D"},
-    hovermode: "x unified"
+    hovermode: "x unified",
+    hovertemplate:
+        "<b>Threshold: %{x}</b><br>" +
+        "Missed Hits (MH): %{y1Values}<br>" +
+        "False Alarms (FA): %{y2Values}<br>" +
+        "Costs for MH: %{y4Values}<br>" +
+        "Costs for FA: %{y5Values}<br>" +
+        "Total Costs: %{y3Values}<br>" +
+        "<extra></extra>"
 };
 
 // Display Plot using Plotly
